@@ -1,0 +1,9 @@
+[2017-06-19 13:35:34.371] [DEBUG] model - 修改用户是否在线状态sql:update sys_user set IS_ONLINE = 0 where USER_ID = 1
+[2017-06-19 13:37:12.337] [DEBUG] model - 修改用户是否在线状态sql:update sys_user set IS_ONLINE = 0 where USER_ID = 1
+[2017-06-19 13:38:32.819] [DEBUG] model - 修改用户是否在线状态sql:update sys_user set IS_ONLINE = 0 where USER_ID = 1
+[2017-06-19 13:39:17.946] [DEBUG] model - 修改用户是否在线状态sql:update sys_user set IS_ONLINE = 0 where USER_ID = 1
+[2017-06-19 13:57:22.861] [DEBUG] model - 修改用户是否在线状态sql:update sys_user set IS_ONLINE = 0 where USER_ID = 1
+[2017-06-19 14:24:56.847] [DEBUG] model - 修改用户是否在线状态sql:update sys_user set IS_ONLINE = 0 where USER_ID = 1
+[2017-06-19 14:30:55.989] [DEBUG] model - 修改用户是否在线状态sql:update sys_user set IS_ONLINE = 0 where USER_ID = 1
+[2017-06-19 14:34:37.660] [DEBUG] model - 修改用户是否在线状态sql:update sys_user set IS_ONLINE = 0 where USER_ID = 1
+[2017-06-19 15:03:45.896] [DEBUG] model - 修改用户是否在线状态sql:update sys_user set IS_ONLINE = 0 where USER_ID = 1
