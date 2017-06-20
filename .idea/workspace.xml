@@ -1,0 +1,1331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/routes/datatrend/trendSocket.js" description="var opPool = require('../openplant/openPlantPool')..." line="1" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" readonly="true" id="347cff76-acde-4a99-92ca-5363311e126f" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/box" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/error" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/box" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/interface" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/interface/box" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/utils/sms" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/box" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/error" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/error/ace-responsive.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/error/ace-skins.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/error/ace.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/error/bootstrap-responsive.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/error/bootstrap.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/error/font-awesome.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/system/sysLog.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/api/boxSocket.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/box/box.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/box/boxInfo.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/interface/box/box.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/interface/box/boxData.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/interface/box/boxInfo.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/interface/box/boxService.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/interface/box/boxUser.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/openplant/openPlantPool-test.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/openplant/openPlantPoolBox.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/system/system_log.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/utils/sms/sms.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/box/device.hbs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/error/404.hbs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/error/500.hbs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/system/sysLog.hbs" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/routes/dasServiceManage/dasService.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/routes/dasServiceManage/dasServiceManage.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/routes/dasServiceManage/das_manage.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/routes/deviceManage/device.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/routes/deviceManage/deviceManage.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/routes/deviceManage/device_manage.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/routes/domain/das/point_manage.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/routes/domain/system/system_manage.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/views/domain/das/dasList.hbs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/views/domain/das/pointList.hbs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/views/domain/device/device.hbs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/views/domain/device/onlineDev.hbs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/views/domain/system/system.hbs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/javascripts/domain/device" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/routes/dasServiceManage" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/routes/deviceManage" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/routes/domain/das" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/routes/domain/system" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/views/domain/das" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/views/domain/device" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/views/domain/system" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/config.json" afterPath="$PROJECT_DIR$/config/config.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/opapi/opapi.js" afterPath="$PROJECT_DIR$/node_modules/opapi/opapi.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/sql-query/test/integration/test-insert.js" afterPath="$PROJECT_DIR$/node_modules/sql-query/test/integration/test-insert.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/datatrend/trend.js" afterPath="$PROJECT_DIR$/public/javascripts/datatrend/trend.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/dataview/alarmHistory.js" afterPath="$PROJECT_DIR$/public/javascripts/dataview/alarmHistory.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/dataview/alarmRealtime.js" afterPath="$PROJECT_DIR$/public/javascripts/dataview/alarmRealtime.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/dataview/history.js" afterPath="$PROJECT_DIR$/public/javascripts/dataview/history.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/dataview/realtime.js" afterPath="$PROJECT_DIR$/public/javascripts/dataview/realtime.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/domain/domain/domain.js" afterPath="$PROJECT_DIR$/public/javascripts/domain/domain/domain.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/domain/mtree/mtree.js" afterPath="$PROJECT_DIR$/public/javascripts/domain/mtree/mtree.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/gview/gview.js" afterPath="$PROJECT_DIR$/public/javascripts/gview/gview.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/system/addCustomer.js" afterPath="$PROJECT_DIR$/public/javascripts/system/addCustomer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/system/enterprise.js" afterPath="$PROJECT_DIR$/public/javascripts/system/enterprise.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/system/fileManage.js" afterPath="$PROJECT_DIR$/public/javascripts/system/fileManage.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/system/user.js" afterPath="$PROJECT_DIR$/public/javascripts/system/user.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/utils.js" afterPath="$PROJECT_DIR$/public/javascripts/utils.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/plugins/bootstrap-table/src/tableExport.js" afterPath="$PROJECT_DIR$/public/plugins/bootstrap-table/src/tableExport.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/plugins/echarts/echarts.js" afterPath="$PROJECT_DIR$/public/plugins/echarts/echarts.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/plugins/view-canvas/viewCanvas.js" afterPath="$PROJECT_DIR$/public/plugins/view-canvas/viewCanvas.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/api/apiV1.js" afterPath="$PROJECT_DIR$/routes/api/apiV1.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/api/devSocket.js" afterPath="$PROJECT_DIR$/routes/api/devSocket.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/apio/pointAPISocket.js" afterPath="$PROJECT_DIR$/routes/apio/pointAPISocket.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/datatrend/trendSocket.js" afterPath="$PROJECT_DIR$/routes/datatrend/trendSocket.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/dataview/alarmSocket.js" afterPath="$PROJECT_DIR$/routes/dataview/alarmSocket.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/dataview/rhDataSocket.js" afterPath="$PROJECT_DIR$/routes/dataview/rhDataSocket.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/domain/domain.js" afterPath="$PROJECT_DIR$/routes/domain/domain.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/domain/domain/domain.js" afterPath="$PROJECT_DIR$/routes/domain/domain/domain.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/domain/mtree/mtree.js" afterPath="$PROJECT_DIR$/routes/domain/mtree/mtree.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/filter.js" afterPath="$PROJECT_DIR$/routes/filter.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/gview/gviewSocket.js" afterPath="$PROJECT_DIR$/routes/gview/gviewSocket.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/openplant/openPlantPool.js" afterPath="$PROJECT_DIR$/routes/openplant/openPlantPool.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/rsa/givew/graphElementUtils.js" afterPath="$PROJECT_DIR$/routes/rsa/givew/graphElementUtils.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/rsa/rsaUtils.js" afterPath="$PROJECT_DIR$/routes/rsa/rsaUtils.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/system/customer.js" afterPath="$PROJECT_DIR$/routes/system/customer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/system/fileManage.js" afterPath="$PROJECT_DIR$/routes/system/fileManage.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/system/publicInfo.js" afterPath="$PROJECT_DIR$/routes/system/publicInfo.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/system/serverInit.js" afterPath="$PROJECT_DIR$/routes/system/serverInit.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/system/system.js" afterPath="$PROJECT_DIR$/routes/system/system.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/system/system_user.js" afterPath="$PROJECT_DIR$/routes/system/system_user.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/utils/tools/fileUtils.js" afterPath="$PROJECT_DIR$/routes/utils/tools/fileUtils.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/datatrend/trend.hbs" afterPath="$PROJECT_DIR$/views/datatrend/trend.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/dataview/alarmHistory.hbs" afterPath="$PROJECT_DIR$/views/dataview/alarmHistory.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/dataview/alarmRealtime.hbs" afterPath="$PROJECT_DIR$/views/dataview/alarmRealtime.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/dataview/history.hbs" afterPath="$PROJECT_DIR$/views/dataview/history.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/dataview/historySnapSta.hbs" afterPath="$PROJECT_DIR$/views/dataview/historySnapSta.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/dataview/realtime.hbs" afterPath="$PROJECT_DIR$/views/dataview/realtime.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/gview/view.hbs" afterPath="$PROJECT_DIR$/views/gview/view.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/partials/left.userinfo.hbs" afterPath="$PROJECT_DIR$/views/partials/left.userinfo.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/system/fileManage.hbs" afterPath="$PROJECT_DIR$/views/system/fileManage.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/system/forgetPwd.hbs" afterPath="$PROJECT_DIR$/views/system/forgetPwd.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/system/page.hbs" afterPath="$PROJECT_DIR$/views/system/page.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/system/register.hbs" afterPath="$PROJECT_DIR$/views/system/register.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/system/registerIndividual.hbs" afterPath="$PROJECT_DIR$/views/system/registerIndividual.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/system/role.hbs" afterPath="$PROJECT_DIR$/views/system/role.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/system/user.hbs" afterPath="$PROJECT_DIR$/views/system/user.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/view.hbs" afterPath="$PROJECT_DIR$/views/view.hbs" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/javascripts/domain/device/device.js" afterPath="$PROJECT_DIR$/public/javascripts/box/device.js" />
+    </list>
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="OPCloud4nodejs" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
+      <file leaf-file-name="user.hbs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/system/user.hbs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1020">
+              <caret line="282" column="12" lean-forward="false" selection-start-line="282" selection-start-column="12" selection-end-line="282" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="9801">
+              <caret line="363" column="24" lean-forward="false" selection-start-line="363" selection-start-column="24" selection-end-line="363" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mtree.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/domain/mtree/mtree.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="918">
+              <caret line="793" column="45" lean-forward="false" selection-start-line="707" selection-start-column="44" selection-end-line="793" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="customer.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/system/customer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="boxUser.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/routes/interface/box/boxUser.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="565">
+              <caret line="369" column="29" lean-forward="false" selection-start-line="369" selection-start-column="29" selection-end-line="369" selection-end-column="29" />
+              <folding>
+                <element signature="e#30096#34735#0" expanded="false" />
+                <element signature="e#78174#81415#0" expanded="false" />
+                <element signature="e#81554#85152#0" expanded="false" />
+                <element signature="e#85291#88336#0" expanded="false" />
+                <element signature="e#88475#89250#0" expanded="false" />
+                <element signature="e#89388#90477#0" expanded="false" />
+                <element signature="e#90618#92204#0" expanded="false" />
+                <element signature="e#92349#93403#0" expanded="false" />
+                <element signature="e#93555#95825#0" expanded="false" />
+                <element signature="e#95968#101109#0" expanded="false" />
+                <element signature="e#101247#105513#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fileUtils.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/utils/tools/fileUtils.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="600">
+              <caret line="159" column="70" lean-forward="false" selection-start-line="159" selection-start-column="70" selection-end-line="159" selection-end-column="70" />
+              <folding>
+                <element signature="e#2282#3766#0" expanded="false" />
+                <element signature="e#3862#4159#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mtreeSocket.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/domain/mtree/mtreeSocket.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="boxData.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/interface/box/boxData.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="694">
+              <caret line="309" column="79" lean-forward="false" selection-start-line="309" selection-start-column="79" selection-end-line="309" selection-end-column="79" />
+              <folding>
+                <element signature="e#14172#17904#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="system_user.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/system/system_user.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="27">
+              <caret line="372" column="13" lean-forward="false" selection-start-line="366" selection-start-column="12" selection-end-line="372" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="device.hbs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/box/device.hbs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="7101">
+              <caret line="263" column="24" lean-forward="false" selection-start-line="263" selection-start-column="24" selection-end-line="263" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>operateFormatter</find>
+      <find>showAddUser</find>
+      <find>groupManage</find>
+      <find>userType</find>
+      <find>system/</find>
+      <find>user</find>
+      <find>token</find>
+      <find>moduleName</find>
+      <find>duty_id</find>
+      <find>IS_DELETED</find>
+      <find>device</find>
+      <find>sys_user_dept</find>
+      <find>xml_par</find>
+      <find>xml_partransmit_service</find>
+      <find>transmit_service</find>
+      <find>transmit_serviceopen_plant</find>
+      <find>open_plant</find>
+      <find>open_plantsys_dept</find>
+      <find>sys_dept</find>
+      <find>sys_deptsys_action</find>
+      <find>sys_action</find>
+      <find>sys_file_temp</find>
+      <find>ENTERPRISE_ID</find>
+      <find>sys_domain</find>
+      <find>sys_enterprise</find>
+      <find>mailUtil</find>
+      <find>userName</find>
+      <find>opPool</find>
+      <find>\\</find>
+      <find>company.jobNo</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>-4</replace>
+      <replace>MD</replace>
+      <replace>GlobalAgent</replace>
+      <replace>WSServer</replace>
+      <replace>IS_ENABLE</replace>
+      <replace>field</replace>
+      <replace>value</replace>
+      <replace>match</replace>
+      <replace>{}</replace>
+      <replace>[]</replace>
+      <replace>getHeight4</replace>
+      <replace>box_box_info</replace>
+      <replace>Status = true</replace>
+      <replace>Status = false</replace>
+      <replace>Status</replace>
+      <replace>Data</replace>
+      <replace>box_driver_conf</replace>
+      <replace>message.Data</replace>
+      <replace>data</replace>
+      <replace>charCodeAt()</replace>
+      <replace>false</replace>
+      <replace>= true</replace>
+      <replace>rows</replace>
+    </replaceStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/routes/box/dasService/das_manage.js" />
+        <option value="$PROJECT_DIR$/routes/domain/mtree/mtree.js" />
+        <option value="$PROJECT_DIR$/views/gview/view.hbs" />
+        <option value="$PROJECT_DIR$/routes/openplant/openPlantPool.js" />
+        <option value="$PROJECT_DIR$/config.json" />
+        <option value="$PROJECT_DIR$/public/javascripts/system/user.js" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/routes/system/system.js" />
+        <option value="$PROJECT_DIR$/views/system/systemLog.hbs" />
+        <option value="$PROJECT_DIR$/views/system/sysLog.hbs" />
+        <option value="$PROJECT_DIR$/public/javascripts/system/sysLog.js" />
+        <option value="$PROJECT_DIR$/routes/api/apiV1.js" />
+        <option value="$PROJECT_DIR$/routes/utils/sms/sms.js" />
+        <option value="$PROJECT_DIR$/node_modules/opapi/opapi.js" />
+        <option value="$PROJECT_DIR$/views/system/register.hbs" />
+        <option value="$PROJECT_DIR$/routes/system/publicInfo.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/system/addCustomer.js" />
+        <option value="$PROJECT_DIR$/views/system/forgetPwd.hbs" />
+        <option value="$PROJECT_DIR$/routes/system/serverInit.js" />
+        <option value="$PROJECT_DIR$/views/system/registerIndividual.hbs" />
+        <option value="$PROJECT_DIR$/logs/iboxlog.log" />
+        <option value="$PROJECT_DIR$/routes/api/TCP.js" />
+        <option value="$PROJECT_DIR$/routes/interface/box/boxService.js" />
+        <option value="$PROJECT_DIR$/routes/api/boxSocket.js" />
+        <option value="$PROJECT_DIR$/routes/interface/box/box.js" />
+        <option value="$PROJECT_DIR$/routes/box/device/device_manage.js" />
+        <option value="$PROJECT_DIR$/views/box/device/device.hbs" />
+        <option value="$PROJECT_DIR$/routes/box/device/boxInfo.js" />
+        <option value="$PROJECT_DIR$/routes/box/box.js" />
+        <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/views/partials/left.userinfo.hbs" />
+        <option value="$PROJECT_DIR$/routes/api/devSocket.js" />
+        <option value="$PROJECT_DIR$/routes/interface/box/boxInfo.js" />
+        <option value="$PROJECT_DIR$/routes/box/boxInfo.js" />
+        <option value="$PROJECT_DIR$/routes/system/system_log.js" />
+        <option value="$PROJECT_DIR$/routes/filter.js" />
+        <option value="$PROJECT_DIR$/routes/openplant/openPlantPoolBox.js" />
+        <option value="$PROJECT_DIR$/routes/rsa/rsaUtils.js" />
+        <option value="$PROJECT_DIR$/routes/datatrend/trendSocket.js" />
+        <option value="$PROJECT_DIR$/routes/system/system_user.js" />
+        <option value="$PROJECT_DIR$/public/plugins/bootstrap-table/src/tableExport.js" />
+        <option value="$PROJECT_DIR$/views/dataview/alarmHistory.hbs" />
+        <option value="$PROJECT_DIR$/views/dataview/historySnapSta.hbs" />
+        <option value="$PROJECT_DIR$/public/javascripts/box/device.js" />
+        <option value="$PROJECT_DIR$/views/box/device.hbs" />
+        <option value="$PROJECT_DIR$/views/system/user.hbs" />
+        <option value="$PROJECT_DIR$/routes/index.js" />
+        <option value="$PROJECT_DIR$/routes/interface/box/boxData.js" />
+        <option value="$PROJECT_DIR$/routes/system/customer.js" />
+        <option value="$PROJECT_DIR$/routes/utils/tools/fileUtils.js" />
+        <option value="$PROJECT_DIR$/routes/interface/box/boxUser.js" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER">
+    <package-json value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/node_modules" />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-11" />
+    <option name="y" value="-11" />
+    <option name="width" value="1942" />
+    <option name="height" value="1042" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>AngularJS</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OPCloud4nodejs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OPCloud4nodejs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OPCloud4nodejs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OPCloud4nodejs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="routes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OPCloud4nodejs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OPCloud4nodejs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="routes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utils" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OPCloud4nodejs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OPCloud4nodejs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="routes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utils" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OPCloud4nodejs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OPCloud4nodejs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="routes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="domain" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.HTML" />
+    <property name="nodejs_interpreter_path" value="F:/software/nodejs/node" />
+    <property name="js.eslint.eslintPackage" value="" />
+    <property name="js-jscs-nodeInterpreter" value="F:\software\nodejs\node.exe" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://E:/work/magustek/op-cloud/trunk/OPCloud4nodejs/routes/datatrend/dataTrend.js" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\work\magustek\op-cloud\trunk\OPCloud4nodejs\public\javascripts\domain\project" />
+      <recent name="E:\work\magustek\op-cloud\trunk\OPCloud4nodejs\public\javascripts\domain\domain" />
+      <recent name="E:\work\magustek\op-cloud\trunk\OPCloud4nodejs\views\domain\domain" />
+      <recent name="E:\work\magustek\op-cloud\trunk\OPCloud4nodejs\routes\domain\domain" />
+      <recent name="E:\work\magustek\op-cloud\trunk\OPCloud4nodejs\public\plugins\echarts" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\work\magustek\op-cloud\trunk\OPCloud4nodejs\views\box" />
+      <recent name="E:\work\magustek\op-cloud\trunk\OPCloud4nodejs\routes\box" />
+      <recent name="E:\work\magustek\op-cloud\trunk\OPCloud4nodejs\routes\interface\box" />
+      <recent name="E:\work\magustek\op-cloud\trunk\OPCloud4nodejs\routes\system" />
+      <recent name="E:\work\magustek\op-cloud\trunk\OPCloud4nodejs\public\javascripts\system" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Node.js.WWW">
+    <configuration default="false" name="openPlantPool.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="project" path-to-js-file="$PROJECT_DIR$/bin/www" working-dir="$PROJECT_DIR$/routes/openplant">
+      <EXTENSION ID="com.jetbrains.nodejs.remote.docker.NodeJSDockerRunConfigurationExtension">
+        <option name="envVars">
+          <list />
+        </option>
+        <option name="extraHosts">
+          <list />
+        </option>
+        <option name="links">
+          <list />
+        </option>
+        <option name="networkDisabled" value="false" />
+        <option name="networkMode" value="bridge" />
+        <option name="portBindings">
+          <list />
+        </option>
+        <option name="publishAllPorts" value="false" />
+        <option name="version" value="1" />
+        <option name="volumeBindings">
+          <list />
+        </option>
+      </EXTENSION>
+      <method />
+    </configuration>
+    <configuration default="false" name="openPlantPool.js (1)" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="project" path-to-js-file="openPlantPool.js" working-dir="$PROJECT_DIR$/routes/openplant">
+      <method />
+    </configuration>
+    <configuration default="false" name="boxSocket.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="project" path-to-js-file="boxSocket.js" working-dir="$PROJECT_DIR$/routes/api">
+      <method />
+    </configuration>
+    <configuration default="false" name="TCP.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="project" path-to-js-file="TCP.js" working-dir="$PROJECT_DIR$/routes/api">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartTestRunConfigurationType" factoryName="Dart Test">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSRemoteDebug" factoryName="Node.js Remote Debug">
+      <node-js-remote-debug />
+      <method />
+    </configuration>
+    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" value="" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory />
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui />
+      <extra-mocha-options />
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+      <method />
+    </configuration>
+    <configuration default="false" name="sparkCache.js" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" path-to-js-file="bin/www" working-dir="$PROJECT_DIR$/">
+      <EXTENSION ID="com.jetbrains.nodejs.remote.docker.NodeJSDockerRunConfigurationExtension">
+        <option name="envVars">
+          <list />
+        </option>
+        <option name="extraHosts">
+          <list />
+        </option>
+        <option name="links">
+          <list />
+        </option>
+        <option name="networkDisabled" value="false" />
+        <option name="networkMode" value="bridge" />
+        <option name="portBindings">
+          <list />
+        </option>
+        <option name="publishAllPorts" value="false" />
+        <option name="version" value="1" />
+        <option name="volumeBindings">
+          <list />
+        </option>
+      </EXTENSION>
+      <method />
+    </configuration>
+    <configuration default="false" name="WWW" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" path-to-js-file="bin/www" working-dir="$PROJECT_DIR$">
+      <EXTENSION ID="com.jetbrains.nodejs.remote.docker.NodeJSDockerRunConfigurationExtension">
+        <option name="envVars">
+          <list />
+        </option>
+        <option name="extraHosts">
+          <list />
+        </option>
+        <option name="links">
+          <list />
+        </option>
+        <option name="networkDisabled" value="false" />
+        <option name="networkMode" value="bridge" />
+        <option name="portBindings">
+          <list />
+        </option>
+        <option name="publishAllPorts" value="false" />
+        <option name="version" value="1" />
+        <option name="volumeBindings">
+          <list />
+        </option>
+      </EXTENSION>
+      <method />
+    </configuration>
+    <list size="6">
+      <item index="0" class="java.lang.String" itemvalue="Node.js.sparkCache.js" />
+      <item index="1" class="java.lang.String" itemvalue="Node.js.WWW" />
+      <item index="2" class="java.lang.String" itemvalue="Node.js.openPlantPool.js" />
+      <item index="3" class="java.lang.String" itemvalue="Node.js.openPlantPool.js (1)" />
+      <item index="4" class="java.lang.String" itemvalue="Node.js.boxSocket.js" />
+      <item index="5" class="java.lang.String" itemvalue="Node.js.TCP.js" />
+    </list>
+    <recent_temporary>
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="Node.js.boxSocket.js" />
+        <item index="1" class="java.lang.String" itemvalue="Node.js.TCP.js" />
+        <item index="2" class="java.lang.String" itemvalue="Node.js.openPlantPool.js (1)" />
+        <item index="3" class="java.lang.String" itemvalue="Node.js.openPlantPool.js" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration useDefault="false">F:\software\SlikSvn</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="E:\work\magustek\op-cloud\trunk\OPCloud4nodejs" />
+          <option name="myCopyRoot" value="E:\work\magustek\op-cloud\trunk\OPCloud4nodejs" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="E:\work\magustek\op-cloud\trunk\OPCloud4nodejs" />
+          <option name="myCopyRoot" value="E:\work\magustek\op-cloud\trunk\OPCloud4nodejs" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="347cff76-acde-4a99-92ca-5363311e126f" name="Default" comment="" />
+      <created>1487492169453</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1487492169453</updated>
+      <workItem from="1487492171292" duration="375000" />
+      <workItem from="1487492570605" duration="1050000" />
+      <workItem from="1488163999825" duration="1910000" />
+      <workItem from="1488204421267" duration="9489000" />
+      <workItem from="1488265738775" duration="32922000" />
+      <workItem from="1488422387830" duration="4598000" />
+      <workItem from="1488430171980" duration="3682000" />
+      <workItem from="1488436109030" duration="40674000" />
+      <workItem from="1488760793233" duration="40641000" />
+      <workItem from="1488855570362" duration="70656000" />
+      <workItem from="1489067164264" duration="31065000" />
+      <workItem from="1489294001459" duration="39980000" />
+      <workItem from="1489538854191" duration="2214000" />
+      <workItem from="1489553586567" duration="68630000" />
+      <workItem from="1489757766770" duration="13790000" />
+      <workItem from="1489931887290" duration="73146000" />
+      <workItem from="1490158575841" duration="16357000" />
+      <workItem from="1490229724580" duration="44369000" />
+      <workItem from="1490327829850" duration="64255000" />
+      <workItem from="1490682370115" duration="64398000" />
+      <workItem from="1490920696701" duration="8472000" />
+      <workItem from="1490936635803" duration="6584000" />
+      <workItem from="1491006562713" duration="19507000" />
+      <workItem from="1491352875563" duration="1099000" />
+      <workItem from="1491358607242" duration="19523000" />
+      <workItem from="1491439315570" duration="6186000" />
+      <workItem from="1491525895097" duration="14199000" />
+      <workItem from="1491785043654" duration="14670000" />
+      <workItem from="1491871076673" duration="24960000" />
+      <workItem from="1491902203498" duration="2642000" />
+      <workItem from="1491957431100" duration="18166000" />
+      <workItem from="1492132106268" duration="3841000" />
+      <workItem from="1492390112502" duration="805000" />
+      <workItem from="1492405839869" duration="48477000" />
+      <workItem from="1492676183554" duration="31323000" />
+      <workItem from="1492994428134" duration="12246000" />
+      <workItem from="1493010241603" duration="4610000" />
+      <workItem from="1493015889352" duration="67045000" />
+      <workItem from="1493701918206" duration="34242000" />
+      <workItem from="1493859555348" duration="8042000" />
+      <workItem from="1493870048949" duration="71446000" />
+      <workItem from="1494376817711" duration="7995000" />
+      <workItem from="1494391298027" duration="4355000" />
+      <workItem from="1494399828070" duration="19069000" />
+      <workItem from="1494495747628" duration="67496000" />
+      <workItem from="1494981880074" duration="27632000" />
+      <workItem from="1495018826573" duration="14848000" />
+      <workItem from="1495090991683" duration="1718000" />
+      <workItem from="1495092838311" duration="9410000" />
+      <workItem from="1495117883780" duration="33918000" />
+      <workItem from="1495429719520" duration="20036000" />
+      <workItem from="1495766329708" duration="642000" />
+      <workItem from="1496194149747" duration="951000" />
+      <workItem from="1496200662388" duration="232000" />
+      <workItem from="1496200934058" duration="2710000" />
+      <workItem from="1496207176884" duration="2174000" />
+      <workItem from="1496211768583" duration="5395000" />
+      <workItem from="1496227284373" duration="4906000" />
+      <workItem from="1496294601952" duration="13243000" />
+      <workItem from="1496364135254" duration="42052000" />
+      <workItem from="1496648521002" duration="2457000" />
+      <workItem from="1496651738482" duration="67026000" />
+      <workItem from="1496841921760" duration="2129000" />
+      <workItem from="1496882865781" duration="12178000" />
+      <workItem from="1496898092232" duration="63076000" />
+      <workItem from="1497183778741" duration="18985000" />
+      <workItem from="1497244716315" duration="168000" />
+      <workItem from="1497244921037" duration="75071000" />
+      <workItem from="1497498346929" duration="13783000" />
+      <workItem from="1497594076258" duration="650000" />
+      <workItem from="1497601584578" duration="3416000" />
+      <workItem from="1497832871308" duration="14409000" />
+      <workItem from="1497856955230" duration="33360000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1627776000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-11" y="-11" width="1942" height="1042" extended-state="7" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1828125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17747441" sideWeight="0.40590277" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.49861112" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35729387" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29527837" sideWeight="0.5940972" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992035" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32769555" sideWeight="0.49861112" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992035" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17747441" sideWeight="0.40590277" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.49861112" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.465821" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.265625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32769555" sideWeight="0.49861112" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22973925" sideWeight="0.5940972" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/node_modules/socket.io/lib/socket.js</url>
+          <line>191</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+      </breakpoints>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="342" />
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="NodeJSConfigurationType">
+        <watch expression="this" />
+        <watch expression="this" />
+        <watch expression="res" />
+        <watch expression="res.write" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/logs/iboxlog.log" />
+    <entry file="file://$PROJECT_DIR$/routes/api/TCP.js" />
+    <entry file="file://$PROJECT_DIR$/views/system/registerIndividual.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="523">
+          <caret line="101" column="6" lean-forward="false" selection-start-line="101" selection-start-column="6" selection-end-line="101" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/utils/sms/sms.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="586">
+          <caret line="24" column="29" lean-forward="false" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/api/boxSocket.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="972">
+          <caret line="147" column="52" lean-forward="false" selection-start-line="147" selection-start-column="52" selection-end-line="147" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/interface/box/boxService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="210" column="45" lean-forward="false" selection-start-line="210" selection-start-column="44" selection-end-line="210" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/apio/dataAPISocket.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="291" column="43" lean-forward="false" selection-start-line="291" selection-start-column="43" selection-end-line="291" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/box/device/deviceManage.js" />
+    <entry file="file://$PROJECT_DIR$/views/box/device/device.hbs" />
+    <entry file="file://$PROJECT_DIR$/routes/box/device/boxInfo.js" />
+    <entry file="file://$PROJECT_DIR$/routes/box/box.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="548">
+          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-170">
+          <caret line="64" column="51" lean-forward="false" selection-start-line="64" selection-start-column="51" selection-end-line="64" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/node-uuid/uuid.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/system/serverInit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="10" column="52" lean-forward="false" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/dataview/realtime.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="655">
+          <caret line="93" column="71" lean-forward="false" selection-start-line="93" selection-start-column="70" selection-end-line="93" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/system/system.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="285" column="49" lean-forward="false" selection-start-line="285" selection-start-column="49" selection-end-line="285" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/message/GlobalAgent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2646">
+          <caret line="98" column="9" lean-forward="false" selection-start-line="95" selection-start-column="7" selection-end-line="98" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/system/tokenManage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7101">
+          <caret line="263" column="35" lean-forward="false" selection-start-line="263" selection-start-column="35" selection-end-line="263" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/partials/header.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/partials/left.userinfo.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/interface/box/box.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="19" column="39" lean-forward="false" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/system/system.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="161" column="7" lean-forward="false" selection-start-line="161" selection-start-column="7" selection-end-line="161" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/api/devSocket.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2295">
+          <caret line="85" column="52" lean-forward="false" selection-start-line="85" selection-start-column="52" selection-end-line="85" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/interface/box/boxInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21006">
+          <caret line="778" column="64" lean-forward="false" selection-start-line="778" selection-start-column="64" selection-end-line="778" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/box/boxInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4266">
+          <caret line="158" column="69" lean-forward="false" selection-start-line="158" selection-start-column="61" selection-end-line="158" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/system/system_log.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="16" column="43" lean-forward="false" selection-start-line="16" selection-start-column="43" selection-end-line="16" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/filter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3375">
+          <caret line="125" column="42" lean-forward="false" selection-start-line="125" selection-start-column="42" selection-end-line="125" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/dataview/historySnapStaSocket.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="334" column="52" lean-forward="false" selection-start-line="334" selection-start-column="47" selection-end-line="334" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/openplant/openPlantPool.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="642" column="0" lean-forward="false" selection-start-line="642" selection-start-column="0" selection-end-line="652" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/openplant/openPlantPoolBox.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="754">
+          <caret line="619" column="2" lean-forward="false" selection-start-line="619" selection-start-column="2" selection-end-line="619" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/rsa/rsaUtils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="500" column="48" lean-forward="false" selection-start-line="500" selection-start-column="48" selection-end-line="500" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/datatrend/trendSocket.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2592">
+          <caret line="167" column="33" lean-forward="false" selection-start-line="167" selection-start-column="33" selection-end-line="167" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/index.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="379" column="51" lean-forward="false" selection-start-line="379" selection-start-column="37" selection-end-line="379" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/system/sysLog.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="3" column="31" lean-forward="false" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/plugins/bootstrap-table/src/bootstrap-table-export.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="103" column="52" lean-forward="false" selection-start-line="103" selection-start-column="52" selection-end-line="103" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/plugins/bootstrap-table/src/tableExport.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="197" column="41" lean-forward="false" selection-start-line="197" selection-start-column="41" selection-end-line="197" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/dataview/alarmHistory.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1458">
+          <caret line="54" column="22" lean-forward="false" selection-start-line="44" selection-start-column="14" selection-end-line="54" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/dataview/historySnapSta.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1782">
+          <caret line="66" column="115" lean-forward="false" selection-start-line="66" selection-start-column="115" selection-end-line="66" selection-end-column="115" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/box/device.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14877">
+          <caret line="551" column="74" lean-forward="false" selection-start-line="551" selection-start-column="74" selection-end-line="551" selection-end-column="74" />
+          <folding>
+            <element signature="n#!!block;n#updateBox#0" expanded="false" />
+            <element signature="n#!!block;n#cancalAnttention#0" expanded="false" />
+            <element signature="n#!!block;n#DiffTimeFormatter#0" expanded="false" />
+            <element signature="n#!!block;n#formatSeconds#0" expanded="false" />
+            <marker date="1497853851414" expanded="true" signature="4454:4460" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="4460:4466" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="4466:4472" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="4472:4478" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="4612:4625" ph="..." />
+            <marker date="1497853851414" expanded="true" signature="4701:4707" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="4707:4713" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="4713:4719" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="4719:4725" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="4828:4837" ph="..." />
+            <marker date="1497853851414" expanded="true" signature="13150:13163" ph="..." />
+            <marker date="1497853851414" expanded="true" signature="13240:13246" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="13246:13252" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="13370:13383" ph="..." />
+            <marker date="1497853851414" expanded="true" signature="13460:13466" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="13466:13472" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="13572:13585" ph="..." />
+            <marker date="1497853851414" expanded="true" signature="13689:13695" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="13695:13700" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="13760:13773" ph="..." />
+            <marker date="1497853851414" expanded="true" signature="13846:13852" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="13852:13858" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="14019:14032" ph="..." />
+            <marker date="1497853851414" expanded="true" signature="14109:14115" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="14115:14121" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="14239:14252" ph="..." />
+            <marker date="1497853851414" expanded="true" signature="14329:14335" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="14335:14341" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="14441:14454" ph="..." />
+            <marker date="1497853851414" expanded="true" signature="14531:14537" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="14537:14543" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="14658:14671" ph="..." />
+            <marker date="1497853851414" expanded="true" signature="14744:14750" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="14750:14756" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="14833:14846" ph="..." />
+            <marker date="1497853851414" expanded="true" signature="14919:14925" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="14925:14931" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="15023:15036" ph="..." />
+            <marker date="1497853851414" expanded="true" signature="15109:15115" ph=" " />
+            <marker date="1497853851414" expanded="true" signature="15115:15121" ph=" " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/system/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5535">
+          <caret line="205" column="20" lean-forward="false" selection-start-line="205" selection-start-column="9" selection-end-line="205" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/system/userInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="17" column="27" lean-forward="false" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/box/device.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7101">
+          <caret line="263" column="24" lean-forward="false" selection-start-line="263" selection-start-column="24" selection-end-line="263" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9801">
+          <caret line="363" column="24" lean-forward="false" selection-start-line="363" selection-start-column="24" selection-end-line="363" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/system/system_user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="372" column="13" lean-forward="false" selection-start-line="366" selection-start-column="12" selection-end-line="372" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/interface/box/boxData.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="694">
+          <caret line="309" column="79" lean-forward="false" selection-start-line="309" selection-start-column="79" selection-end-line="309" selection-end-column="79" />
+          <folding>
+            <element signature="e#14172#17904#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/system/user.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1020">
+          <caret line="282" column="12" lean-forward="false" selection-start-line="282" selection-start-column="12" selection-end-line="282" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/domain/mtree/mtreeSocket.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/domain/mtree/mtree.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="793" column="45" lean-forward="false" selection-start-line="707" selection-start-column="44" selection-end-line="793" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/system/customer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/utils/tools/fileUtils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="159" column="70" lean-forward="false" selection-start-line="159" selection-start-column="70" selection-end-line="159" selection-end-column="70" />
+          <folding>
+            <element signature="e#2282#3766#0" expanded="false" />
+            <element signature="e#3862#4159#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/interface/box/boxUser.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="565">
+          <caret line="369" column="29" lean-forward="false" selection-start-line="369" selection-start-column="29" selection-end-line="369" selection-end-column="29" />
+          <folding>
+            <element signature="e#30096#34735#0" expanded="false" />
+            <element signature="e#78174#81415#0" expanded="false" />
+            <element signature="e#81554#85152#0" expanded="false" />
+            <element signature="e#85291#88336#0" expanded="false" />
+            <element signature="e#88475#89250#0" expanded="false" />
+            <element signature="e#89388#90477#0" expanded="false" />
+            <element signature="e#90618#92204#0" expanded="false" />
+            <element signature="e#92349#93403#0" expanded="false" />
+            <element signature="e#93555#95825#0" expanded="false" />
+            <element signature="e#95968#101109#0" expanded="false" />
+            <element signature="e#101247#105513#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
