@@ -1,0 +1,330 @@
+<link href="/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet"/>
+<script src="/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script src="/plugins/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/plugins/sweetalert/dist/sweetalert.css"/>
+<script src="/javascripts/utils.js"></script>
+<link rel="stylesheet" href="/plugins/bootstrap-table/src/bootstrap-table.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="/stylesheets/AdminLTE.min.css">
+<!--[if lt IE 9]>
+<script src="/plugins/bootstrap-table/src/json2.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" href="/plugins/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css"/>
+<link rel="stylesheet" href="/plugins/jqwidgets/jqwidgets/styles/jqx.magus.css" type="text/css"/>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdata.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxlistbox.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdropdownlist.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxmenu.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxpanel.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxcalendar.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdatetimeinput.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdatatable.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxtreegrid.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxtree.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxcheckbox.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/globalization/globalize.js"></script>
+<script src="/plugins/bootstrap-table/src/bootstrap-table.js"></script>
+<script src="/plugins/bootstrap-table/src/bootstrap-table-export.js"></script>
+<script src="/plugins/bootstrap-table/src/tableExport.js"></script>
+<script src="/plugins/bootstrap-table/src/locale/bootstrap-table-zh-CN.js" type="text/javascript"></script>
+<script type="text/javascript" src="/plugins/jquery-form/jquery-form.js"></script>
+<script src="/javascripts/system/fileManage.js"></script>
+<section class="content-header text-left">
+    <h1 style="margin-bottom: 5px">
+        {{pageName}}
+    </h1>
+    <ul class="breadcrumb">
+        <li><a href="/system/manage" target="_top">首页</a></li>
+        <li class="active">{{pageName}}</li>
+    </ul>
+</section>
+
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#zxmlTab" data-toggle="tab">图形树</a></li>
+    <li><a href="#modelTab" data-toggle="tab">文件</a></li>
+</ul>
+
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade in active" id="zxmlTab">
+        <div class="container" style="width: 100%">
+            <div class="box box-primary">
+                <div class="row" style="padding-top: 8px; padding-left: 20px;">
+                    <div class="col-md-12">
+                        <ul class="nav navbar-left">
+                            <button type="button" class="btn btn-primary btn-sm" style="" onclick="getZXMLFile()">
+                                <li class="glyphicon glyphicon-refresh"></li>
+                            </button>
+                            <button type="button" class="btn btn-success btn-sm" onclick="showImportZXMLFile()">
+                                <span class="glyphicon glyphicon-plus"></span>图形文件
+                            </button>
+                            <button type="button" class="btn btn-info btn-sm" onclick="showImportImageFile()">
+                                <span class="glyphicon glyphicon-plus"></span>图片
+                            </button>
+                        </ul>
+                    </div>
+                </div>
+                <input id="fileURI" type="hidden"/>
+                <div id="fileGrid" style="margin-top: 5px">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="modelTab">
+        <div class="container" style="width: 100%">
+            <div class="box box-primary">
+                <div class="row" style="padding-top: 8px; padding-left: 20px;">
+                    <div class="col-md-4">
+                       <span class="input-group"> <span class="input-group-addon" style="color: black; padding: 3px;">资源名称</span> <input
+                               type="text" id="fileNameQuery" class="form-control" placeholder="请输入资源名称"> </span>
+                    </div>
+                    <div class="col-md-3">
+                 <span class="input-group"> <span class="input-group-addon" style="color: black; padding: 3px;">文件类型</span>   <select class="form-control"
+                                                                                                                                      id="fileTypeQuery">
+                </select></span>
+                    </div>
+                    <div class="col-md-5">
+                        <ul class="nav navbar-left">
+                            <button type="button" class="btn btn-primary btn-sm" style="" onclick="fileQuery()">
+                                <span class="glyphicon glyphicon-ok"></span>查询
+                            </button>
+                            <button type="button" class="btn btn-success btn-sm" onclick="showImportZXMLZIPFile()">
+                                <span class="glyphicon glyphicon-plus"></span>压缩图形文件
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="showImportMDFile()">
+                                <span class="glyphicon glyphicon-plus"></span>ModelFile
+                            </button>
+                            <button type="button" class="btn btn-warning btn-sm" onclick="showImportJarFile()">
+                                <span class="glyphicon glyphicon-plus"></span>jar
+                            </button>
+                        </ul>
+                    </div>
+                </div>
+                <table id="table"
+                       data-search="false"
+                       data-show-export="true"
+                       data-show-refresh="true"
+                       data-show-toggle="true"
+                       data-show-columns="true"
+                       data-minimum-count-columns="2"
+                       data-pagination="true"
+                       data-striped="true"
+                       data-id-field="ID"
+                       data-page-size="10"
+                       data-page-list="[10,50,100,200,1000]"
+                       data-show-footer="false"
+                       data-side-pagination="server">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 文件导入 -->
+<div id="importZXMLModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 150px;">
+    <div class="modal-dialog" style="width: 400px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left"> ZXML文件导入</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <form class="form-signin" id="uploadZXMLForm" role="form" method="post" enctype='multipart/form-data'>
+                    <font style="font-size:14px;"><b>导入说明：</b></font><br>
+                    <font style="font-size:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        导入只支持ZXML文件导入，且文件格式必须按照规定的标准</font><br><br>
+                    <img src="/images/zxml.png" style="width:340px;" data-action="zoom"><br><br>
+                    <span>
+                         <textarea id="zxmlDesc" placeholder="请输入文件描述" style="width:100%;height:50px;resize: none;"></textarea>
+                    <button type="button" class="btn center-block" style="margin-top: 16px;display: inline-block;width:28%;"
+                            onclick="showDomain()">域信息
+                    </button>
+                    <input id="resourceZXML" name="resource" type="file" style="position:relative;width: 70%;left:30%;top:-33px;" class="form-control"
+                           accept="application/zxml"/>
+                    </span>
+                    <br/>
+                    <center>
+                        <button type="button" class="btn btn-primary  center-block" style="margin-top: 16px;display: inline-block;"
+                                aria-hidden="true" onclick="importZXMLFile()">提交
+                        </button>
+                        <button type="button" class="btn btn-info  center-block" style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                                aria-hidden="true" onclick="closeZXML()">关闭
+                        </button>
+                    </center>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 文件导入 -->
+<div id="importZXMLZIPModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 150px;">
+    <div class="modal-dialog" style="width: 400px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left"> ZXML文件导入</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <form class="form-signin" id="uploadZXMLZIPForm" role="form" method="post" enctype='multipart/form-data'>
+                    <font style="font-size:14px;"><b>导入说明：</b></font><br>
+                    <font style="font-size:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        导入只支持ZXML ZIP压缩包文件导入，且文件格式必须按照规定的标准</font><br><br>
+                    <img src="/images/zxml.png" style="width:340px;" data-action="zoom"><br><br>
+
+                    </br>
+                    <span>
+                         <textarea id="zxmlZIPDesc" placeholder="请输入文件描述" style="width:100%;height:50px;resize: none;"></textarea>
+                    <button type="button" class="btn center-block" style="margin-top: 16px;display: inline-block;width:28%;"
+                            onclick="showDomain()">域信息
+                    </button>
+                    <input id="resourceZXMLZIP" name="resource" type="file" style="position:relative;width: 70%;left:30%;top:-33px;" class="form-control"
+                           accept="application/zip"/>
+                    </span>
+                    <br/>
+                    <center>
+                        <button type="button" class="btn btn-primary  center-block" style="margin-top: 16px;display: inline-block;"
+                                aria-hidden="true" onclick="importZXMLZIPFile()">提交
+                        </button>
+                        <button type="button" class="btn btn-info  center-block" style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                                aria-hidden="true" onclick="closeZXMLZIP()">关闭
+                        </button>
+                    </center>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 文件导入 -->
+<div id="importImageModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 150px;">
+    <div class="modal-dialog" style="width: 400px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left"> 图片文件导入</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <form class="form-signin" id="uploadImageForm" role="form" method="post" enctype='multipart/form-data'>
+                    <font style="font-size:14px;"><b>导入说明：</b></font><br>
+                    <font style="font-size:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        导入只支持图片文件 ZIP压缩包导入，且文件格式必须按照规定的标准</font><br><br>
+                    <img src="/images/image.png" style="width:340px;" data-action="zoom"><br><br>
+                    <span>
+                         <textarea id="imageDesc" placeholder="请输入文件描述" style="width:100%;height:50px;resize: none;"></textarea>
+                    <button type="button" class="btn center-block" style="margin-top: 16px;display: inline-block;width:28%;"
+                            onclick="showDomain()">域信息
+                    </button>
+                    <input id="resourceImage" name="resource" type="file" style="position:relative;width: 70%;left:30%;top:-33px;" class="form-control"
+                           accept="image/gif,image/png,image/jpeg,image/bmp,image/jpg"/>
+                    </span>
+                    <br/>
+                    <center>
+                        <button type="button" class="btn btn-primary  center-block" style="margin-top: 16px;display: inline-block;"
+                                aria-hidden="true" onclick="importImageFile()">提交
+                        </button>
+                        <button type="button" class="btn btn-info  center-block" style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                                aria-hidden="true" onclick="closeImage()">关闭
+                        </button>
+                    </center>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 文件导入 -->
+<div id="importMDModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 150px;">
+    <div class="modal-dialog" style="width: 400px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left"> ModelFile文件导入</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <form class="form-signin" id="uploadMDForm" role="form" method="post" enctype='multipart/form-data'>
+                    <font style="font-size:14px;"><b>导入说明：</b></font><br>
+                    <font style="font-size:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        导入只支持ModelFile文件导入，且文件格式必须按照规定的标准</font><br><br>
+                    <img src="/images/modelFile.png" style="width:340px;" data-action="zoom"><br><br>
+                    <span>
+                         <textarea id="mdDesc" placeholder="请输入文件描述" style="width:100%;height:50px;resize: none;"></textarea>
+                    <button type="button" class="btn center-block" style="margin-top: 16px;display: inline-block;width:28%;"
+                            onclick="showDomain()">域信息
+                    </button>
+                    <input id="resourceMD" name="resource" type="file" style="position:relative;width: 70%;left:30%;top:-33px;" class="form-control"
+                           accept="application/modelfile"/>
+                    </span>
+                    <br/>
+                    <center>
+                        <button type="button" class="btn btn-primary  center-block" style="margin-top: 16px;display: inline-block;"
+                                aria-hidden="true" onclick="importMDFile()">提交
+                        </button>
+                        <button type="button" class="btn btn-info  center-block" style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                                aria-hidden="true" onclick="closeMD()">关闭
+                        </button>
+                    </center>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 文件导入 -->
+<div id="importJarModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 150px;">
+    <div class="modal-dialog" style="width: 400px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left"> Jar文件导入</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <form class="form-signin" id="uploadJarForm" role="form" method="post" enctype='multipart/form-data'>
+                    <font style="font-size:14px;"><b>导入说明：</b></font><br>
+                    <font style="font-size:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        导入只支持Jar文件导入，且文件格式必须按照规定的标准</font><br><br>
+                    <img src="/images/modelFile.png" style="width:340px;" data-action="zoom"><br><br>
+                    <span>
+                         <textarea id="jarDesc" placeholder="请输入文件描述" style="width:100%;height:50px;resize: none;"></textarea>
+                    <button type="button" class="btn center-block" style="margin-top: 16px;display: inline-block;width:28%;"
+                            onclick="showDomain()">域信息
+                    </button>
+                    <input id="resourceJar" name="resource" type="file" style="position:relative;width: 70%;left:30%;top:-33px;" class="form-control"
+                           accept="application/jar"/>
+                    </span>
+                    <br/>
+                    <center>
+                        <button type="button" class="btn btn-primary  center-block" style="margin-top: 16px;display: inline-block;"
+                                aria-hidden="true" onclick="importJarFile()">提交
+                        </button>
+                        <button type="button" class="btn btn-info  center-block" style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                                aria-hidden="true" onclick="closeJar()">关闭
+                        </button>
+                    </center>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade in" id="jarFileSelectedModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width: 600px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <div>
+                <input type="hidden" id="mdId"/>
+                <table id="jarFileTable">
+                </table>
+            </div>
+            <div class="modal-footer" style="align-content: center;padding-bottom: 2px;padding-top: 40px;">
+                <center>
+                    <button class="btn btn-primary" type="button" onclick="confirmJarFile()">提交
+                    </button>
+                    <button class="btn btn-default" type="button" onclick="closeJarModal()">关闭
+                    </button>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="domainModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 50px;">
+    <div class="modal-dialog" style="width: 600px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h5>域划分</h5>
+            <input type="hidden" id="fileDomainId"/>
+            <div id="domainTree"></div>
+            <center>
+                <button class="btn btn-success  center-block" style="margin-top: 16px;display: inline-block;"
+                        onclick="selectDomain()">提交
+                </button>
+                <button class="btn btn-primary  center-block" data-dismiss="modal" style="margin-top: 16px;display: inline-block;"
+                        aria-hidden="true" onclick="">关闭
+                </button>
+            </center>
+        </div>
+    </div>
+</div>

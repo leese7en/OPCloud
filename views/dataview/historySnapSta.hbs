@@ -1,0 +1,318 @@
+<link rel="stylesheet" href="/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+<link href="/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/plugins/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css"/>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdata.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdatatable.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxtreegrid.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxpanel.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxtree.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxcheckbox.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxmenu.js"></script>
+<script src="/plugins/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/plugins/sweetalert/dist/sweetalert.css"/>
+<script src="/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+<link rel="stylesheet" href="/plugins/bootstrap-table/src/bootstrap-table.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="/stylesheets/AdminLTE.min.css">
+<script src="/plugins/bootstrap-table/src/bootstrap-table.js"></script>
+<script src="/plugins/bootstrap-table/src/bootstrap-table-export.js"></script>
+<script src="/plugins/bootstrap-table/src/tableExport.js"></script>
+<script src="/plugins/bootstrap-table/src/locale/bootstrap-table-zh-CN.js" type="text/javascript"></script>
+
+<section class="content-header text-left">
+    <h1 style="margin-bottom: 5px">
+        {{pageName}}
+    </h1>
+    <link rel="stylesheet" href="/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <ul class="breadcrumb">
+        <li><a href="/system/manage" target="_top"><i class="fa fa-dashboard"></i>首页</a></li>
+        <li class="active">{{pageName}}</li>
+    </ul>
+</section>
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#historySnap" data-toggle="tab">历史区间快照</a></li>
+    <li><a href="#historyStatistics" data-toggle="tab">历史区间统计</a></li>
+</ul>
+<div id="jqxMenu">
+    <ul>
+        <li class="edit">编辑</li>
+        <li class="delete">删除</li>
+    </ul>
+</div>
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade in active" id="historySnap">
+        <div class="container" style="width: 100%">
+            <div class="box box-primary">
+                <div class="row" style="padding-top: 2px; padding-left: 10px;">
+                    <div class="col-md-6" style="padding-right:1px;padding-left:1px;">
+                        <div class="col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                            <span class="form-group">
+                                <span class="input-group" style="color: black; padding: 3px;">
+                                    <span class="input-group-addon" style="color: black; padding: 3px;">开始时间</span>
+                                        <div id="beginDateSnap" class="input-group date form_datetime">
+                                    <input class="form-control" type="text" value="">
+                                        <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                </div> </span>
+                            </span>
+                        </div>
+                        <div class="col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                            <span class="form-group">
+                                <span class="input-group" style="color: black; padding: 3px;">
+                                    <span class="input-group-addon" style="color: black; padding: 3px;">开始时间</span>
+                                        <div id="endDateSnap" class="input-group date form_datetime">
+                                    <input class="form-control" type="text" value="">
+                                        <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                </div> </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-1" style="padding-right:1px;padding-left:1px;">
+                        <span class="input-group" style="color: black; padding: 3px;">
+                            <select type="text" id="snapDistance" class="form-control selectpicker" style="width:100%;">
+                            <option value="600">10分钟</option>
+                            <option value="1800">30分钟</option>
+                            <option selected="selected" value="3600">1小时</option>
+                            <option value="21600">6小时</option>
+                            <option value="86400">1天</option>
+                            </select>
+                        </span>
+                    </div>
+                    <div class="col-md-2" style="padding-right:1px;padding-left:1px;">
+                        <div class="col-md-7" style="padding-right:1px;padding-left:1px;">
+                            <span class="input-group" style="color: black; padding: 3px;">
+                                <span class="input-group-addon" style="color: black;">区间</span>
+                                <input type="text" id="interval" class="form-control" value="1" placeholder="请输入区间">
+                            </span>
+                        </div>
+                        <div class="col-md-5" style="padding-right:1px;padding-left:1px;">
+                        <span class="input-group" style="color: black; padding: 3px;">
+                            <select type="text" id="intervalType" class="form-control selectpicker">
+                                <option value="s" selected="selected">秒</option>
+                                <option value="m">分</option>
+                                <option value="h">时</option>
+                                <option value="d">天</option>
+                            </select>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2" style="padding-right:1px;padding-left:1px;">
+                        <div class="col-md-6" style="padding-right:1px;padding-left:1px;">
+                            <span class="input-group" style="color: black; padding: 3px;">
+                                <select type="text" id="hisType" class="form-control selectpicker" style="width:100%;">
+                                    <option value="SPAN" selected="selected">等间距</option>
+                                    <!--<option value="RAW" selected="selected">采样值</option>-->
+                                    <option value="AVGV">平均值</option>
+                                    <option value="MAXV">最大值</option>
+                                    <option value="MINV">最小值</option>
+                                    <option value="FLOW">流量值</option>
+                                </select>
+                            </span>
+                        </div>
+                        <div class="col-md-5" style="padding-right:1px;padding-left:1px;">
+                            <ul class="nav navbar-left" style="color: black; padding: 3px;">
+                                <button type="button" class="btn btn-info btn-sm" style="" onclick="queryHistorySnap()">
+                                    <span class="glyphicon glyphicon-ok"></span> 查询
+                                </button>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <table id="tableSnap"></table>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="historyStatistics">
+        <div class="container" style="width: 100%">
+            <div class="box box-primary">
+                <div class="row" style="padding-top: 2px; padding-left: 10px;">
+                    <div class="col-md-7" style="padding-right:1px;padding-left:1px;">
+                        <div class="col-md-6" style="padding-right:1px;padding-left:1px;">
+                            <span class="form-group">
+                                <span class="input-group" style="color: black; padding: 3px;">
+                                    <span class="input-group-addon" style="color: black; padding: 3px;">开始时间</span>
+                                    <div id="beginDateSta" class="input-group date form_datetime">
+                                        <input class="form-control" type="text" value="2016-11-01 00:00:00">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="col-md-6" style="padding-right:1px;padding-left:1px;">
+                            <span class="form-group">
+                                <span class="input-group" style="color: black; padding: 3px;">
+                                    <span class="input-group-addon" style="color: black; padding: 3px;">结束时间</span>
+                                    <div id="endDateSta" class="input-group date form_datetime">
+                                        <input class="form-control" type="text" value="2016-12-01 00:00:00">
+                                        <span class="input-group-addon" style="height: 31px">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div> </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="padding-right:1px;padding-left:1px;">
+                        <div class="col-md-7" style="padding-right:1px;padding-left:1px;">
+                            <span class="input-group" style="color: black; padding: 3px;">
+                                <span class="input-group-addon" style="color: black;">时间间隔</span>
+                                <select type="text" id="staDistance" class="form-control selectpicker">
+                                    <option value="600">10分钟</option>
+                                    <option value="1800">30分钟</option>
+                                    <option selected="selected" value="3600">1小时</option>
+                                    <option value="21600">6小时</option>
+                                    <option value="86400">1日</option>
+                                    <option value="604800">7日</option>
+                                </select>
+                            </span>
+                        </div>
+                        <div class="col-md-5" style="padding-right:1px;padding-left:1px;">
+                            <ul class="nav navbar-left" style="color: black; padding: 3px;">
+                                <button type="button" class="btn btn-info btn-sm" style="" onclick="queryHistorySta()">
+                                    <span class="glyphicon glyphicon-ok"></span> 查询
+                                </button>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <table id="tableSta"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 拖动框-->
+<div id="drag" style="position:absolute;top:3px;margin:0 auto;">
+    <ul style="color: black; padding: 3px;">
+        <button id="putAway" class="btn btn-success add" onclick="putAway()">展开</button>
+        <button class="btn btn-warning add" onclick="addPointGroupModal()">添加点组</button>
+    </ul>
+    <ul id="dragGroupPoint" style="display:none;">
+        <div id="choosePointSelect" style="position:relative;left:-20px;"></div>
+    </ul>
+</div>
+<div class="modal fade in" id="addPointGroupModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width:400px;margin-top: 100px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" aria-hidden="true" onclick="closeAddPointGroupModal()">&times;</button>
+                <h4 class="modal-title" id="point-title">点组管理 </h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-horizontal" role="form" action="#" style="padding-top: 10px;">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="addPointGroupName">名称</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="addPointGroupName"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="addPointGroupDesc">描述</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="addPointGroupDesc"/>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="modal-footer" style="text-align: center;">
+                        <button class="btn btn-primary" type="button" onclick="addPointGroup()">提交
+                        </button>
+                        <button class="btn btn-default" type="button" onclick="closeAddPointGroupModal()">关闭
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade in" id="updatePointGroupModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width:400px;margin-top: 100px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" aria-hidden="true" onclick="closeUpdatePointGroupModal()">&times;</button>
+                <h4 class="modal-title" id="point-title"> 点组管理 </h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-horizontal" role="form" action="#" style="padding-top: 10px;">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="updatePointGroupName">名称</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="updatePointGroupName"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="updatePointGroupDesc">描述</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="updatePointGroupDesc"/>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="modal-footer" style="text-align: center;">
+                        <button class="btn btn-primary" type="button" onclick="updatePointGroup()">提交
+                        </button>
+                        <button class="btn btn-default" type="button" onclick="closeUpdatePointGroupModal()">关闭
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    #drag {
+        background-color: rgba(244, 244, 244, 0.7);
+        z-index: 800;
+        cursor: move;
+        left: 40%;
+        top: 0;
+    }
+
+    ul.vakata-context {
+        z-index: 2000;
+    }
+</style>
+<!-- 可拖动控件 -->
+<script type="text/javascript" src="/javascripts/Tdrag.js"></script>
+<!-- 可折叠多选控件-->
+<link rel="stylesheet" href="/plugins/jstree/themes/default/style.min.css">
+<script src="/plugins/jstree/jstree.min.js"></script>
+<script type="text/javascript" src="/javascripts/dataview/historySnapSta.js"></script>
+<script>
+    var currentNode;
+    //维护全局变量
+    if (window.parent.socket) {
+        socket = window.parent.socket;
+    } else {
+        var token = '{{token}}';
+        socket = io.connect(socketURI, {
+            'query': 'token=' + token
+        });
+    }
+    socket.removeAllListeners('historyStatistics');
+    socket.removeAllListeners('historySnapshot');
+    socket.removeAllListeners('jsTreePointData');
+
+    socket.on('historyStatistics', function (data) {
+        if (data.total == 0) {
+            $('#tableSta').bootstrapTable('refreshOptions', {pageNumber: 1});
+        }
+        $("#tableSta").bootstrapTable('load', data);
+    });
+    socket.on('historySnapshot', function (data) {
+        if (data.total == 0) {
+            $('#tableSnap').bootstrapTable('refreshOptions', {pageNumber: 1});
+        }
+        formatterSnapData(data);
+    });
+    socket.on('jsTreePointData', function (result) {
+        refreshPointGroupData(result.data);
+    });
+</script>

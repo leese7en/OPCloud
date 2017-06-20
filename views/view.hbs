@@ -1,0 +1,85 @@
+<script type="text/javascript" src="/javascripts/viewCanvas/openPlant.js"></script>
+<canvas id='c' style="width: 100%;height: 100%"></canvas>
+<script>
+
+    var socket = null;
+    /**
+     * 获取 参数
+     * @returns {Object}
+     */
+    function op_get_url_parms() {
+        var args = new Object();
+        var query = location.search.substring(1);
+        var pairs = query.split("&");
+        for (var i = 0; i < pairs.length; i++) {
+            var pos = pairs[i].indexOf('=');
+            if (pos == -1)
+                continue;
+            var argname = pairs[i].substring(0, pos);
+            var value = pairs[i].substring(pos + 1);
+            args[argname] = unescape(value);
+        }
+        return args;
+    }
+    /**
+     * 页面加载执行
+     */
+    $(document).ready(function () {
+        var token = '{{token}}';
+        socket = io.connect(socketURI, {
+            'query': 'token=' + token
+        })
+
+        var args = op_get_url_parms();
+        var canvas = document.getElementById('c');
+        if (canvas.getContext) {
+            var fileName = '{{fileName}}';
+            if (fileName == undefined) {
+                fileName = "test1.zxml";
+            }
+            openPlant.GraphConst.ALARM_TIMEOUT = "#00FFFF";
+            canvas.width = $(window).width() - 20;
+            canvas.height = $(window).height() - 25;
+            var graph = new openPlant.Graph(canvas,
+                    {
+                        'url': "a.op_graph",
+                        'interval': 1,
+                        'bgSrcPrefix': '../diagram_static/',
+                        'imageSrcPrefix': '../diagram/imglib/',
+                        'fileName': fileName,
+                        isphone: false
+                    });
+
+            //设置窗口监听事件
+            $(window).resize(function () { //浏览器窗口变化
+                var _canvas = document.getElementById('c');
+                _canvas.width = $(window).width() - 20;
+                _canvas.height = $(window).height() - 25;
+                if (graph) {
+                    graph.canvas_resize(_canvas);
+                }
+            });
+
+            graph.initDiagram = function (fileName) {
+                socket.emit('getGraph', {
+                    fileName: fileName
+                });
+            };
+            graph.initDiagram(fileName);
+            //监听 图片信息
+            socket.on('getGraphCallback', function (data) {
+                clearInterval(graph._interval_action);
+                graph._parseXML(data.value, data.pointList);
+                graph._interval_action = setInterval(function () {
+                    socket.emit('getGraphData', {pointList: data.pointList})
+                }, 1000);
+
+            });
+            socket.on('getGraphDataCallback', function (data) {
+                graph._refresh_graph(data.value);
+            });
+        } else {
+            alert("浏览器兼容性出错，不支持您使用的浏览器，请使用支持HTML5标准的浏览器工具")
+        }
+    });
+</script>

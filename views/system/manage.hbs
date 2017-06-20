@@ -1,0 +1,36 @@
+{{>managePageHeader}}
+{{#if session.user.skin}}
+    <body class="hold-transition {{session.user.skin}} sidebar-mini" style="overflow:hidden;">
+{{else}}
+    <body class="hold-transition skin-blue sidebar-mini" style="overflow:hidden;">
+{{/if}}
+
+{{>header}}
+{{>leftsidebar}}
+<div class="content-wrapper" style="position:absolute;left:0px;top:50px;right:0;bottom:50px;overflow-y:auto;min-height:600px;">
+    <iframe id="contentIfream" name="contentIfream" src="/system/indexMessage"
+            style="width: 100%;height: 99%;overflow-y:auto;"></iframe>
+</div>
+{{>settings}}
+</body>
+<script>
+    //维护全局变量
+    if (window.parent.socket) {
+        socket = window.parent.socket;
+    } else {
+        var token = '{{token}}';
+        socket = io.connect(socketURI, {
+            'query': 'token=' + token
+        });
+    }
+    socket.on('opmq/message', function (data) {
+        $('#message-info').html(data.info);
+        $('#message-warning').html(data.warning);
+        $('#message-task').html(data.task);
+    });
+    setInterval(function () {
+        socket.emit('opmq/message', {value: -1});
+    }, 5000);
+
+</script>
+

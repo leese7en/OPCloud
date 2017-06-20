@@ -1,0 +1,312 @@
+{{>managePageHeader}}
+<link rel="stylesheet" href="/plugins/bootstrap-table/src/bootstrap-table.css">
+<link rel="stylesheet" href="/plugins/bootstrap-table/src/bootstrap-editable.css">
+<script async="" src="/plugins/bootstrap-table/src/analytics.js"></script>
+<script src="/plugins/bootstrap-table/src/ga.js"></script>
+<!--[if lt IE 9]>
+<script src="/plugins/bootstrap-table/src/json2.min.js"></script>
+<![endif]-->
+<script src="/plugins/bootstrap-table/src/bootstrap-table.js"></script>
+<script src="/plugins/bootstrap-table/src/bootstrap-table-export.js"></script>
+<script src="/plugins/bootstrap-table/src/tableExport.js"></script>
+<script src="/plugins/bootstrap-table/src/bootstrap-table-editable.js"></script>
+<script src="/plugins/bootstrap-table/src/bootstrap-editable.js"></script>
+<script src="/plugins/bootstrap-table/src/locale/bootstrap-table-zh-CN.js" type="text/javascript"></script>
+<script src="/plugins/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/plugins/sweetalert/dist/sweetalert.css">
+
+
+<link rel="stylesheet" href="/plugins/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css"/>
+<link rel="stylesheet" href="/plugins/jqwidgets/jqwidgets/styles/jqx.magus.css" type="text/css"/>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdata.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxpanel.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxtree.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxmenu.js"></script>
+
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxpanel.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdragdrop.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxtree.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxcheckbox.js"></script>
+
+<script type="text/javascript" src="/plugins/jquery-form/jquery-form.js"></script>
+<body class="hold-transition skin-blue sidebar-mini">
+<section class="content-header text-left">
+    <h1 style="margin-bottom: 5px">
+        {{pageName}}
+    </h1>
+    <ul class="breadcrumb">
+        <li><a href="/system/manage" target="_top"><i class="fa fa-dashboard"></i>首页</a></li>
+        <li class="active">{{pageName}}</li>
+    </ul>
+</section>
+<div class="container" style="width: 100%;">
+    <div class="box box-primary">
+            <div class="row" style="margin-top: 20px">
+                <div class="col-md-3">
+                    <center>
+                        <button id="add" class="btn btn-success">
+                            创建
+                        </button>
+                        &nbsp;&nbsp;
+                        <button id="save" class="btn btn-success">
+                            保存
+                        </button>
+                        &nbsp;&nbsp;
+                        <button id="remove" class="btn btn-danger">
+                            删除
+                        </button>
+                    </center>
+                    <div id='jqxMenu' style="display: none">
+                        <ul>
+                            <li>刷新</li>
+                            <li type='separator'></li>
+                            <li>创建</li>
+                            <li>编辑</li>
+                            <li>重命名</li>
+                            <li>删除</li>
+                            <li type='separator'></li>
+                            <li>剪切</li>
+                            <li>复制</li>
+                            <li>粘贴</li>
+                            <li type='separator'></li>
+                            <li>选中</li>
+                            <li>链接</li>
+                        </ul>
+                    </div>
+                    <div class="box box-solid" style="margin-top: 10px">
+                        <div id="jqxTree">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                        <div class="box-header with-border">
+                            <i class="fa fa-th"  id="bt" style="margin-left: -10px"></i>
+                            <h3 class="box-title">数据清单</h3>
+                            <div id="toolbar">
+                                <button id="addPoint" class="btn btn-success"  onclick="showAddModal()">创建</button>
+                                <button id="inport" class="btn btn-success" onclick="showInportFile()">导入</button>
+                                <button id="remove" class="btn btn-danger" onclick="batchDelete()">删除</button>
+                            </div>
+                            <table id="table"
+                                   data-toolbar="#toolbar"
+                                   data-search="false"
+                                   data-show-export="true"
+                                   data-show-refresh="true"
+                                   data-show-toggle="true"
+                                   data-show-columns="true"
+                                   data-minimum-count-columns="2"
+                                   data-pagination="true"
+                                   data-striped="true"
+                                   data-id-field="USER_ID"
+                                   data-page-size="25"
+                                   data-page-list="[10,25,50,100]"
+                                   data-show-footer="false"
+                                   data-side-pagination="server"
+                                   data-url="{{listDataURL}}">
+                            </table>
+                        </div>
+                </div>
+            </div>
+    </div>
+</div>
+<div id="TreeModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 50px;">
+    <div class="modal-dialog" style="width: 340px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left">结构管理</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <form id="addUser" style="margin-bottom:0;">
+                    <table>
+                        <tr>
+                            <td>名称：</td>
+                            <td><input type="text" class="form-control" id="TreeModal_NAME"
+                                       style="width: 200px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>访问地址：</td>
+                            <td><input type="text" class="form-control" id="TreeModal_URI"
+                                       style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>描述：</td>
+                            <td><input type="text" class="form-control" id="TreeModal_DESCRIPTION"
+                                       style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="middle" colspan="2">
+
+                                <button class="btn btn-primary  center-block" data-dismiss="modal"
+                                        style="margin-top: 16px;display: inline-block;"
+                                        aria-hidden="true" onclick="addItem()">提交
+                                </button>
+                                <button class="btn btn-primary  center-block" data-dismiss="modal"
+                                        style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                                        aria-hidden="true" onclick="">取消
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 添加 -->
+<div id="addModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 150px;" >
+    <div class="modal-dialog" style="width: 340px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left"> 添加测点</h4>
+            <div class="modal-body"  style="padding-bottom:0;">
+                <form  style="margin-bottom:0;">
+                    <table>
+                        <tr>
+                            <td>点名：</td>
+                            <td><input type="text" class="form-control" id="addName" style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>压缩类型：</td>
+                            <td><select class="form-control" id="addType" style="width: 200px;margin-top: 10px;align-content: center;">
+                                <option value="0" selected>无损压缩</option>
+                                <option value="1">自动</option>
+                            </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>单位：</td>
+                            <td><input type="text" class="form-control" id="addUnit" style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>描述：</td>
+                            <td><input type="text" class="form-control" id="addDesc" style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr >
+                            <td align="center" valign="middle" colspan="2">
+                                <button class="btn btn-primary  center-block" data-dismiss="modal" style="margin-top: 16px;display: inline-block;"
+                                        aria-hidden="true" onclick="addPoint()">提交
+                                </button>
+                                <button class="btn btn-primary  center-block" data-dismiss="modal" style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                                        aria-hidden="true" onclick="">取消
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 编辑 -->
+<div id="editModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 150px;" >
+    <div class="modal-dialog" style="width: 340px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left"> 编辑测点</h4>
+            <div class="modal-body"  style="padding-bottom:0;">
+                <form  style="margin-bottom:0;">
+                    <table>
+                        <tr style="display: none">
+                            <td>ID：</td>
+                            <td><input type="text" class="form-control" id="editId" style="width: 200px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>点名：</td>
+                            <td><input type="text" class="form-control" id="editName" style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>压缩类型：</td>
+                            <td><select class="form-control" id="editType" style="width: 200px;margin-top: 10px;align-content: center;">
+                                <option value="0" selected>无损压缩</option>
+                                <option value="1">自动</option>
+                            </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>单位：</td>
+                            <td><input type="text" class="form-control" id="editUnit" style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>描述：</td>
+                            <td><input type="text" class="form-control" id="editDesc" style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr >
+                            <td align="center" valign="middle" colspan="2">
+
+                                <button class="btn btn-primary  center-block" data-dismiss="modal" style="margin-top: 16px;display: inline-block;"
+                                        aria-hidden="true" onclick="editPoint()">提交
+                                </button>
+                                <button class="btn btn-primary  center-block" data-dismiss="modal" style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                                        aria-hidden="true" onclick="">取消
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 文件导入 -->
+<div id="inportModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 150px;" >
+    <div class="modal-dialog" style="width: 400px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left"> 文件导入</h4>
+            <div class="modal-body"  style="padding-bottom:0;">
+                <form class="form-signin" id="uploadForm" role="form" method="post"  enctype='multipart/form-data'>
+                    <font style="font-size:14px;"><b>导入说明：</b></font><br>
+                     <font style="font-size:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                         导入只支持excel文件导入，且文件格式必须按照规定的标准(<a href="/excel/model.xls">模版下载</a>)。例如：</font><br><br>
+                    <img src="/images/excel.png" style="width:340px;" data-action="zoom"><br><br>
+                    <input id="resource" name="resource" type="file" class="form-control" />
+                    <br/>
+                    <center>
+                    <button id="btnSub" class="btn btn-primary  center-block" data-dismiss="modal" style="margin-top: 16px;display: inline-block;"
+                            aria-hidden="true" onclick="inportFile()">提交
+                    </button>
+                    <button class="btn btn-primary  center-block" data-dismiss="modal" style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                            aria-hidden="true" onclick="close()">取消
+                    </button>
+                    </center>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 编辑 -->
+<div id="imageModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"
+     style="margin-top: 150px;" >
+    <div class="modal-dialog" style="width: 340px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <div><img src="/images/excel.png"></div>
+
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    var treeDataURL = "{{treeDataURL}}";
+    var tableColumns = {{{stringify columns}}};
+    var key = '{{key}}';
+</script><script type="text/javascript" src="/javascripts/Mtree/Mtree.js"></script>
+<script type="text/javascript" src="/javascripts/Mtree/zoom.js"></script>
+
+<script>
+    $(function(){
+        var flag = true;
+        $("#bt").click(function() {
+            if(flag){
+                $(".col-md-3").hide();
+                $(".col-md-9").width("1100px");
+                flag = false;
+                initTable();
+            }else{
+                $(".col-md-3").show();
+                $(".col-md-9").width("800px");
+                flag = true;
+                initTable();
+            }
+        });
+    })
+</script>

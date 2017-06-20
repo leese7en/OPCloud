@@ -1,0 +1,401 @@
+{{#if session.user.skin}}
+    <link id="userSkin" rel="stylesheet" href="/stylesheets/skins/{{session.user.skin}}.min.css"/>
+{{else}}
+    <link id="userSkin" rel="stylesheet" href="/stylesheets/skins/skin-blue.min.css"/>
+{{/if}}
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Create the tabs -->
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+        <li class="active"><a href="#control-sidebar-theme-tab" data-toggle="tab"><i class="fa fa-wrench"></i></a></li>
+        <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+        <li><a href="#control-sidebar-settings-tab" data-toggle="tab" onclick="listPageMsg()"><i
+                class="fa fa-gears"></i></a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="control-sidebar-theme-tab">
+            <div>
+                <h4 class="control-sidebar-heading">Skins</h4>
+                <ul class="list-unstyled clearfix">
+                    <li style="float:left; width: 33.33333%; padding: 5px;">
+                        <a href="javascript:void(0);" data-skin="skin-blue" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)"
+                           class="clearfix full-opacity-hover">
+                            <div>
+                                <span style="display:block; width: 20%; float: left; height: 7px; background: #367fa9;"></span>
+                                <span class="bg-light-blue" style="display:block; width: 80%; float: left; height: 7px;"></span>
+                            </div>
+                            <div>
+                                <span style="display:block; width: 20%; float: left; height: 20px; background: #222d32;"></span>
+                                <span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;"></span>
+                            </div>
+                        </a>
+                        <p class="text-center no-margin">Blue</p></li>
+                    <li style="float:left; width: 33.33333%; padding: 5px;">
+                        <a href="javascript:void(0);" data-skin="skin-black" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)"
+                           class="clearfix full-opacity-hover">
+                            <div style="box-shadow: 0 0 2px rgba(0,0,0,0.1)" class="clearfix">
+                                <span style="display:block; width: 20%; float: left; height: 7px; background: #fefefe;"></span>
+                                <span style="display:block; width: 80%; float: left; height: 7px; background: #fefefe;"></span>
+                            </div>
+                            <div>
+                                <span style="display:block; width: 20%; float: left; height: 20px; background: #222;"></span>
+                                <span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;"></span>
+                            </div>
+                        </a>
+                        <p class="text-center no-margin">Black</p></li>
+                    <li style="float:left; width: 33.33333%; padding: 5px;">
+                        <a href="javascript:void(0);" data-skin="skin-purple" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)"
+                           class="clearfix full-opacity-hover">
+                            <div>
+                                <span style="display:block; width: 20%; float: left; height: 7px;" class="bg-purple-active"></span>
+                                <span class="bg-purple" style="display:block; width: 80%; float: left; height: 7px;"></span>
+                            </div>
+                            <div><span style="display:block; width: 20%; float: left; height: 20px; background: #222d32;"></span>
+                                <span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;"></span>
+                            </div>
+                        </a>
+                        <p class="text-center no-margin">Purple</p></li>
+                    <li style="float:left; width: 33.33333%; padding: 5px;">
+                        <a href="javascript:void(0);" data-skin="skin-green" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)"
+                           class="clearfix full-opacity-hover">
+                            <div>
+                                <span style="display:block; width: 20%; float: left; height: 7px;" class="bg-green-active"></span>
+                                <span class="bg-green" style="display:block; width: 80%; float: left; height: 7px;"></span>
+                            </div>
+                            <div><span style="display:block; width: 20%; float: left; height: 20px; background: #222d32;"></span>
+                                <span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;"></span>
+                            </div>
+                        </a>
+                        <p class="text-center no-margin">Green</p></li>
+                    <li style="float:left; width: 33.33333%; padding: 5px;">
+                        <a href="javascript:void(0);" data-skin="skin-red" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)"
+                           class="clearfix full-opacity-hover">
+                            <div>
+                                <span style="display:block; width: 20%; float: left; height: 7px;" class="bg-red-active"></span>
+                                <span class="bg-red" style="display:block; width: 80%; float: left; height: 7px;"></span>
+                            </div>
+                            <div>
+                                <span style="display:block; width: 20%; float: left; height: 20px; background: #222d32;"></span>
+                                <span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;"></span>
+                            </div>
+                        </a>
+                        <p class="text-center no-margin">Red</p></li>
+                    <li style="float:left; width: 33.33333%; padding: 5px;">
+                        <a href="javascript:void(0);" data-skin="skin-yellow" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)"
+                           class="clearfix full-opacity-hover">
+                            <div>
+                                <span style="display:block; width: 20%; float: left; height: 7px;" class="bg-yellow-active"></span>
+                                <span class="bg-yellow" style="display:block; width: 80%; float: left; height: 7px;"></span>
+                            </div>
+                            <div>
+                                <span style="display:block; width: 20%; float: left; height: 20px; background: #222d32;"></span>
+                                <span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;"></span>
+                            </div>
+                        </a>
+                        <p class="text-center no-margin">Yellow</p></li>
+                    <li style="float:left; width: 33.33333%; padding: 5px;">
+                        <a href="javascript:void(0);" data-skin="skin-blue-light" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)"
+                           class="clearfix full-opacity-hover">
+                            <div>
+                                <span style="display:block; width: 20%; float: left; height: 7px; background: #367fa9;"></span>
+                                <span class="bg-light-blue" style="display:block; width: 80%; float: left; height: 7px;"></span>
+                            </div>
+                            <div>
+                                <span style="display:block; width: 20%; float: left; height: 20px; background: #f9fafc;"></span>
+                                <span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;"></span>
+                            </div>
+                        </a>
+                        <p class="text-center no-margin" style="font-size: 12px">Blue Light</p></li>
+                    <li style="float:left; width: 33.33333%; padding: 5px;">
+                        <a href="javascript:void(0);" data-skin="skin-black-light" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)"
+                           class="clearfix full-opacity-hover">
+                            <div style="box-shadow: 0 0 2px rgba(0,0,0,0.1)" class="clearfix">
+                                <span style="display:block; width: 20%; float: left; height: 7px; background: #fefefe;"></span>
+                                <span style="display:block; width: 80%; float: left; height: 7px; background: #fefefe;"></span>
+                            </div>
+                            <div>
+                                <span style="display:block; width: 20%; float: left; height: 20px; background: #f9fafc;"></span>
+                                <span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;"></span>
+                            </div>
+                        </a>
+                        <p class="text-center no-margin" style="font-size: 12px">Black Light</p></li>
+                    <li style="float:left; width: 33.33333%; padding: 5px;">
+                        <a href="javascript:void(0);" data-skin="skin-purple-light" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)"
+                           class="clearfix full-opacity-hover">
+                            <div>
+                                <span style="display:block; width: 20%; float: left; height: 7px;" class="bg-purple-active"></span>
+                                <span class="bg-purple" style="display:block; width: 80%; float: left; height: 7px;"></span>
+                            </div>
+                            <div>
+                                <span style="display:block; width: 20%; float: left; height: 20px; background: #f9fafc;"></span>
+                                <span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;"></span>
+                            </div>
+                        </a>
+                        <p class="text-center no-margin" style="font-size: 12px">Purple Light</p></li>
+                    <li style="float:left; width: 33.33333%; padding: 5px;">
+                        <a href="javascript:void(0);" data-skin="skin-green-light" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)"
+                           class="clearfix full-opacity-hover">
+                            <div>
+                                <span style="display:block; width: 20%; float: left; height: 7px;" class="bg-green-active"></span>
+                                <span class="bg-green" style="display:block; width: 80%; float: left; height: 7px;"></span>
+                            </div>
+                            <div>
+                                <span style="display:block; width: 20%; float: left; height: 20px; background: #f9fafc;"></span>
+                                <span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;"></span>
+                            </div>
+                        </a>
+                        <p class="text-center no-margin" style="font-size: 12px">Green Light</p></li>
+                    <li style="float:left; width: 33.33333%; padding: 5px;">
+                        <a href="javascript:void(0);" data-skin="skin-red-light" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)"
+                           class="clearfix full-opacity-hover">
+                            <div>
+                                <span style="display:block; width: 20%; float: left; height: 7px;" class="bg-red-active"></span>
+                                <span class="bg-red" style="display:block; width: 80%; float: left; height: 7px;"></span>
+                            </div>
+                            <div>
+                                <span style="display:block; width: 20%; float: left; height: 20px; background: #f9fafc;"></span>
+                                <span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;"></span>
+                            </div>
+                        </a>
+                        <p class="text-center no-margin" style="font-size: 12px">Red Light</p></li>
+                    <li style="float:left; width: 33.33333%; padding: 5px;">
+                        <a href="javascript:void(0);" data-skin="skin-yellow-light" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)"
+                           class="clearfix full-opacity-hover">
+                            <div>
+                                <span style="display:block; width: 20%; float: left; height: 7px;" class="bg-yellow-active"></span>
+                                <span class="bg-yellow" style="display:block; width: 80%; float: left; height: 7px;"></span>
+                            </div>
+                            <div>
+                                <span style="display:block; width: 20%; float: left; height: 20px; background: #f9fafc;"></span>
+                                <span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;"></span>
+                            </div>
+                        </a>
+                        <p class="text-center no-margin" style="font-size: 12px;">Yellow Light</p></li>
+                </ul>
+            </div>
+        </div>
+        <!-- Home tab content -->
+        <div class="tab-pane" id="control-sidebar-home-tab">
+            <h3 class="control-sidebar-heading">Recent Activity</h3>
+            <ul class="control-sidebar-menu">
+                <li>
+                    <a href="javascript:void(0)">
+                        <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+
+                        <div class="menu-info">
+                            <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+                            <p>Will be 23 on April 24th</p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <i class="menu-icon fa fa-user bg-yellow"></i>
+
+                        <div class="menu-info">
+                            <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+
+                            <p>New phone +1(800)555-1234</p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
+
+                        <div class="menu-info">
+                            <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
+
+                            <p>nora@example.com</p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <i class="menu-icon fa fa-file-code-o bg-green"></i>
+
+                        <div class="menu-info">
+                            <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
+
+                            <p>Execution time 5 seconds</p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <!-- /.control-sidebar-menu -->
+            <h3 class="control-sidebar-heading">Tasks Progress</h3>
+            <ul class="control-sidebar-menu">
+                <li>
+                    <a href="javascript:void(0)">
+                        <h4 class="control-sidebar-subheading">
+                            Custom Template Design
+                            <span class="label label-danger pull-right">70%</span>
+                        </h4>
+
+                        <div class="progress progress-xxs">
+                            <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <h4 class="control-sidebar-subheading">
+                            Update Resume
+                            <span class="label label-success pull-right">95%</span>
+                        </h4>
+
+                        <div class="progress progress-xxs">
+                            <div class="progress-bar progress-bar-success" style="width: 95%"></div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <h4 class="control-sidebar-subheading">
+                            Laravel Integration
+                            <span class="label label-warning pull-right">50%</span>
+                        </h4>
+
+                        <div class="progress progress-xxs">
+                            <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <h4 class="control-sidebar-subheading">
+                            Back End Framework
+                            <span class="label label-primary pull-right">68%</span>
+                        </h4>
+
+                        <div class="progress progress-xxs">
+                            <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <!-- /.control-sidebar-menu -->
+
+        </div>
+        <!-- /.tab-pane -->
+        <!-- Settings tab content -->
+        <div class="tab-pane" id="control-sidebar-settings-tab">
+            <h3 class="control-sidebar-heading">消息订阅</h3>
+            <div class="indexMessage">
+            </div>
+        </div>
+        <!-- /.tab-pane -->
+    </div>
+</aside>
+<script type="text/javascript">
+    $('#control-sidebar-theme-tab ul a').click(function () {
+        var skin = $(this).attr('data-skin');
+        $.ajax({
+            type: 'post',
+            url: '/system/user/personaliseSkin',
+            data: {
+                skin: skin
+            },
+            success: function (data) {
+                var flag = data.flag;
+                if (flag > -1) {
+                    $('#userSkin').attr('href', '/stylesheets/skins/' + skin + '.min.css');
+                }
+                $('body').attr('class', skin + ' sidebar-mini');
+            },
+        });
+    });
+    //加载设置栏中可供选择的的面板信息
+    function listPageMsg() {
+        $.ajax({
+            type: "post",
+            url: "/message/message/indexMessage",
+            async: false,
+            dataType: "json",
+            success: function (data) {
+                var flag = data.flag;
+                if (flag > -1) {
+                    var data = data.data;
+                    var html = '';
+                    for (var i in data) {
+                        var obj = data[i];
+                        var checked = '';
+                        if (obj.checked) {
+                            checked = 'checked';
+                        }
+                        html += '<div class="form-group"> <label class="control-sidebar-subheading">' + obj.name + ' <input value ="' + obj.value + '" class="indexCheck pull-right" type="checkbox" ' + checked + '> </label> </div>';
+                    }
+                    $('#control-sidebar-settings-tab .indexMessage').html(html);
+
+                }
+            },
+            error: function () {
+            }
+        });
+        //选中框点击事件
+        $(".indexCheck").change(function () {
+            var checked = $(this).is(':checked');
+            var panel = $(this).attr('value').split("|");
+            var panelId = panel[0];
+            var panelUrl = panel[1];
+            var isChecked;
+            if (checked) {
+                isChecked = 1;
+            } else {
+                isChecked = 0;
+            }
+            $.ajax({
+                type: "post",
+                url: "/message/message/editIndexMessage",
+                data: {
+                    panelId: panelId,
+                    isChecked: isChecked
+                },
+                async: false,
+                dataType: "json",
+                success: function (data) {
+                    if (data.flag == 0) {
+                        if (isChecked == 1) {
+                            $(window.frames["contentIfream"].document).find('#' + panelUrl).show();
+                        } else {
+                            $(window.frames["contentIfream"].document).find('#' + panelUrl).hide();
+                        }
+                    }
+                },
+                error: function () {
+                }
+            });
+        });
+    }
+    function getIndexMessage() {
+        $.ajax({
+            type: "post",
+            url: "/message/message/getIndexMessage",
+            async: false,
+            dataType: "json",
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var panelUrl = data[i].pageUrl;
+                    var jpanelUrl = "#" + panelUrl;
+                    $(jpanelUrl, doc)[0].style.display = '';
+                    $(jpanelUrl + "Id", doc).val(data[i].pageId);
+                    $(jpanelUrl + "No", doc).val(data[i].pageNo);
+                    if (data[i].pageNo % 2 == 1) {
+                        $(window.frames["contentIfream"].document).find(jpanelUrl).appendTo($("#section1", doc));
+                    } else {
+                        $(window.frames["contentIfream"].document).find(jpanelUrl).appendTo($("#section2", doc));
+                    }
+                    //获取鼠标点击前坐标
+                    $(jpanelUrl, doc).mousedown(function (e) {
+                        downX = e.pageX;
+                        downY = e.pageY;
+                        curPanel = $(this);//獲取當前的panel
+                        oldNextPanels = $(this).nextAll();//获取當前panel移動前後面的兄弟節點
+                    });
+                }
+            },
+            error: function () {
+            }
+        });
+    }
+</script>

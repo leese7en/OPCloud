@@ -1,0 +1,141 @@
+<link rel="stylesheet" href="/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+<link href="/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet"/>
+<script src="/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+<link rel="stylesheet" href="/plugins/bootstrap-table/src/bootstrap-table.css">
+<link rel="stylesheet" href="/plugins/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css"/>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdata.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdatatable.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxtreegrid.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxpanel.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxtree.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdropdownbutton.js"></script>
+<!-- Theme style -->
+<link rel="stylesheet" href="/stylesheets/AdminLTE.min.css">
+<script src="/plugins/bootstrap-table/src/bootstrap-table.js"></script>
+<script src="/plugins/bootstrap-table/src/bootstrap-table-export.js"></script>
+<script src="/plugins/bootstrap-table/src/tableExport.js"></script>
+<script src="/plugins/bootstrap-table/src/locale/bootstrap-table-zh-CN.js" type="text/javascript"></script>
+<section class="content-header text-left">
+    <h1 style="margin-bottom: 5px">
+        {{pageName}}
+    </h1>
+    <ul class="breadcrumb">
+        <li><a href="/system/manage" target="_top">首页</a></li>
+        <li class="active">{{pageName}}</li>
+    </ul>
+</section>
+<div class="container" style="width: 100%">
+    <div class="box box-primary">
+        <div class="row" style="padding-top: 2px; padding-left: 10px;">
+            <div class="col-md-2" style="padding-left: 0px; padding-right: 0px;">
+                        <span class="input-group" style="color: black; padding: 3px;">
+                        <span class="input-group-addon" style="color: black;">节点</span>
+                            <div id="mtreeDropDownButton" style="width: 100%;">
+                                  <div style="border: none;" id='mtreeNode'>
+                                  </div>
+                            </div>
+                        </span>
+            </div>
+            <div class="col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                <div class="col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                    <span class="form-group">
+                        <span class="input-group" style="color: black; padding: 3px;">
+                            <span class="input-group-addon" style="color: black; padding: 3px;">开始时间</span>
+                                <div id="beginDate" class="input-group date form_datetime">
+                            <input class="form-control" type="text" value="2016-11-01 00:00:00">
+                                <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                        </div> </span>
+                    </span>
+                </div>
+                <div class="col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                <span class="form-group">
+                    <span class="input-group" style="color: black; padding: 3px;">
+                        <span class="input-group-addon"
+                              style="color: black; padding: 3px;">结束时间</span>  <div id="endDate" class="input-group date form_datetime">
+                        <input class="form-control" type="text" value="2016-12-01 00:00:00">
+                            <span class="input-group-addon" style="height: 31px"> <span
+                                    class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                    </div> </span>
+                </span>
+                </div>
+            </div>
+            <div class="col-md-3" style="padding-left: 0px; padding-right: 0px;">
+             <span class="input-group" style="color: black; padding: 3px;"> <span class="input-group-addon" style="color: black; padding: 3px;">间隔</span>
+             <select id="alarmHisDistance" class="form-control selectpicker">
+                 <option value="600">10分钟</option>
+                 <option value="1800">30分钟</option>
+                 <option value="3600">1小时</option>
+                 <option value="21600">6小时</option>
+                 <option value="86400">1日</option>
+                 <option value="604800">7日</option>
+             </select> </span>
+            </div>
+        </div>
+        <div class="row" style="padding-top: 2px; padding-left: 12px;">
+            <div class="col-md-2" style="padding-left: 0px; padding-right: 0px;">
+             <span class="input-group">
+                 <span class="input-group-addon" style="color: black; padding: 3px;">报警级别</span>
+                 <select id="alarmLevel" class="form-control selectpicker" multiple>
+                     <option value="0">红</option>
+                     <option value="1">黄</option>
+                     <option value="2">白</option>
+                     <option value="3">绿</option>
+                 </select>
+             </span>
+            </div>
+            <div class="col-md-3" style="padding-left: 0px; padding-right: 0px;">
+            <span class="input-group" style="color: black; padding: 3px;">
+                <span class="input-group-addon" style="color: black;">名称</span>
+                <input type="text" id="alarmRealName" class="form-control" placeholder="请输入名称"> </span>
+            </div>
+            <div class="col-md-3" style="padding-left: 0px; padding-right: 0px;">
+            <span class="input-group" style="color: black; padding: 3px;">
+                <span class="input-group-addon">描述</span> <input
+                    type="text" id="alarmRealDesc" class="form-control"
+                    placeholder="请输入描述"> </span>
+            </div>
+            <div class="col-md-3" style="padding-left: 0px; padding-right: 0px;">
+                <ul class="nav navbar-left" style="color: black; padding: 3px;">
+                    <button type="button" class="btn btn-info btn-sm" style="" onclick="queryHistory()">
+                        <span class="glyphicon glyphicon-ok"></span> 查询
+                    </button>
+                </ul>
+            </div>
+        </div>
+        <table id="table"></table>
+    </div>
+</div>
+<style>
+    .fixed-table-toolbar .columns {
+        margin-top: -38px !important;
+        margin-right: 5px !important;
+    }
+</style>
+
+<script type="text/javascript" src="/javascripts/dataview/alarmHistory.js"></script>
+<script>
+    //维护全局变量
+    if (window.parent.socket) {
+        socket = window.parent.socket;
+    } else {
+        var token = '{{token}}';
+        socket = io.connect(socketURI, {
+            'query': 'token=' + token
+        });
+    }
+    socket.removeAllListeners('alarmHistoryData');
+    socket.on('alarmHistoryData', function (data) {
+        if (data.total == 0) {
+            $('#table').bootstrapTable('refreshOptions', {pageNumber: 1});
+        }
+        $("#table").bootstrapTable('load', data);
+        alarmAPColor();
+    });
+</script>

@@ -1,0 +1,158 @@
+{{>systemTable}}
+<div id="myToolbar" style="display: none">
+    <div class="col-md-3">
+        <span class="input-group" style="color: black; padding: 3px;">
+            <span class="input-group-addon" style="color: black;">项目名称</span>
+            <input type="text" id="projectName" class="form-control" placeholder="请输入项目名称"> </span>
+    </div>
+    <div class="col-md-3">
+        <span class="input-group">
+            <span class="input-group-addon">负责人</span>
+            <input type="text" id="principal" class="form-control" placeholder="请输入负责人"> </span>
+    </div>
+    <button id="queryUser" class="btn btn-success add" onclick="queryProject()">
+        查询
+    </button>
+    <button id="addUser" class="btn btn-success add" onclick="showAddProject()">
+        新建
+    </button>
+</div>
+<div id="addProjectModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 80px;">
+    <div class="modal-dialog" style="width: 340px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left"> 添加项目</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <form id="addProject" style="margin-bottom:0;">
+                    <table>
+                        <tr>
+                            <td>项目名称：</td>
+                            <td><input type="text" class="form-control" id="addName" style="width: 200px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>负责人：</td>
+                            <td><input type="text" class="form-control" id="addPrincipal" style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>是否锁定：</td>
+                            <td><select class="form-control" id="addLock" style="width: 200px;margin-top: 10px;align-content: center;">
+                                <option value="1">锁定</option>
+                                <option value="0">不锁定</option>
+                            </select>
+                        </tr>
+                        <tr>
+                            <td>地址：</td>
+                            <td><input type="text" class="form-control" id="addAddress" style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>经度：</td>
+                            <td>
+                                <input type="text" class="form-control" id="addLongitude" style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>纬度：</td>
+                            <td>
+                                <input type="text" class="form-control" id="addLatitude" style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>描述：</td>
+                            <td>
+                                <input type="text" class="form-control" id="addDesc" style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="middle" colspan="2">
+
+                                <button class="btn btn-primary  center-block" data-dismiss="modal" style="margin-top: 16px;display: inline-block;"
+                                        aria-hidden="true" onclick="addProject()">提交
+                                </button>
+                                <button class="btn btn-primary  center-block" data-dismiss="modal"
+                                        style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                                        aria-hidden="true" onclick="reset()">取消
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="editProjectModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 80px;">
+    <div class="modal-dialog" style="width: 340px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left"> 编辑项目</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <form id="editProject" style="margin-bottom:0;">
+                    <table>
+                        <tr style="display: none">
+                            <td>ID：</td>
+                            <td><input type="text" class="form-control" id="editId" style="width: 200px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>项目名称：</td>
+                            <td><input type="text" class="form-control" id="editName" style="width: 200px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>负责人：</td>
+                            <td><input type="text" class="form-control" id="editPrincipal" style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>是否锁定：</td>
+                            <td><select class="form-control" id="editLock" style="width: 200px;margin-top: 10px;align-content: center;">
+                                <option value="1">锁定</option>
+                                <option value="0">不锁定</option>
+                            </select>
+                        </tr>
+                        <tr>
+                            <td>地址：</td>
+                            <td><input type="text" class="form-control" id="editAddress" style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>经度：</td>
+                            <td>
+                                <input type="text" class="form-control" id="editLongitude" style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>纬度：</td>
+                            <td>
+                                <input type="text" class="form-control" id="editLatitude" style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>描述：</td>
+                            <td>
+                                <input type="text" class="form-control" id="editDesc" style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="middle" colspan="2">
+
+                                <button type="button" class="btn btn-primary  center-block" data-dismiss="modal" style="margin-top: 16px;display: inline-block;"
+                                        aria-hidden="true" onclick="editProject()">提交
+                                </button>
+                                <button type="button" class="btn btn-primary  center-block" data-dismiss="modal"
+                                        style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                                        aria-hidden="true" onclick="reset()">取消
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .fixed-table-toolbar .columns {
+        margin-top: -38px !important;
+        margin-right: 5px !important;
+        z-index: 2000;
+    }
+</style>
+<script type="text/javascript" src="/javascripts/domain/project/project.js"></script>

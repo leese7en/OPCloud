@@ -1,0 +1,71 @@
+<link rel="stylesheet" href="/plugins/bootstrap-table/src/bootstrap-table.css">
+<script src="/plugins/bootstrap-table/src/bootstrap-table.js"></script>
+<script src="/plugins/bootstrap-table/src/locale/bootstrap-table-zh-CN.js" type="text/javascript"></script>
+<script src="/plugins/bootstrap-table/src/bootstrap-table-export.js"></script>
+<script src="/plugins/bootstrap-table/src/tableExport.js"></script>
+<link rel="stylesheet" href="/stylesheets/AdminLTE.min.css">
+<link rel="stylesheet" href="/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+<script src="/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="/javascripts/system/sysLog.js"></script>
+<section class="content-header text-left">
+    <h1 style="margin-bottom: 5px">
+        {{pageName}}
+    </h1>
+    <ul class="breadcrumb">
+        <li><a href="/system/manage" target="_top"><i class="fa fa-dashboard"></i>首页</a></li>
+        <li class="active">{{pageName}}</li>
+    </ul>
+</section>
+<div class="container" style="width: 100%">
+    <div class="box box-primary">
+        <div class="row" style="padding-top: 2px; padding-left: 10px;">
+            <div class="col-md-2" style="padding-left: 0px; padding-right: 0px;">
+                        <span class="input-group" style="color: black; padding: 3px;">
+                        <span class="input-group-addon" style="color: black;">请求路径</span>
+                            <input id="queryURL" type="text" class="form-control" placeholder="请输入请求路径"/>
+                        </span>
+            </div>
+            <div class=" col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                <div class="col-md-6" style="padding-left: 0px; padding-right: 0px;">
+            <span class="form-group">
+                <span class="input-group" style="color: black; padding: 3px;">
+                    <span class="input-group-addon" style="color: black; padding: 3px;">开始时间</span>
+                        <div id="beginDate" class="input-group date form_datetime">
+                    <input class="form-control" type="text" value="2016-11-01 00:00:00">
+                        <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                </div> </span>
+            </span>
+                </div>
+                <div class="col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                <span class="form-group">
+                    <span class="input-group" style="color: black; padding: 3px;">
+                        <span class="input-group-addon"
+                              style="color: black; padding: 3px;">结束时间</span>  <div id="endDate" class="input-group date form_datetime">
+                        <input class="form-control" type="text" value="2016-12-01 00:00:00">
+                            <span class="input-group-addon" style="height: 31px"> <span
+                                    class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                    </div> </span>
+                </span>
+                </div>
+            </div>
+            <div class="col-md-2" style="padding-left: 0px; padding-right: 0px;">
+                <ul class="nav navbar-left" style="color: black; padding: 3px;">
+                    <button type="button" class="btn btn-info btn-sm" style="" onclick="querySystemLog()">
+                        <span class="glyphicon glyphicon-ok"></span> 查询
+                    </button>
+                </ul>
+            </div>
+        </div>
+        <table id="sysTable"></table>
+    </div>
+</div>
+<style>
+    .fixed-table-toolbar .columns {
+        margin-top: -38px !important;
+        margin-right: 5px !important;
+        z-index: 2000;
+    }
+</style>

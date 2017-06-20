@@ -1,0 +1,110 @@
+<link rel="stylesheet" href="/stylesheets/ionicons.min.css"/>
+<link rel="stylesheet" href="/stylesheets/AdminLTE.min.css">
+<script src="/plugins/echarts/echarts.min.js"></script>
+<section class="content-header text-left">
+    <h1 style="margin-bottom: 5px">
+        {{pageName}}
+    </h1>
+    <ul class="breadcrumb">
+        <li><a href="/system/manage" target="_top"><i class="fa fa-dashboard"></i>首页</a></li>
+        <li class="active">{{pageName}}</li>
+    </ul>
+</section>
+<div id="container" class="container" style="width: 100%">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <i class="ion ion-clipboard"></i>
+            <h3 class="box-title">Agent 运行情况</h3>
+        </div>
+        <div class="row" style="padding-top: 8px; padding-left: 20px;">
+            <div class="box-body">
+                <div id="chartContainer" class="row">
+                    <div class="col-lg-8 col-xs-8">
+                        <div id="agentTotal"></div>
+                    </div>
+                    <div class="col-lg-4 col-xs-4">
+                        <div class="row">
+                            <div class="col-lg-10 col-xs-12">
+                                <div class="small-box bg-yellow">
+                                    <div class="inner">
+                                        <h3 id="agentConn">0</h3>
+                                        <p>当前连接数</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-person-stalker"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-5 col-xs-6">
+                                <div class="small-box bg-aqua">
+                                    <div class="inner">
+                                        <h3 id="agentFlowUp">0</h3>
+                                        <p>流量上行(KB)</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-arrow-graph-up-left"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-xs-6">
+                                <div class="small-box bg-aqua">
+                                    <div class="inner">
+                                        <h3 id="agentFlowDown">0</h3>
+                                        <p>流量下行(KB)</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-arrow-graph-down-left"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-5 col-xs-6">
+                                <!-- small box -->
+                                <div class="small-box bg-green">
+                                    <div class="inner">
+                                        <h3 id="agentNetworkUp">0</h3>
+                                        <p>网络上行(KB/s)</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-arrow-graph-up-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-xs-6">
+                                <!-- small box -->
+                                <div class="small-box bg-green">
+                                    <div class="inner">
+                                        <h3 id="agentNetworkDown">0</h3>
+                                        <p>网络下行(KB/s)</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion-arrow-graph-down-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="agentHist"></div>
+    </div>
+    <div id="group">
+    </div>
+</div>
+<script src="/javascripts/system/serverStatus.js"></script>
+<script>
+    //维护全局变量
+    if (window.parent.socket) {
+        socket = window.parent.socket;
+    } else {
+        var token = '{{token}}';
+        socket = io.connect(socketURI, {
+            'query': 'token=' + token
+        });
+    }
+    initSocketOn();
+</script>

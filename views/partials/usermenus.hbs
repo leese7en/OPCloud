@@ -1,0 +1,316 @@
+<li class="dropdown user user-menu">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        {{#if session.user.ICON}}
+            <img id="userHeadImg2" src="{{session.user.ICON}}" class="user-image" alt="User Image">
+        {{else}}
+            <img id="userHeadImg2" src="/images/user2-160x160.jpg" class="user-image" alt="User Image">
+        {{/if}}
+        <span id="personaliseUserNameTop" class="hidden-xs">{{session.user.USER_NAME}}</span>
+    </a>
+    <ul class="dropdown-menu">
+        <!-- User image -->
+        <li class="user-header">
+            {{#if session.user.ICON}}
+                <img id="userHeadImg" src="{{session.user.ICON}}" class="img-circle" alt="User Image" onclick="showUserHeadModal()" height="160" width="160">
+            {{else}}
+                <img id="userHeadImg" src="/images/user2-160x160.jpg" class="img-circle" alt="User Image" onclick="showUserHeadModal()">
+            {{/if}}
+            <p>
+                <span id="personaliseUserNameInner">{{session.user.USER_NAME}}</span>
+                <small id="personaliseUserDesc">{{session.user.DESCRIPTION}}</small>
+            </p>
+        </li>
+        <!-- Menu Body -->
+        <li class="user-body">
+            <div class="row">
+                <div class="col-xs-4 text-center">
+                    <a href="#" onclick="showPersonaliseModal()">个性化</a>
+                </div>
+                <div class="col-xs-4 text-center">
+                    <a href="#" onclick="getUserToken()">证书</a>
+                </div>
+                <div class="col-xs-4 text-center">
+                    <a href="#" onclick="showUserInfo()">档案</a>
+                </div>
+            </div>
+        </li>
+        <!-- Menu Footer-->
+        <li class="user-footer">
+            <div class="pull-left">
+                <a href="#" class="btn btn-default btn-flat" onclick="userProfile()">密码管理</a>
+            </div>
+            <div class="pull-right">
+                <a href="/system/user/loginOut" class="btn btn-default btn-flat">退出</a>
+            </div>
+        </li>
+    </ul>
+</li>
+<div class="modal fade in" id="userInfo" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width:400px;margin-top: 100px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="point-title"> 修改密码 </h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-horizontal" role="form" action="#" style="padding-top: 10px;">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="password">旧密码</label>
+                            <div class="col-md-8">
+                                <input type="password" class="form-control" id="password" onblur="validateOldPass()">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="newPass">新密码</label>
+                            <div class="col-md-8">
+                                <input type="password" class="form-control" id="newPass" onblur="validateNewPassword()"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="newPassAgain">密码确认</label>
+
+                            <div class="col-md-8">
+                                <input type="password" class="form-control" id="newPassAgain" onblur="validateNewPassword2()"/>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="modal-footer" style="text-align: center;">
+                        <button class="btn btn-primary" type="button" onclick="changePassword()">提交
+                        </button>
+                        <button class="btn btn-default" type="button" onclick="closeUpdateUserModal()">取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="editUserModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 50px;">
+    <div class="modal-dialog" style="width: 340px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left"> 信息</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <form id="editUser" style="margin-bottom:0;">
+                    <table>
+                        <tr>
+                            <td>用户名：</td>
+                            <td><input type="text" class="form-control" id="editJobNo" readonly
+                                       style="width: 200px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>姓名：</td>
+                            <td><input type="text" class="form-control" id="editUserName" onblur="validateEditUserName()"
+                                       style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>邮箱：</td>
+                            <td><input type="text" class="form-control" id="editMail" readonly
+                                       style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>联系方式：</td>
+                            <td><input type="text" class="form-control" id="editPhone" onblur="validateEditPhone()"
+                                       style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>描述：</td>
+                            <td><input type="text" class="form-control" id="editDesc" onblur="trimDesc()"
+                                       style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+
+                            <td align="center" valign="middle" colspan="2">
+                                <button type="button" class="btn btn-primary  center-block"
+                                        style="margin-top: 16px;display: inline-block;"
+                                        aria-hidden="true" onclick="updateUserInfo()">提交
+                                </button>
+                                <button type="button" class="btn btn-primary  center-block" data-dismiss="modal"
+                                        style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                                        aria-hidden="true">取消
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 更换用户头像 -->
+<div id="userHeadImgModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width: 500px; margin-top: 150px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left"> 用户头像图片文件导入</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <form class="form-signin" id="uploadImageForm" role="form" method="post" enctype='multipart/form-data'>
+                    <table>
+                        <tr>
+                            <td>头像图片选择：</td>
+                            <td><input id="resourceImage" name="resource" type="file" class="form-control" onchange="previewImage()"
+                                       accept="image/gif,image/png,image/jpeg,image/bmp,image/jpg"/></td>
+                        </tr>
+                        <tr>
+                            <div id="previewCon">
+                                {{#if session.user.ICON}}
+                                    <img id="preview" src="{{session.user.ICON}}" style="width: 200px;heigth:40px;margin-left:140px;" alt="预览">
+                                {{else}}
+                                    <img id="preview" src="/images/user2-160x160.jpg" style="width: 200px;heigth:40px;margin-left:140px;" alt="预览">
+                                {{/if}}
+                            </div>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="middle" colspan="2">
+                                <button type="button" class="btn btn-primary  center-block" style="margin-top: 16px;display: inline-block;"
+                                        aria-hidden="true" onclick="changeUserHeadImg()">提交
+                                </button>
+                                <button type="button" class="btn btn-primary  center-block" data-dismiss="modal"
+                                        style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                                        aria-hidden="true">取消
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="personaliseModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width: 500px; margin-top: 50px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left">个性化页面</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <div>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#personaLiseLogo" style="color:black;" aria-controls="personaLiseLogo" role="tab" data-toggle="tab">LOGO</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#personaLiseInfo" style="color:black;" aria-controls="personaLiseInfo" role="tab" data-toggle="tab">显示信息</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="personaLiseLogo">
+                            <form class="form-signin" id="uploadPersonaliseImageForm" role="form" method="post" enctype='multipart/form-data'>
+                                <table>
+                                    <tr>
+                                        <td>LOGO选择：</td>
+                                        <td><input id="logoImage" name="resource" type="file" class="form-control" onchange="previewLogoImage()"
+                                                   accept="image/gif,image/png,image/jpeg,image/bmp,image/jpg"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <div id="previewLogoCon">
+                                            {{#if session.user.logoPath}}
+                                                <img id="previewLogo" src="{{session.user.logoPath}}" style="width: 200px;heigth:40px;margin-left:140px;"
+                                                     alt="Logo预览">
+                                            {{else}}
+                                                <img id="previewLogo" src="/images/logo.jpg" style="width: 200px;heigth:40px;margin-left:140px;" alt="Logo预览">
+                                            {{/if}}
+                                        </div>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" valign="middle" colspan="2">
+                                            <button type="button" class="btn btn-danger  center-block" style="margin-top: 16px;display: inline-block;"
+                                                    aria-hidden="true" onclick="deleteUserPersonaliseLogo()">删除
+                                            </button>
+                                            <button type="button" class="btn btn-primary  center-block" style="margin-top: 16px;display: inline-block;"
+                                                    aria-hidden="true" onclick="updateUserPersonaliseLogo()">提交
+                                            </button>
+                                            <button type="button" class="btn btn-primary  center-block" data-dismiss="modal"
+                                                    style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                                                    aria-hidden="true">取消
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="personaLiseInfo">
+                            <form class="form-horizontal" role="form" action="#" style="padding-top: 10px;">
+                                <table>
+                                    <tr>
+                                        <td>全称：</td>
+                                        <td><input id="fullName" type="text" class="form-control"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>简称：</td>
+                                        <td><input id="shortName" type="text" class="form-control"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" align="center" valign="middle" colspan="2">
+                                            <button type="button" class="btn btn-primary  center-block" style="margin-top: 16px;display: inline-block;"
+                                                    aria-hidden="true" onclick="updateUserPersonaliseInfo()">提交
+                                            </button>
+                                            <button type="button" class="btn btn-primary  center-block" data-dismiss="modal"
+                                                    style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                                                    aria-hidden="true">取消
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .inputErr {
+        border-color: red;
+        border-width: 2px;
+    }
+
+    .modal-backdrop {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 0;
+        background-color: #000;
+    }
+
+    #userHeadImg:hover {
+        cursor: pointer;
+    }
+</style>
+<script src="/javascripts/system/userInfo.js"></script>
+<script>
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "progressBar": false,
+        "positionClass": "toast-top-center",
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "1000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    };
+    /**
+     * 编辑用户信息
+     */
+    function userProfile() {
+        // 弹出添加框
+        $('#userInfo').modal({
+            backdrop: 'static'
+        });
+        $('.modal-backdrop').css('z-index', 10);
+    }
+    function closeUpdateUserModal() {
+        // 关闭modal窗口
+        $('#userInfo').modal('hide');
+        $('#password').val('');
+        $('#newPass').val('');
+        $('#newPassAgain').val('');
+    }
+</script>
+<script type="text/javascript" src="/plugins/jquery-form/jquery-form.js"></script>

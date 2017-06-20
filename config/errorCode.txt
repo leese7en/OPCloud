@@ -1,0 +1,109 @@
+ Return Value 返回码参考
+返回正数表明成功操作的对象个数，返回0说明API调用成功，返回负数参见以下错误列表
+
+#define OPE_OK             0     ///< 成功，没有错误
+#define OPE_ERROR         -1     ///< 未知错误
+#define OPE_PARAM         -10    ///< 参数错误
+#define OPE_UNSUPPORTED   -11    ///< 功能未支持
+#define OPE_MEMORY        -96    ///< 无法分配内存，需要重连
+#define OPE_NET_IO        -97    ///< 网络读写IO错误，需要重连
+#define OPE_NET_CLOSED    -98    ///< 连接已关闭，需要重连
+#define OPE_CONNECT       -99    ///< 无法连接服务器，需要重连
+#define OPE_BUFF_NET      -1001  ///< 网络断开
+#define OPE_BUFF_IO       -1002  ///< 写入存储缓存文件出错了，最有可能是文件所在分区满了
+#define OPE_BUFF_OVERFLOW -1003  ///< 数据文件到了预设的大小
+
+Error数组返回值参考
+        //===============================================================================
+        //openPlant 协议定义的错误
+        eOPPacket         =-100, ///< [openPlant] 数据包格式
+        eOPCommand        =-101, ///< [openPlant] 命令不支持
+        eOPExist          =-102, ///< [openPlant] 对象已存在
+        eOPNotExist       =-103, ///< [openPlant] 对象不存在
+        eOPDuplicate      =-104, ///< [openPlant] 关键字重复
+        eOPCreate         =-105, ///< [openPlant] 创建失败
+        eOPLimit          =-106, ///< [openPlant] 系统容量限制
+        eOPParent         =-107, ///< [openPlant] 父节点错误
+        eOPRegistry       =-108, ///< [openPlant] 写数据库错误
+        eOPAccess         =-109, ///< [openPlant] 不容许访问
+        eOPName           =-110, ///< [openPlant] 名称错误
+        eOPWait           =-111, ///< [openPlant] 需要等待
+        eOPMismatch       =-112, ///< [openPlant] 不匹配
+        eOPParam          =-113, ///< [openPlant] 参数错误
+        eOPHistory        =-200, ///< [openPlant] 访问历史错误
+        eOPInterval       =-201, ///< [openPlant] 不合适的时间间隔
+        -202 没有归档
+
+        //===============================================================================
+        //OPAPIV3定义的错误
+        eOPMagic          =-1, ///< [OPAPIV3] 协议幻数错误
+        eOPSeparator      =-2, ///< [OPAPIV3] 历史数据的分隔符
+        eOPProtocolError  =-3, ///< [OPAPIV3] 协议解析错误
+        eOPNotSupport     =-4, ///< [OPAPIV3] 出错误了，但协议没有把错误传递回来
+
+        //===============================================================================
+        //ErrorCode
+        eNoError    = 0,           ///< [ErrorCode] 没有错误
+        eSysError   = 1,              ///< [ErrorCode] 操作系统底层错误
+        eSysNetConnectError   = 2,    ///< [ErrorCode] 网络连接错误
+        eUserParamError       = 3,        ///< [ErrorCode] 参数错误，使用了无效的参数
+        eUserMemoryAllocError = 4,  ///< [ErrorCode] 分配内存错误，分配内存失败
+        eUserDirError         = 5,          ///< [ErrorCode] 目录使用错误
+        eServiceUnkownCommand = 6,  ///< [ErrorCode] 当前服务未知其命令
+        eSociError            = 7,             ///< [ErrorCode] soci内部错误
+        eFileOpenFailed       = 8,        ///< [ErrorCode] 文件打开错误
+        eFileParseFailed      = 9,       ///< [ErrorCode] 文件内容解析错误
+
+        //===============================================================================
+        //OPVM定义的错误
+        eOPVMRangOut          = 100,         ///< [OPVM] 范围越界
+        eOPVMStkOut           = 101,              ///< [OPVM] 栈越界
+        eOPVMIdxOut           = 102,              ///< [OPVM] 索引越界
+        eOPVMUnkownInst       = 103,          ///< [OPVM] 未知指令
+        eOPVMUnkownMethod     = 104,        ///< [OPVM] 未知方法
+        eOPVMInvalidCall      = 105,         ///< [OPVM] 无效调用，对象不支持这个调用
+        eOPVMMethodParamWrong = 106,    ///< [OPVM] 调用参数错误
+        eOPVMUnkownFace       = 107,          ///< [OPVM] 未知接口
+        eOPVMUnkownBuildInModule = 108, ///< [OPVM] 未知内建模块
+        eOPVMPause               = 109,               ///< [OPVM] 虚拟机执行被暂停
+        eOPVMAsync               = 110,               ///< [OPVM] 请求执行异步操作
+        eOPVMInvailSysVal        = 111,        ///< [OPVM] 请求执行异步操作
+
+        //===============================================================================
+        //IOPacket 和 IOTable 定义的错误
+        ePacketTCPConnectError = 200,///< [Packet] TCP 连接时出错
+        ePacketTCPWriteError   = 201,      ///< [Packet] TCP 写数据时出错
+        ePacketTCPReadError    = 202,       ///< [Packet] TCP 读数据时出错
+        ePacketSizeTooLong     = 203,        ///< [Packet] 收到的包长不合理
+        ePacketTCPAcceptError  = 204,     ///< [Packet] 在等待连接时出错
+        eIOTableReadError      = 205,         ///< [v2::IOTable] 非法的MTable字节序列
+        eGTPIsStop             = 206  ,                ///< [GlobalTheadPool] 系统已经停机
+
+        //===============================================================================
+        //压缩解压器
+        eUnCompressError       =400,       ///< [UnCompress] 解压数据不正确
+
+        //===============================================================================
+        //登录服务
+        eLoginUserNotExist     = 410,  ///< [Login] 用户不存在
+        eLoginPasswordNotMatch = 411,  ///< [Login] 密码不匹配
+        eLoginSessionIDNotMatch = 412, ///< [Login] 密码不匹配
+
+
+        //===============================================================================
+        //脚本服务器
+        eSptUnknowCommand = 500, ///< [spt] 未知命令
+
+
+
+
+        //请上面加入致命错误类型的错误，下面的错误类型是警告型的，系统可能会忽略
+        //===============================================================================
+        //===============================================================================
+        //===============================================================================
+
+
+        //===============================================================================
+        //SQL引擎
+
+        eSQLNoObject=eWarningStarNum, ///< [SQL] 没有指定数据对象，无法向openPlant获取数据

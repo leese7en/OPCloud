@@ -1,0 +1,580 @@
+<link rel="stylesheet" href="/plugins/bootstrap-table/src/bootstrap-table.css">
+<link rel="stylesheet" href="/plugins/bootstrap-table/src/bootstrap-editable.css">
+<link href="/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" media="screen"/>
+<link href="/plugins/toastr/toastr.min.css" rel="stylesheet"/>
+<link href="/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/stylesheets/AdminLTE.min.css">
+<script async="" src="/plugins/bootstrap-table/src/analytics.js"></script>
+<script src="/plugins/bootstrap-table/src/ga.js"></script>
+<!--[if lt IE 9]>
+<script src="/plugins/bootstrap-table/src/json2.min.js"></script>
+<![endif]-->
+<script src="/plugins/bootstrap-table/src/bootstrap-table.js"></script>
+<script src="/plugins/bootstrap-table/src/bootstrap-table-export.js"></script>
+<script src="/plugins/bootstrap-table/src/tableExport.js"></script>
+<script src="/plugins/bootstrap-table/src/bootstrap-table-editable.js"></script>
+<script src="/plugins/bootstrap-table/src/bootstrap-editable.js"></script>
+<script src="/plugins/bootstrap-table/src/locale/bootstrap-table-zh-CN.js" type="text/javascript"></script>
+<script src="/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script src="/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<script src="/plugins/toastr/toastr.min.js"></script>
+<script src="/plugins/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/plugins/sweetalert/dist/sweetalert.css">
+<link rel="stylesheet" href="/plugins/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css"/>
+<link rel="stylesheet" href="/plugins/jqwidgets/jqwidgets/styles/jqx.magus.css" type="text/css"/>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdata.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxpanel.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxtree.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxmenu.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdragdrop.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdatatable.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxtreegrid.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdropdownbutton.js"></script>
+<script type="text/javascript" src="/plugins/jquery-form/jquery-form.js"></script>
+<link rel="stylesheet" href="/plugins/jstree/themes/default/style.min.css">
+<script src="/plugins/jstree/jstree.min.js"></script>
+<body class="hold-transition skin-blue sidebar-mini">
+<section class="content-header text-left">
+    <h1 style="margin-bottom: 5px">
+        {{pageName}}
+    </h1>
+    <ul class="breadcrumb">
+        <li><a href="/system/manage" target="_top">首页</a></li>
+        <li class="active">{{pageName}}</li>
+    </ul>
+</section>
+<div class="container" style="width: 100%;">
+    <div class="box box-primary">
+        <div class="row" style="margin-top: 10px">
+            <div class="col-md-3">
+                <center>
+                    <button id="add" class="btn btn-success" onclick="clickAdd()">
+                        创建
+                    </button>
+                    &nbsp;&nbsp;
+                    &nbsp;&nbsp;
+                    <button id="remove" class="btn btn-danger" onclick="clickRemove()">
+                        删除
+                    </button>
+                </center>
+                <div id='jqxMenu' style="display: none">
+                    <ul>
+                        <li>刷新</li>
+                        <li type='separator'></li>
+                        <li>创建</li>
+                        <li>编辑</li>
+                        <li>重命名</li>
+                        <li>删除</li>
+                        <li type='separator'></li>
+                        <li>剪切</li>
+                        <li>复制</li>
+                        <li>粘贴</li>
+                        <li type='separator'></li>
+                        {{!--<li>超链接</li>--}}
+                    </ul>
+                </div>
+                <div class="box box-solid" style="margin-top: 10px">
+                    <div id="jqxTree">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <h3 style="margin-top: -5px;margin-bottom: 1px;">测点清单</h3>
+                <div id="toolbar">
+                    <button id="addPoint" class="btn btn-success" onclick="showAddModal()">创建</button>
+                    <button id="inport" class="btn btn-success" onclick="showImportFile()">导入</button>
+                    <button id="remove" class="btn btn-danger" onclick="batchDelete()">删除</button>
+                    <button id="addToGroupBatch" class="btn btn-info" onclick="batchAddPointToSnapOperator()">添加到点组</button>
+                    <button id="startRefresh" class="btn btn-success" onclick="startRefresh()">刷新</button>
+                </div>
+                <table id="table"
+                       data-toolbar="#toolbar"
+                       data-search="false"
+                       data-show-export="true"
+                       data-show-refresh="true"
+                       data-show-toggle="true"
+                       data-show-columns="true"
+                       data-minimum-count-columns="2"
+                       data-pagination="true"
+                       data-striped="true"
+                       data-page-size="10"
+                       data-page-list="[10,25,50,100,500]"
+                       data-show-footer="false"
+                       data-side-pagination="server">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="TreeModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 50px;">
+    <div class="modal-dialog" style="width: 340px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left">创建节点</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <form id="addUser" style="margin-bottom:0;">
+                    <table>
+                        <tr>
+                            <td>名称：</td>
+                            <td><input type="text" class="form-control" id="TreeModal_NAME"
+                                       style="width: 200px;align-content: center;"></td>
+                        </tr>
+                        <td>描述：</td>
+                        <td><input type="text" class="form-control" id="TreeModal_DESCRIPTION"
+                                   style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="middle" colspan="2">
+
+                                <button type="button" class="btn btn-primary  center-block" data-dismiss="modal"
+                                        style="margin-top: 16px;display: inline-block;"
+                                        aria-hidden="true" onclick="addItem()">提交
+                                </button>
+                                <button type="button" class="btn btn-primary  center-block" data-dismiss="modal"
+                                        style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                                        aria-hidden="true" onclick="">取消
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="TreeEditModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 50px;">
+    <div class="modal-dialog" style="width: 340px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left">编辑节点</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <form id="addUser" style="margin-bottom:0;">
+                    <table>
+                        <tr>
+                            <input id="editTreeModalID" type="hidden" value=""/>
+                            <td>名称：</td>
+                            <td><input type="text" class="form-control" readonly="readonly" id="editTreeModalName"
+                                       style="width: 200px;align-content: center;"></td>
+                        </tr>
+                        <td>描述：</td>
+                        <td><input type="text" class="form-control" id="editTreeModalDESCRIPTION"
+                                   style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="middle" colspan="2">
+
+                                <button type="button" class="btn btn-primary  center-block" data-dismiss="modal"
+                                        style="margin-top: 16px;display: inline-block;"
+                                        aria-hidden="true" onclick="editItem()">提交
+                                </button>
+                                <button type="button" class="btn btn-primary  center-block" data-dismiss="modal"
+                                        style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                                        aria-hidden="true" onclick="">取消
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="LinkModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 50px;">
+    <div class="modal-dialog" style="width: 340px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left">超链接管理</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <form id="addUser" style="margin-bottom:0;">
+                    <table>
+                        <tr>
+                            <td>链接名称：</td>
+                            <td><input type="text" class="form-control" id="linkName"
+                                       style="width: 200px;align-content: center;"></td>
+                        </tr>
+                        <td>链接节点：</td>
+                        <td>
+                            <div id="dropDownButton">
+                                <div id="linkMtree"></div>
+                            </div>
+                        </td>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="middle" colspan="2">
+
+                                <button type="button" class="btn btn-primary  center-block" data-dismiss="modal"
+                                        style="margin-top: 16px;display: inline-block;"
+                                        aria-hidden="true" onclick="addLinkMTree()">提交
+                                </button>
+                                <button type="button" class="btn btn-primary  center-block" data-dismiss="modal"
+                                        style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                                        onclick="clsoeLinkMTree()">取消
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 添加 -->
+<div id="addPointModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 10px;">
+    <div class="modal-dialog" style="width: 800px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 id="pointTitle" class="text-left"> 添加测点</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <input type="hidden" id="PointID">
+                <div>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#basic" aria-controls="basic" role="tab"
+                                                                  data-toggle="tab">基本信息</a></li>
+                        <li role="presentation"><a href="#alarm" aria-controls="alarm" role="tab" data-toggle="tab">报警</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="basic">
+                            <form class="form-horizontal" role="form" action="#" style="padding-top: 10px;">
+                                <input type="hidden" id="driver_type">
+                                <div class="row" style="display: flex; align-items: center;">
+                                    <div class="col-md-2">ID(ID)</div>
+                                    <div class="col-md-2"><input type="text" class="form-control" id="pointID" readonly></div>
+                                    <div class="col-md-2">点名(PN)</div>
+                                    <div class="col-md-6"><input type="text" class="form-control" id="pointPN"></div>
+                                </div>
+                                <div class="row" style="display: flex; align-items: center;">
+                                    <div class="col-md-2">点类型(RT)</div>
+                                    <div class="col-md-2">
+                                        <select id="pointRT" class="selectpicker" data-width="100%">
+                                            <option value="0">
+                                                模拟量
+                                            </option>
+                                            <option value="1">
+                                                数字量
+                                            </option>
+                                            <option value="2">
+                                                短整数
+                                            </option>
+                                            <option value="3">
+                                                长整数
+                                            </option>
+                                            <option value="4">
+                                                浮点型
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">描述(ED)</div>
+                                    <div class="col-md-6"><input type="text" class="form-control" id="pointED"></div>
+                                </div>
+                                <div class="row" style="display: flex; align-items: center;">
+                                    <div class="col-md-2">点的来源(PT)</div>
+                                    <div class="col-md-2">
+                                        <select id="pointPT" class="selectpicker" data-width="100%">
+                                            <option value="0">
+                                                DAS
+                                            </option>
+                                            <option value="1">
+                                                CALC
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">別名(AN)</div>
+                                    <div class="col-md-6"><input type="text" class="form-control" id="pointAN"></div>
+                                </div>
+                                <div class="row" style="display: flex; align-items: center;">
+                                    <div class="col-md-2">分辨率(FQ)</div>
+                                    <div class="col-md-4"><input type="text" class="form-control" id="pointFQ" value="1"></div>
+                                    <div class="col-md-2">显示格式(FM)</div>
+                                    <div class="col-md-4"><input type="text" class="form-control" id="pointFM" value="2"></div>
+                                </div>
+                                <div class="row" style="display: flex; align-items: center;">
+                                    <div class="col-md-2">量程上限(TV)</div>
+                                    <div class="col-md-4"><input type="text" class="form-control" id="pointTV" value="100"></div>
+                                    <div class="col-md-2">量程下限(BV)</div>
+                                    <div class="col-md-4"><input type="text" class="form-control" id="pointBV" value="0"></div>
+                                </div>
+
+                                <div class="row" style="display: flex; align-items: center;">
+                                    <div class="col-md-2">量纲(EU)</div>
+                                    <div class="col-md-4"><input type="text" class="form-control" id="pointEU"></div>
+                                    <div class="col-md-2">压缩类型(KZ)</div>
+                                    <div class="col-md-4">
+                                        <select id="pointKZ" class="selectpicker" data-width="100%">
+                                            <option value="1">
+                                                自动
+                                            </option>
+                                            <option value="2">
+                                                无压缩
+                                            </option>
+                                        </select></div>
+                                </div>
+                                <div class="row" style="display: flex; align-items: center;">
+                                    <div class="col-md-2">计算类型(KT)</div>
+                                    <div class="col-md-2">
+                                        <select id="pointKT" class="selectpicker" data-width="100%">
+                                            <option value="0">
+                                                变化计算
+                                            </option>
+                                            <option value="1">
+                                                每秒计算
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">配置时间(CT)</div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" id="pointCT" readonly>
+                                    </div>
+                                </div>
+                                <div class="row" style="display: flex; align-items: center;">
+                                    <div class="col-md-2">计算公式(EX)</div>
+                                    <div class="col-md-9" style="padding-right:0px;"><input type="text" class="form-control" readonly="readonly" id="pointEX">
+                                    </div>
+                                    <div class="col-md-1" style="padding-left:0px;padding-right:15px;">
+                                        <button class="btn btn-default" type="button" onclick="showCalcModal()" style="width:100%;">...</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="alarm">
+                            <form class="form-horizontal" role="form" action="#" style="padding-top: 10px;">
+                                <div class="row" style="display: flex; align-items: center;">
+                                    <div class="col-md-2">报警级别(AP)</div>
+                                    <div class="col-md-10">
+                                        <select id="pointAP" class="selectpicker" data-width="100%">
+                                            <option value="0">
+                                                红
+                                            </option>
+                                            <option value="1">
+                                                黄
+                                            </option>
+                                            <option value="2">
+                                                白
+                                            </option>
+                                            <option value="3">
+                                                绿
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="pointAX row" style="display: flex; align-items: center;">
+                                    <div class="col-md-2">报警高4限(H4)</div>
+                                    <div class="col-md-4">
+                                        <input type="checkbox" style="width: 7%" id="pointCKH4">
+                                        <input type="text" style="width: 57%" id="pointH4">
+                                        <input id="C8" class="pointCO" type="text" style="width:30%;background-color:#660000;" readonly value="#660000"/></div>
+                                    <div class="col-md-2">报警低限(LL)</div>
+                                    <div class="col-md-4">
+                                        <input type="checkbox" style="width: 7%" id="pointCKLL">
+                                        <input type="text" style="width: 57%" id="pointLL">
+                                        <input id="C1" class="pointCO" type="text" style="width:30%;background-color:#FF0000;" readonly value="#FF0000"/></div>
+                                </div>
+                                <div class="pointAX row" style="display: flex; align-items: center;">
+                                    <div class="col-md-2">报警高3限(H3)</div>
+                                    <div class="col-md-4">
+                                        <input type="checkbox" style="width: 7%" id="pointCKH3">
+                                        <input type="text" style="width: 57%" id="pointH3">
+                                        <input id="C7" class="pointCO" type="text" style="width:30%;background-color:#990000;" readonly value="#990000"/></div>
+                                    <div class="col-md-2">报警低2限(ZL)</div>
+                                    <div class="col-md-4">
+                                        <input type="checkbox" style="width: 7%" id="pointCKZL">
+                                        <input type="text" style="width: 57%" id="pointZL">
+                                        <input id="C2" class="pointCO" type="text" style="width:30%;background-color:#CC0000;" readonly value="#CC0000"/></div>
+                                </div>
+                                <div class="pointAX row" style="display: flex; align-items: center;">
+                                    <div class="col-md-2">报警高2限(ZH)</div>
+                                    <div class="col-md-4">
+                                        <input type="checkbox" style="width: 7%" id="pointCKZH">
+                                        <input type="text" style="width: 57%" id="pointZH">
+                                        <input id="C6" class="pointCO" type="text" style="width:30%;background-color:#CC0000;" readonly value="#CC0000"/></div>
+                                    <div class="col-md-2">报警低3限(L3)</div>
+                                    <div class="col-md-4">
+                                        <input type="checkbox" style="width: 7%" id="pointCKL3">
+                                        <input type="text" style="width: 57%" id="pointL3">
+                                        <input id="C3" class="pointCO" type="text" style="width:30%;background-color:#990000;" readonly value="#990000"/></div>
+                                </div>
+                                <div class="pointAX row" style="display: flex; align-items: center;">
+                                    <div class="col-md-2">报警高限(HL)</div>
+                                    <div class="col-md-4">
+                                        <input type="checkbox" style="width: 7%" id="pointCKHL">
+                                        <input type="text" style="width: 57%" id="pointHL">
+                                        <input id="C5" class="pointCO" type="text" style="width:30%;background-color:#FF0000;" readonly value="#FF0000"/></div>
+                                    <div class="col-md-2">报警低4限(L4)</div>
+                                    <div class="col-md-4">
+                                        <input type="checkbox" style="width: 7%" id="pointCKL4">
+                                        <input type="text" style="width: 57%" id="pointL4">
+                                        <input id="C4" class="pointCO" type="text" style="width:30%;background-color:#660000;" readonly value="#660000"/>
+                                    </div>
+                                </div>
+                                <div class="pointDX row" style="display:none;">
+                                    <div class="col-md-2">报警属性(LC)</div>
+                                    <div class="col-md-10">
+                                        <select id="pointLC" class="selectpicker" data-width="100%">
+                                            <option value="0">
+                                                不报警
+                                            </option>
+                                            <option value="1">
+                                                变0报警
+                                            </option>
+                                            <option value="2">
+                                                变1报警
+                                            </option>
+                                            <option value="3">
+                                                变化报警
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="modal-footer" style="text-align: center;">
+                        <button class="btn btn-primary" type="button" onclick="addOrUpdatePoint()">提交</button>
+                        <button class="btn btn-default" type="button" onclick="closePointModal()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 文件导入 -->
+<div id="importModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 150px;">
+    <div class="modal-dialog" style="width: 400px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left"> 文件导入</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <form class="form-signin" id="uploadForm" role="form" method="post" enctype='multipart/form-data'>
+                    <font style="font-size:14px;"><b>导入说明：</b></font><br>
+                    <font style="font-size:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        导入只支持excel文件导入，且文件格式必须按照规定的标准(<a href="/excel/pointtemplate.xls">模版下载</a>)。例如：</font><br><br>
+                    <img src="/images/excel.png" style="width:340px;" data-action="zoom"><br><br>
+                    <input id="resource" name="resource" type="file" class="form-control"
+                           accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                    <br/>
+                    <center>
+                        <button id="btnSub" class="btn btn-primary  center-block" data-dismiss="modal" style="margin-top: 16px;display: inline-block;"
+                                aria-hidden="true" onclick="importFile()">提交
+                        </button>
+                        <button class="btn btn-primary  center-block" data-dismiss="modal" style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                                aria-hidden="true" onclick="close()">取消
+                        </button>
+                    </center>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 编辑 -->
+<div id="imageModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"
+     style="margin-top: 150px;">
+    <div class="modal-dialog" style="width: 340px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <div><img src="/images/excel.png"></div>
+
+        </div>
+    </div>
+</div>
+<!-- 添加到点组 -->
+<div id="addPointToSnapModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width: 340px; margin-top: 15%">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left"> 添加到点组</h4>
+            <div class="modal-body">
+                <input type="hidden" id="pointIdHidden" value="">
+                <input type="hidden" id="pointIdHidden" value="">
+                <input type="hidden" id="isBatch" value="0">
+                <div class="row" style="display: flex; align-items: center; justify-content: space-around;">
+                    <div class="col-md-4">请选择点组</div>
+                    <div class="col-md-8">
+                        <select id="pointGoroupSelect" class="selectpicker" data-width="100%"></select>
+                    </div>
+                </div>
+                <div class="row" style="display: flex; align-items: center; justify-content: space-between; margin-top: 50px">
+                    <button type="button" class="col-md-3 btn btn-info" onclick="addPointGroupModal()">添加点组</button>
+                    <button type="button" class="col-md-3 btn btn-success" onclick="addPointToSnap()">确定</button>
+                    <button type="button" class="col-md-3 btn btn-default" onclick="closePointToSnap()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade in" id="addPointGroupModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width:400px;margin-top: 100px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" aria-hidden="true" onclick="closeAddPointGroupModal()">&times;</button>
+                <h4 class="modal-title" id="point-title">点组管理 </h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-horizontal" role="form" action="#" style="padding-top: 10px;">
+                        <input type="hidden" id="updatePointGroupId"/>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="addPointGroupName">名称</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="addPointGroupName"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="addPointGroupDesc">描述</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="addPointGroupDesc"/>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="modal-footer" style="text-align: center;">
+                        <button class="btn btn-primary" type="button" onclick="addPointGroup()">提交
+                        </button>
+                        <button class="btn btn-default" type="button" onclick="closeAddPointGroupModal()">关闭
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade in" id="calcFormulaModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width:400px;margin-top: 100px;height:400px;">
+        <div class="modal-content">
+            <div class="modal-body" style="padding:8px;">
+                   <textarea id="calcFormula" placeholder="请输入公式" style="width:385px;;height:240px;">
+                   </textarea>
+                <div class="modal-footer" style="text-align: center;padding:0px;">
+                    <button class="btn btn-primary" type="button" onclick="addCalcFormual()">提交
+                    </button>
+                    <button class="btn btn-default" type="button" onclick="closeCalcFormualModal()">关闭
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    //维护全局变量
+    if (window.parent.socket) {
+        socket = window.parent.socket;
+    } else {
+        var token = '{{token}}';
+        socket = io.connect(socketURI, {
+            'query': 'token=' + token
+        });
+    }
+</script>
+<script type="text/javascript" src="/javascripts/domain/mtree/mtree.js"></script>
+<script type="text/javascript" src="/javascripts/domain/mtree/zoom.js"></script>
+<style>
+    .btn-default {
+        background-color: white;
+        color: #444;
+        border-color: #ddd;
+    }
+
+    div[class="btn-group bootstrap-select disabled"] {
+        background-color: #CEC4C4;
+    }
+</style>

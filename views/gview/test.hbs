@@ -1,0 +1,21 @@
+{{>trendInfo}}
+<script type="text/javascript" src="/javascripts/gview/test.js"></script>
+<input type="button" value="提交" onclick="openModel()"/>
+<script>
+    initPointName();
+    initDate();
+    var token = '{{token}}';
+    socket = io.connect(socketURI, {
+        'query': 'token=' + token
+    })
+    var trendGroup = new defaultTrendGroup();
+    var op = new opTrend();
+    trendGroup.isDialog = true;
+    trendGroup.trendcontainer = 'trend_container';
+    trendGroup.opTrend = op;
+    trendGroup.pointsTable = "pointInfoTable";
+    trendGroup.getTrendReal = getTrendReal;
+    socket.on('refreshTrend', function (data) {
+        trendGroup.refreshTrend(data.value);
+    });
+</script>

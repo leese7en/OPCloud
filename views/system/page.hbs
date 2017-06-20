@@ -1,0 +1,198 @@
+<link href="/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet"/>
+<script src="/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script src="/plugins/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/plugins/sweetalert/dist/sweetalert.css"/>
+<link rel="stylesheet" href="/plugins/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css"/>
+<!-- Theme style -->
+<link rel="stylesheet" href="/stylesheets/AdminLTE.min.css">
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdata.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdatatable.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxtreegrid.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxpanel.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxtree.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdropdownbutton.js"></script>
+
+<script src="/javascripts/system/page.js"></script>
+
+<section class="content-header text-left">
+    <h1 style="margin-bottom: 5px">
+        菜单管理
+    </h1>
+    <ul class="breadcrumb">
+        <li><a href="/system/manage" target="_top"><i class="fa fa-dashboard"></i>首页</a></li>
+        <li class="active">菜单管理</li>
+    </ul>
+</section>
+<div class="container" style="width: 100%">
+    <div class="box box-primary">
+        <div class="row" style="padding-top: 8px; padding-left: 20px;">
+            <div class="col-md-4">
+                <span class="input-group"> <span class="input-group-addon"
+                                                 style="color: black; padding: 3px;">菜单名称</span> <input
+                        type="text" id="pageNameQuery" class="form-control" placeholder="请输入菜单名称"> </span>
+            </div>
+            <div class="col-md-4">
+                <span class="input-group"> <span class="input-group-addon"
+                                                 style="color: black; padding: 3px;">菜单描述</span> <input
+                        type="text" id="pageDescQuery" class="form-control" placeholder="请输入菜单描述"> </span>
+            </div>
+            <div class="col-md-3">
+                <ul class="nav navbar-left">
+                    <button type="button" class="btn btn-primary btn-sm" style="" onclick="pageQuery()">
+                        <span class="glyphicon glyphicon-ok"></span>查询
+                    </button>
+                    <button type="button" class="btn btn-success btn-sm" onclick="pageInsert()">
+                        <span class="glyphicon glyphicon-plus"></span>添加
+                    </button>
+                </ul>
+            </div>
+        </div>
+        <div id="pageInfoTable" style="margin-top: 10px">
+        </div>
+    </div>
+</div>
+<div>
+    <!-- 隐藏域，保存pageid和prepageid -->
+    <input type="text" id="pageTableId" style="display: none">
+    <input type="text" id="prePageTableId" style="display: none">
+</div>
+<div class="modal fade in" id="pageMessageInsert" role="dialog" aria-hidden="true" style="z-index: 1100;">
+    <div class="modal-dialog" style="width: 350px; margin-top: 20px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" aria-hidden="true" onclick="closePageInsertModal()">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="point-title">
+                    添加菜单
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div style="margin-left: 25px;">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <div class="input-group" style="width: 300px">
+                                <span class="input-group-addon" style="color: black;">上级菜单</span>
+                                <div id="dropDownButton">
+                                    <div id="pagePreInsert"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group" style="width: 300px">
+                                <span class="input-group-addon" style="color: black;">页面名称</span>
+                                <input id="pageNameInsert" type="text" class="form-control" placeholder="请输入菜单名称">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group" style="width: 300px">
+                                <span class="input-group-addon" style="color: black;">菜单路径</span>
+                                <input id="pageURLInsert" type="text" class="form-control" placeholder="请输入菜单路径">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group" style="width: 300px">
+                                <span class="input-group-addon" style="color: black;">菜单图标</span>
+                                <input id="pageIconInsert" type="text" class="form-control" placeholder="请输入菜单图标">
+                                <span class="input-group-addon glyphicon glyphicon-map-marker"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group" style="width: 300px">
+                                <span class="input-group-addon" style="color: black;">菜单序号</span>
+                                <input id="pageOrderCodeInsert" type="text" class="form-control" placeholder="请输入排序号">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group" style="width: 300px">
+                                <span class="input-group-addon" style="color: black;">菜单描述</span>
+                                <input id="pageDescInsert" type="text" class="form-control" placeholder="请输入菜单描述">
+                            </div>
+                        </div>
+                    </form>
+                    <div class="modal-footer" style="text-align: center;">
+                        <button class="btn btn-primary" type="button" onclick="insertPage()">
+                            确认
+                        </button>
+                        <button class="btn btn-default" type="button" onclick="closePageInsertModal()">
+                            取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade in" id="pageMessage" role="dialog" aria-hidden="true" style="z-index: 1100;">
+    <div class="modal-dialog" style="width: 350px; margin-top: 20px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" aria-hidden="true" onclick="closePageMessageoModal()">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="point-title">
+                    菜单信息
+                </h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="pageId"/>
+
+                <div style="margin-left: 25px;">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <div class="input-group" style="width: 300px">
+                                <span class="input-group-addon" style="color: black;">上级菜单</span>
+                                <!-- <select id="pagePreUpdate" class="selectpicker"></select> -->
+                                <div id="dropDownButton2">
+                                    <div id="pagePreUpdate"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group" style="width: 300px">
+                                <span class="input-group-addon" style="color: black;">页面名称</span>
+                                <input id="pageNameUpdate" type="text" class="form-control" placeholder="请输入菜单名称">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group" style="width: 300px">
+                                <span class="input-group-addon" style="color: black;">菜单路径</span>
+                                <input id="pageURLUpdate" type="text" class="form-control" placeholder="请输入菜单路径">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group" style="width: 300px">
+                                <span class="input-group-addon" style="color: black;">菜单图标</span>
+                                <input id="pageIconUpdate" type="text" class="form-control" placeholder="请输入菜单图标">
+                                <span class="input-group-addon glyphicon glyphicon-map-marker"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group" style="width: 300px">
+                                <span class="input-group-addon" style="color: black;">菜单序号</span>
+                                <input id="pageOrderCodeUpdate" type="text" class="form-control" placeholder="请输入排序号">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group" style="width: 300px">
+                                <span class="input-group-addon" style="color: black;">菜单描述</span>
+                                <input id="pageDescUpdate" type="text" class="form-control" placeholder="请输入菜单描述">
+                            </div>
+                        </div>
+                    </form>
+                    <div class="modal-footer" style="text-align: center;">
+                        <button class="btn btn-primary" type="button" onclick="updatePageMessage()">
+                            更新
+                        </button>
+                        <button class="btn btn-default" type="button" onclick="closePageMessageoModal()">
+                            取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

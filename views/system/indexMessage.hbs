@@ -1,0 +1,115 @@
+<script src="/javascripts/jquery.dateFormat.js"></script>
+<script src="/javascripts/jquery.ba-resize.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<link href="/stylesheets/animate.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/stylesheets/ionicons.min.css"/>
+<script src="/javascripts/jquery.easing.min.js"></script>
+<script src="/javascripts/wow.js"></script>
+<link rel="stylesheet" href="/stylesheets/font-awesome.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="/stylesheets/AdminLTE.min.css">
+<!-- AdminLTE Skins. Choose a skin from the css/skins
+     folder instead of downloading all of them to reduce the load. -->
+{{#if session.user.skin}}
+    <link rel="stylesheet" href="/stylesheets/skins/{{session.user.skin}}.min.css"/>
+{{else}}
+    <link rel="stylesheet" href="/stylesheets/skins/skin-blue.min.css"/>
+{{/if}}
+<!-- iCheck -->
+<link rel="stylesheet" href="/plugins/iCheck/flat/blue.css">
+<!-- Morris chart -->
+<link rel="stylesheet" href="/plugins/morris/morris.css">
+<!-- jvectormap -->
+<link rel="stylesheet" href="/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+<!-- Date Picker -->
+<link rel="stylesheet" href="/plugins/datepicker/datepicker3.css">
+<!-- Daterange picker -->
+<link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker.css">
+<!-- bootstrap wysihtml5 - text editor -->
+<link rel="stylesheet" href="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+<!--[if lt IE 9]>
+<script src="/javascripts/html5shiv.min.js"></script>
+<script src="/javascripts/respond.min.js"></script>
+<![endif]-->
+<!-- jQuery UI 1.11.4 -->
+<script src="/javascripts/jquery-ui.min.js"></script>
+<!-- Morris.js charts -->
+<script src="/javascripts/raphael-min.js"></script>
+
+<!-- Sparkline -->
+<script src="/plugins/sparkline/jquery.sparkline.min.js"></script>
+<!-- jvectormap -->
+<script src="/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="/plugins/knob/jquery.knob.js"></script>
+<!-- daterangepicker -->
+<script src="/javascripts/moment.min.js"></script>
+<script src="/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- datepicker -->
+<script src="/plugins/datepicker/bootstrap-datepicker.js"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<!-- Slimscroll -->
+<script src="/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="/plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="/javascripts/app.js"></script>
+<!-- jqx -->
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdata.js"></script>
+<script src="/plugins/morris/morris.js"></script>
+<script src="/javascripts/pages/dashboard.js"></script>
+<script src="/plugins/flot/jquery.flot.js"></script>
+<section class="content" id="sectionContent">
+    <div class="row">
+        <section class="col-lg-6 connectedSortable">
+            {{>projectView}}
+            {{>indicators}}
+        </section>
+        <section class="col-lg-6 connectedSortable">
+            {{>messageBox}}
+            {{>RTChart}}
+        </section>
+        <section class="col-lg-6 connectedSortable">
+            {{>calendar}}
+            {{>statistics}}
+        </section>
+    </div>
+</section>
+<script src="/javascripts/manage.js"></script>
+<script type="text/javascript">
+    //加载设置栏中可供选择的的面板信息
+    function getIndexMessage() {
+        $.ajax({
+            type: "post",
+            url: "/message/message/getIndexMessage",
+            async: false,
+            dataType: "json",
+            success: function (data) {
+                if (data.flag < 0) {
+                    toastr.warning(data.message);
+                    return;
+                } else {
+                    var content = data.data;
+                    var size = content.length;
+                    for (var i = 0; i < size; i++) {
+                        var con = content[i];
+                        var url = con.pageUrl;
+                        if (con.pageNo != 0) {
+                            $('#' + url).show();
+                        }
+                    }
+                }
+            },
+            error: function () {
+            }
+        });
+    }
+    getIndexMessage();
+</script>
+
+
+
+

@@ -1,0 +1,173 @@
+<script src="/javascripts/jquery.dateFormat.js"></script>
+<script src="/javascripts/jquery.ba-resize.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+
+<link rel="stylesheet" href="/plugins/bootstrap-table/src/bootstrap-table.css">
+<script src="/plugins/bootstrap-table/src/bootstrap-table.js"></script>
+<script src="/plugins/bootstrap-table/src/bootstrap-table-export.js"></script>
+<script src="/plugins/bootstrap-table/src/tableExport.js"></script>
+<script src="/plugins/bootstrap-table/src/locale/bootstrap-table-zh-CN.js" type="text/javascript"></script>
+<script src="/plugins/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/plugins/sweetalert/dist/sweetalert.css">
+
+<link rel="stylesheet" href="/stylesheets/AdminLTE.min.css">
+<body class="hold-transition skin-blue sidebar-mini" style="overflow: hidden">
+<!-- 用于保存表格选择的数据id -->
+<div>
+    <input type="text" class="form-control" id="saveId" style="width: 190px;align-content: center;display: none">
+</div>
+<div id="addDoMainModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 50px;">
+    <div class="modal-dialog" style="width:400px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left"> 添加域</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <form class="form-horizontal" role="form" action="#" style="padding-top: 10px;">
+                    <div class="row" style="display: flex;align-items: center;">
+                        <div class="col-md-3" style="padding:3px 2px;padding-left: 20px;">
+                            域名：
+                        </div>
+                        <div class="col-md-8" style="padding:3px 2px;"><input type="text" class="form-control" id="addName"
+                                                                              style="width: 190px;align-content: center;"/></div>
+                    </div>
+                    <div class="row" style="display: flex;align-items: center;">
+                        <div class="col-md-3" style="padding:3px 2px;padding-left: 20px;">
+                            启用：
+                        </div>
+                        <div class="col-md-8" style="padding:3px 2px;"><input type="checkbox" id="isEnable"
+                                                                              style="width: 190px;margin-top: 10px;align-content: center;width:16px;height:16px;"/>
+                        </div>
+                    </div>
+                    <div class="row" style="display: flex;align-items: center;">
+                        <div class="col-md-3" style="padding:3px 2px;padding-left: 20px;">
+                            管理员：
+                        </div>
+                        <div class="col-md-4" style="padding:3px 2px;"><input type="hidden" id="addUserId"/>
+                            <input type="text" id="addUserName" readonly class="form-control"/></div>
+                        <div class="col-md-4" style="padding:3px 2px;">
+                            <button class="btn btn-primary" type="button" onclick="getUser('add')">选择</button>
+                        </div>
+                    </div>
+                    <div class="row" style="display: flex;align-items: center;">
+                        <div class="col-md-3" style="padding:3px 2px;padding-left: 20px;">
+                            描述：
+                        </div>
+                        <div class="col-md-8" style="padding:3px 2px;"> <textarea type="text" class="form-control" id="addDesc"
+                                                                                  style="width: 190px;margin-top: 10px;align-content: center;"></textarea></div>
+                    </div>
+                </form>
+                <div class="modal-footer" style="text-align: center;">
+                    <button class="btn btn-primary  center-block" data-dismiss="modal"
+                            style="margin-top: 16px;display: inline-block;"
+                            aria-hidden="true" onclick="addDoMain()">提交
+                    </button>
+                    <button class="btn btn-primary  center-block" data-dismiss="modal"
+                            style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                            aria-hidden="true" onclick="closeAddDomainModal()">取消
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="editDoMainModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 50px;">
+    <div class="modal-dialog" style="width:400px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left"> 编辑域信息</h4>
+
+            <div class="modal-body" style="padding-bottom:0;">
+                <form class="form-horizontal" role="form" action="#" style="padding-top: 10px;">
+                    <div class="row" style="display: flex;align-items: center;">
+                        <div class="col-md-3" style="padding:3px 2px;padding-left: 20px;">
+                            域名：
+                        </div>
+                        <div class="col-md-8" style="padding:3px 2px;"><input type="text" class="form-control" id="editName"
+                                                                              style="width: 190px;align-content: center;"/></div>
+                    </div>
+                    <div class="row" style="display: flex;align-items: center;">
+                        <div class="col-md-3" style="padding:3px 2px;padding-left: 20px;">
+                            启用：
+                        </div>
+                        <div class="col-md-8" style="padding:3px 2px;"><input type="checkbox" id="editEnable"
+                                                                              style="width: 190px;margin-top: 10px;align-content: center;width:16px;height:16px;"/>
+                        </div>
+                    </div>
+                    <div class="row" style="display: flex;align-items: center;">
+                        <div class="col-md-3" style="padding:3px 2px;padding-left: 20px;">
+                            管理员：
+                        </div>
+                        <div class="col-md-4" style="padding:3px 2px;"><input type="hidden" id="editUserId"/>
+                            <input type="text" id="editUserName" readonly class="form-control"/></div>
+                        <div class="col-md-4" style="padding:3px 2px;">
+                            <button class="btn btn-primary" type="button" onclick="getUser('edit')">选择</button>
+                        </div>
+                    </div>
+                    <div class="row" style="display: flex;align-items: center;">
+                        <div class="col-md-3" style="padding:3px 2px;padding-left: 20px;">
+                            描述：
+                        </div>
+                        <div class="col-md-8" style="padding:3px 2px;"> <textarea type="text" class="form-control" id="editDesc"
+                                                                                  style="width: 190px;margin-top: 10px;align-content: center;"></textarea></div>
+                    </div>
+                </form>
+                <div class="modal-footer" style="text-align: center;">
+                    <button class="btn btn-primary  center-block" data-dismiss="modal"
+                            style="margin-top: 16px;display: inline-block;"
+                            aria-hidden="true" onclick="editDoMain()">提交
+                    </button>
+                    <button class="btn btn-primary  center-block" data-dismiss="modal"
+                            style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                            aria-hidden="true" onclick="closeEditDomainModal()">取消
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade in" id="userTableModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width: 600px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <div>
+                <table id="userTable">
+                </table>
+            </div>
+            <div class="modal-footer" style="align-content: center;padding-bottom: 2px;padding-top: 40px;">
+                <button class="btn btn-default" type="button" onclick="closeUserTableModal()">关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="content-header text-left">
+    <h1 style="margin-bottom: 5px">
+        {{pageName}}
+    </h1>
+    <ul class="breadcrumb">
+        <li><a href="/system/manage" target="_top"><i class="fa fa-dashboard"></i>首页</a></li>
+        <li class="active">{{pageName}}</li>
+    </ul>
+</section>
+<div class="container" style="width: 100%">
+    <div class="box box-primary">
+        <div id="domainGrid" style="margin-top: 5px">
+        </div>
+    </div>
+</div>
+</body>
+<link rel="stylesheet" href="/plugins/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css"/>
+<link rel="stylesheet" href="/plugins/jqwidgets/jqwidgets/styles/jqx.magus.css" type="text/css"/>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdata.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxlistbox.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdropdownlist.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxmenu.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxpanel.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxcalendar.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdatetimeinput.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdatatable.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxtreegrid.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/globalization/globalize.js"></script>
+<script type="text/javascript" src="/javascripts/domain/domain/domain.js"></script>

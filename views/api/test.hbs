@@ -1,0 +1,161 @@
+<link href="/stylesheets/patch.css" rel="stylesheet">
+<!-- Documentation extras -->
+<link href="/stylesheets/docs.min.css" rel="stylesheet">
+<!--[if lt IE 9]>
+<script src="../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+<script src="/javascripts/ie-emulation-modes-warning.js"></script>
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="/javascripts/html5shiv.min.js"></script>
+<script src="/javascripts//respond.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="/plugins/syntaxhighlighter/scripts/shCore.js"></script>
+<script type="text/javascript" src="/plugins/syntaxhighlighter/scripts/shBrushSql.js"></script>
+<script type="text/javascript" src="/plugins/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<script type="text/javascript" src="/plugins/syntaxhighlighter/scripts/shBrushXml.js"></script>
+<script type="text/javascript" src="/plugins/syntaxhighlighter/scripts/shBrushCss.js"></script>
+<link type="text/css" rel="stylesheet" href="/plugins/syntaxhighlighter/styles/shCoreDefault.css"/>
+<link rel=stylesheet href="/plugins/codemirror/doc/docs.css">
+<link rel="stylesheet" href="/plugins/codemirror/lib/codemirror.css">
+<link rel="stylesheet" href="/plugins/codemirror/theme/eclipse.css">
+<link rel="stylesheet" href="/plugins/codemirror/theme/neat.css">
+<script type="text/javascript" src="/plugins/codemirror/lib/codemirror.js"></script>
+<script type="text/javascript" src="/plugins/codemirror/mode/javascript/javascript.js"></script>
+<script src="/plugins/codemirror/addon/edit/matchbrackets.js"></script>
+<script src="/plugins/codemirror/addon/comment/continuecomment.js"></script>
+<script src="/plugins/codemirror/addon/comment/comment.js"></script>
+<script type="text/javascript" src="/plugins/codemirror/mode/sql/sql.js"></script>
+<script type="text/javascript">
+    SyntaxHighlighter.config.tagName = "div";
+    SyntaxHighlighter.defaults['toolbar'] = false;
+    SyntaxHighlighter.config.bloggerMode = true;
+    SyntaxHighlighter.all();
+</script>
+<div class="container bs-docs-container">
+    <div class="row">
+        <div class="col-md-9" role="main">
+            <div class="bs-docs-section">
+
+                <h1>SQL 示例</h1>
+                <h4 id="download-cdn">测点查询</h4>
+
+                <div class="brush: sql;" id="sql1">select * from point</div>
+                <h4 id="download-cdn">节点查询</h4>
+
+                <div class="brush: sql;">select * from node</div>
+                <h4 id="download-cdn">实时数据查询</h4>
+
+                <div class="brush: sql;">select * from realtime</div>
+                <h4 id="download-cdn">报警数据查询</h4>
+
+                <div class="brush: sql;">select * from alarm</div>
+                <h4 id="download-cdn">历史数据查询</h4>
+
+                <div class="brush: sql;">select * from archive where TM between "2015-01-03 12:00:00" and "2015-01-03 13:00:00"</div>
+                <h4 id="download-cdn">数据量查询</h4>
+
+                <div class="brush: sql;">select count(ID) as count from realtime</div>
+                <textarea id="sqlText" name="sqlText">select * from node</textarea>
+                </p>
+                <a class="btn btn-lg btn-outline"
+                   role="button" onclick="testSQL()">提交</a>
+            </div>
+            <div>
+                <textarea id="dataView" name="dataView" rows="20" cols="120"></textarea>
+            </div>
+
+            <h1>SQL Bug List</h1>
+            <h4 id="download-cdn">
+                1、不支持模糊查询带‘.’的参数，报 -116错误
+                例：select * from realtime where gn like '%point.1%'
+                <br/>2、取历史报 -113 错误
+                例：select * from archive where tm between "2015-01-03 00:00:00" and "2015-01-05 00:00:00"
+                <br/>3、取报警 返回字段大写，取实时表返回字段小写
+                <br/>4、取报警历史时间参数问题
+                例：select * from alarm where TM between 1469008895 and 1469008995 可以取到数据
+                select * from alarm where TM between '2016-08-31 00:00:00' and '2016-09-03 00:00:00' 取不到数据
+                <br/>5、设置报警八限颜色不成功
+                例：update point set C1='#fff000'where ID=‘1025’   执行sql不报错，执行之后C1的值为 0
+                <br/>6、涉及到有时间字段的表里面时间值都不是标准的时间
+                例：point、alarm、realtime
+                <br/>7、字段区分大小写
+                例：alarm、realtime表里的字段
+                <br/><br/>
+            </h4>
+        </div>
+    </div>
+</div>
+<style>
+    .CodeMirror {
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+</style>
+<script type="application/javascript">
+    var socket = null;
+    window.onload = function () {
+        var token = '{{token}}';
+        console.log("token:" + token);
+        socket = io.connect('127.0.0.1:8201/api/v1', {
+            'query': 'token=' + token
+        })
+    }
+
+    function query(sql, callback) {
+        if (sql != undefined && socket != undefined) {
+            socket.emit('query', {sql: sql});
+            socket.on('queryCB', function (data) {
+                        if (callback != null) {
+                            callback(data);
+                        }
+                    }
+            )
+        }
+    }
+
+    var sqlConfig = {
+        mode: "text/x-mysql",
+        indentWithTabs: true,
+        smartIndent: true,
+        lineNumbers: true,
+        matchBrackets: true,
+        autofocus: true,
+        theme: "neat",
+        extraKeys: {"Ctrl-Space": "autocomplete"},
+        hintOptions: {
+            tables: {
+                users: {name: null, score: null, birthDate: null},
+                countries: {name: null, population: null, size: null}
+            }
+        }
+    }
+
+    var editor = CodeMirror.fromTextArea(document.getElementById('sqlText'), sqlConfig);
+    editor.setSize(800, 100);    //设置宽高
+    var jsonView =
+            CodeMirror.fromTextArea(document.getElementById("dataView"), {
+                mode: "text/javascript",
+                lineNumbers: true,
+                theme: "eclipse",
+                matchBrackets: true,
+                styleActiveLine: true, //line选择是是否加亮
+                lineWrapping: true, //是否自动换行
+            });
+
+    function testSQL() {
+        var sql = editor.getValue();
+        if (sql != undefined) {
+            query(sql, function (data) {
+                console.log(data);
+                var str = JSON.stringify(data);
+                jsonView.setValue(str);
+            })
+        }
+    }
+
+
+    function execute() {
+
+    }
+</script>

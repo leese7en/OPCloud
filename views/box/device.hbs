@@ -1,0 +1,268 @@
+<script src="/plugins/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/plugins/sweetalert/dist/sweetalert.css"/>
+<!-- Theme style -->
+<link rel="stylesheet" href="/stylesheets/AdminLTE.min.css">
+<link rel="stylesheet" href="/plugins/bootstrap-table/src/bootstrap-table.css">
+<script src="/plugins/bootstrap-table/src/bootstrap-table.js"></script>
+<script src="/plugins/bootstrap-table/src/bootstrap-table-export.js"></script>
+<script src="/plugins/bootstrap-table/src/tableExport.js"></script>
+<script src="/plugins/bootstrap-table/src/locale/bootstrap-table-zh-CN.js" type="text/javascript"></script>
+<section class="content-header text-left">
+    <h1 style="margin-bottom: 5px">
+        {{pageName}}
+    </h1>
+    <ul class="breadcrumb">
+        <li><a href="/system/manage" target="_top">首页</a></li>
+        <li class="active">{{pageName}}</li>
+    </ul>
+</section>
+<ul id="myTab" class="nav nav-tabs">
+    <li class="active">
+        <a href="#online" data-toggle="tab">在线设备 </a>
+    </li>
+    <li><a href="#offline" data-toggle="tab">离线设备</a></li>
+</ul>
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade in active" id="online">
+        <div class="container" style="width: 100%">
+            <div class="box box-primary">
+                <div class="row" style="padding-top: 2px; padding-left: 10px;">
+                    <div class="col-md-3" style="padding-left: 0px; padding-right: 0px;">
+                        <span class="input-group" style="color: black; padding: 3px;">
+                        <span class="input-group-addon" style="color: black;">设备组</span>
+                            <select id="boxGroupOnline" class="form-control selectpicker">
+                            </select>
+                        </span>
+                    </div>
+                    <div class="col-md-2" style="padding-left: 0px; padding-right: 0px;">
+                        <span class="input-group" style="color: black; padding: 3px;">
+                            <span class="input-group-addon" style="color: black;">名称</span>
+                            <input type="text" id="onlineName" class="form-control" placeholder="请输入设备名称"> </span>
+                    </div>
+                    <div class="col-md-2" style="padding-left: 0px; padding-right: 0px;">
+                        <span class="input-group" style="color: black; padding: 3px;">
+                            <span class="input-group-addon" style="color: black;">机器码</span>
+                            <input type="text" id="onlineCode" class="form-control" placeholder="请输入设备机器码"> </span>
+                    </div>
+                    <div class="col-md-2" style="padding-left: 0px; padding-right: 0px;">
+                        <span class="input-group" style="color: black; padding: 3px;">
+                        <span class="input-group-addon" style="color: black;">描述</span>
+                            <input type="text" id="onlineDesc" class="form-control" placeholder="请输入描述"> </span>
+                    </div>
+                    <div class="col-md-3" style="padding-left: 0px; padding-right: 0px;">
+                        <div class="col-md-3" style="padding-left: 0px; padding-right: 0px;">
+                        <span class="input-group" style="color: black; padding: 3px;">
+                        <span class="input-group-addon" style="color: black;">关注</span>
+                             <input type="checkbox" id="onlineAttention" style="width: 25px;height: 25px;"/>
+                        </span>
+                        </div>
+                        <div class="col-md-8" style="padding-left: 0px; padding-right: 0px;padding-top:3px;">
+                            <button class="btn btn-success ok" onclick="onlineQuery()">查询</button>
+                        </div>
+                    </div>
+                </div>
+                <table id="onlineTable"></table>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="offline">
+        <div class="container" style="width: 100%">
+            <div class="box box-primary">
+                <div class="row" style="padding-top: 2px; padding-left: 10px;">
+                    <div class="col-md-3" style="padding-left: 0px; padding-right: 0px;">
+                        <span class="input-group" style="color: black; padding: 3px;">
+                        <span class="input-group-addon" style="color: black;">设备组</span>
+                            <select id="boxGroupOffline" class="form-control selectpicker">
+                            </select>
+                        </span>
+                    </div>
+
+                    <div class="col-md-2" style="padding-left: 0px; padding-right: 0px;">
+                        <span class="input-group" style="color: black; padding: 3px;">
+                            <span class="input-group-addon" style="color: black;">名称</span>
+                            <input type="text" id="offlineName" class="form-control" placeholder="请输入设备名称"> </span>
+                    </div>
+                    <div class="col-md-2" style="padding-left: 0px; padding-right: 0px;">
+                        <span class="input-group" style="color: black; padding: 3px;">
+                            <span class="input-group-addon" style="color: black;">机器码</span>
+                            <input type="text" id="offlineCode" class="form-control" placeholder="请输入设备机器码"> </span>
+                    </div>
+                    <div class="col-md-2" style="padding-left: 0px; padding-right: 0px;">
+                        <span class="input-group" style="color: black; padding: 3px;">
+                        <span class="input-group-addon" style="color: black;">描述</span>
+                            <input type="text" id="offlineDesc" class="form-control" placeholder="请输入描述"> </span>
+                    </div>
+                    <div class="col-md-3" style="padding-left: 0px; padding-right: 0px;">
+                        <div class="col-md-3" style="padding-left: 0px; padding-right: 0px;">
+                        <span class="input-group" style="color: black; padding: 3px;">
+                        <span class="input-group-addon" style="color: black;">关注</span>
+                             <input type="checkbox" id="offlineAttention" style="width: 25px;height: 25px;"/>
+                        </span>
+                        </div>
+                        <div class="col-md-8" style="padding-left: 0px; padding-right: 0px;padding-top:3px;">
+                            <button class="btn btn-success" onclick="offlineQuery()">查询</button>
+                            <button class="btn btn-info" id="groupManage" onclick="pointGroup()">组管理</button>
+                        </div>
+                    </div>
+                </div>
+                <table id="offlineTable"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="editBoxModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 150px;">
+    <div class="modal-dialog" style="width: 340px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left">设备信息修改</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <form id="editUser" style="margin-bottom:0;">
+                    <table>
+                        <tr>
+                            <td>机器码：</td>
+                            <td><input type="text" class="form-control" id="devcode" style="width: 200px;align-content: center;" readonly></td>
+                        </tr>
+                        <tr>
+                            <td>显示名称：</td>
+                            <td><input type="text" class="form-control" id="disName" style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>设备分组：</td>
+                            <td><select class="form-control" id="updateGroup" style="width: 200px;margin-top: 10px;align-content: center;"></select></td>
+                        </tr>
+                        <tr>
+                            <td>设备描述：</td>
+                            <td><textarea type="text" class="form-control" id="desc" style="width: 200px;margin-top: 10px;align-content: center;"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="middle" colspan="2">
+                                <button class="btn btn-primary  center-block" data-dismiss="modal" style="margin-top: 16px;display: inline-block;"
+                                        aria-hidden="true" onclick="updateBox()">提交
+                                </button>
+                                <button class="btn btn-primary  center-block" data-dismiss="modal"
+                                        style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                                        aria-hidden="true">取消
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+<div id="BoxLogModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 10px;">
+    <div class="modal-dialog" style="width: 800px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left">设备日志</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <input type="hidden" id="boxLogDevCode"/>
+                <table id="boxLogTable"></table>
+            </div>
+            <div class="modal-footer" style="text-align: center;margin-top:20px;">
+                <button class="btn btn-primary  center-block" data-dismiss="modal" style="margin:auto"
+                        aria-hidden="true" onclick="">关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="GroupManageModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 50px;">
+    <div class="modal-dialog" style="width: 600px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h5>组管理</h5>
+            <button class="btn btn-info" onclick="addPointGroup()">添加组</button>
+            <input type="hidden" id="boxGroupId"/>
+            <table id="boxGroupTable" data-pagination="false">
+            </table>
+            <center>
+                <button class="btn btn-primary  center-block" data-dismiss="modal" style="margin-top: 16px;display: inline-block;"
+                        aria-hidden="true" onclick="">关闭
+                </button>
+            </center>
+        </div>
+    </div>
+</div>
+<div id="addBoxGroupModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 150px;">
+    <div class="modal-dialog" style="width: 340px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left">添加分组</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <form id="editUser" style="margin-bottom:0;">
+                    <table>
+                        <tr>
+                            <td>分组名称：</td>
+                            <td><input type="text" class="form-control" id="addBoxGroupName" style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>分组描述：</td>
+                            <td><textarea type="text" class="form-control" id="addBoxGroupDesc"
+                                          style="width: 200px;margin-top: 10px;align-content: center;"></textarea></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer" style="text-align: center;">
+                <button class="btn btn-primary  center-block" data-dismiss="modal"
+                        style="margin-top: 16px;display: inline-block;"
+                        aria-hidden="true" onclick="addBoxGroup()">提交
+                </button>
+                <button class="btn btn-primary  center-block" data-dismiss="modal"
+                        style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                        aria-hidden="true">取消
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="editBoxGroupModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 150px;">
+    <div class="modal-dialog" style="width: 340px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left">添加分组</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <form id="editUser" style="margin-bottom:0;">
+                    <table>
+                        <input type="hidden" class="form-control" id="editBoxGroupId">
+                        <tr>
+                            <td>分组名称：</td>
+                            <td><input type="text" class="form-control" id="editBoxGroupName" style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>分组描述：</td>
+                            <td><textarea type="text" class="form-control" id="editBoxGroupDesc"
+                                          style="width: 200px;margin-top: 10px;align-content: center;"></textarea></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer" style="text-align: center;">
+                <button class="btn btn-primary  center-block" data-dismiss="modal"
+                        style="margin-top: 16px;display: inline-block;"
+                        aria-hidden="true" onclick="updateBoxGroup()">提交
+                </button>
+                <button class="btn btn-primary  center-block" data-dismiss="modal"
+                        style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                        aria-hidden="true">取消
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .fixed-table-toolbar .columns {
+        margin-top: -38px !important;
+        margin-right: 5px !important;
+        z-index: 2000;
+    }
+</style>
+<script>
+    var userType = {{userType}};
+    if (userType == 1) {
+        $('#groupManage').remove();
+    }
+</script>
+<script type="text/javascript" src="/javascripts/box/device.js"></script>

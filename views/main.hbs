@@ -1,0 +1,12 @@
+<script type="application/javascript">
+    window.onload = function () {
+        var token = '{{token}}';
+        socket = io.connect(socketURI, {
+            'query': 'token=' + token
+        });
+    }
+</script>
+SID:
+{{user.SID}}<br>
+token:
+{{token}}

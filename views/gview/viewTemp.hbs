@@ -1,0 +1,169 @@
+{{>trendInfo}}
+<script type="text/javascript" src="/plugins/view-canvas/openPlant.js"></script>
+<script type="text/javascript" src="/plugins/view-canvas/Utils.js"></script>
+<script type="text/javascript" src="/plugins/view-canvas/ColorUtils.js"></script>
+<script type="text/javascript" src="/plugins/view-canvas/dottedline.js"></script>
+<script type="text/javascript" src="/plugins/view-canvas/pieChart.js"></script>
+<script type="text/javascript" src="/plugins/view-canvas/barChart.js"></script>
+<script type="text/javascript" src="/plugins/view-canvas/dashChart.js"></script>
+<script type="text/javascript" src="/plugins/view-canvas/opConst.js"></script>
+<script type="text/javascript" src="/plugins/view-canvas/graphConst.js"></script>
+<script type="text/javascript" src="/plugins/view-canvas/graphscript.js"></script>
+<script type="text/javascript" src="/plugins/view-canvas/graphUtils.js"></script>
+<script type="text/javascript" src="/plugins/view-canvas/graphElement.js"></script>
+<script type="text/javascript" src="/plugins/view-canvas/graph.js"></script>
+<script type="text/javascript" src="/plugins/view-canvas/graphscriptglobal.js"></script>
+<script type="text/javascript" src="/plugins/echarts/echarts.js"></script>
+
+<script type="text/javascript" src="/plugins/jquery-resize/jquery.ba-resize.js"></script>
+<script type="text/javascript" src="/plugins/jquery-touch/jquery.touchSwipe.js"></script>
+<script type="text/javascript" src="/javascripts/gview/view.js"></script>
+<div id="message"></div>
+<div id="myGview" style="background-color: #2982e5"></div>
+<script>
+    document.documentElement.style.overflow = 'hidden';
+    var socket = null;
+    /**
+     * 页面加载执行
+     */
+    var args = op_get_url_parms();
+    var fileName = args['fileName'];
+    if (fileName == undefined) {
+        //fileName = "unit1/1RCP001YCD.zxml";
+//      fileName = "unit1/1RCP001YFU.zxml";
+        fileName = "example.zxml";
+//        fileName = "test.zxml";
+    }
+
+    initPointName();
+    var token = '{{token}}';
+    var gviewdiv = $("#myGview");
+    var w = $(window).width() - 20;
+    var h = $(window).height() - 20;
+    var zoom = 1;
+    gviewdiv.width(w);
+    gviewdiv.height(h);
+    socket = io.connect(socketURI, {
+        'query': 'token=' + token
+    })
+    var graph = new openPlant.Graph({
+        "target": "myGview",
+        'imageSrcPrefix': '/diagram/imglib/',
+        'name': fileName,
+        "socket": socket
+    });
+    var trendGroup = new defaultTrendGroup();
+    var op = new opTrend();
+    trendGroup.isDialog = true;
+    trendGroup.trendcontainer = 'trend_container';
+    trendGroup.opTrend = op;
+    trendGroup.pointsTable = "pointInfoTable";
+    trendGroup.getTrendReal = getTrendReal;
+    socket.on('refreshTrend', function (data) {
+        trendGroup.refreshTrend(data.value);
+    });
+    graph.setElementMouseClickListener(function (_select_object) {
+        var _length = _select_object.length;
+        for (var _i = _length - 1; _i >= 0; _i--) {
+            var _selected_element = _select_object[_i];
+            var _class = _selected_element['class'];
+            switch (_class) {
+                case openPlant.GraphConst.TYPE_DASPOINT:
+                {
+                    var _pn = _selected_element[openPlant.GraphConst.DASHPOINT_TREND_POINTNAME];
+                    var _pnc = _selected_element[openPlant.GraphConst.DASHPOINT_PROPERTY_POINTNAME];
+                    if (_pnc) {
+                        if (_pn) {
+                            _pn += ',' + _pnc;
+                        } else {
+                            _pn = _pnc;
+                        }
+                    }
+                    if (_pn) {
+                        trendGroup.addName(_pn.toString().toUpperCase());
+                    }
+                    break;
+                }
+                case openPlant.GraphConst.TYPE_TEXT:
+                {
+                    var _pn = _selected_element[openPlant.GraphConst.DASHPOINT_TREND_POINTNAME];
+                    var _pnc = _selected_element[openPlant.GraphConst.DASHPOINT_PROPERTY_POINTNAME];
+                    if (_pnc) {
+                        if (_pn) {
+                            _pn += ',' + _pnc;
+                        } else {
+                            _pn = _pnc;
+                        }
+                    }
+                    if (_pn) {
+                        trendGroup.addName(_pn.toString().toUpperCase());
+                    }
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    });
+    var timer = 0;
+    var isMobile = {
+        Android: function () {
+            return navigator.userAgent.match(/Android/i) ? true : false;
+        },
+        BlackBerry: function () {
+            return navigator.userAgent.match(/BlackBerry/i) ? true : false;
+        },
+        iOS: function () {
+            return navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
+        },
+        Windows: function () {
+            return navigator.userAgent.match(/IEMobile/i) ? true : false;
+        },
+        any: function () {
+            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Windows());
+        }
+    };
+    var debug = function (message) {
+        $("#message").append(">>>>>>>" + message + '<br\>');
+    }
+
+    if (!isMobile.any()) {
+        $(window).resize(function () {
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+                $("#myGview").css({height: h + "px", width: w + "px"});
+            }, 300);
+        });
+    } else {
+        $("#myGview").swipe({
+            swipe: function (event, direction, distance, duration, fingerCount, fingerData) {
+//                $("#message").text("你用" + fingerCount + "个手指以" + duration + "秒的速度向" + direction + "滑动了" + distance + "像素 ");
+            },
+            pinchStatus: function (event, phase, pinchDirection, pinchDistance, duration, fingerCount, pinchZoom) {
+                debug(" phase:" + phase + " pinchDistance:" + pinchDistance + " duration:" + duration + " pinchZoom:" + pinchZoom + "  zoom：" + zoom + " >>>error");
+                if (zoom >= 3 || zoom < 1) {
+                    debug('+++++++++++++++++++++++++++++++++++++++++++++++++++++');
+                    if (zoom < 1) {
+                        zoom = 1;
+                    }
+                    debug(" phase:" + phase + " pinchDistance:" + pinchDistance + " duration:" + duration + " pinchZoom:" + pinchZoom + "  zoom：" + zoom + " >>>error");
+                    event = null;
+                    return false;
+                } else if (pinchZoom != 1 && (phase == "cancel" || phase == "end")) {
+                    debug('-------------------------------------------------------------');
+                    zoom *= pinchZoom;
+                    debug(" phase:" + phase + " pinchDistance:" + pinchDistance + " duration:" + duration + " pinchZoom:" + pinchZoom + "  zoom：" + zoom);
+                    if (zoom < 1) {
+                        zoom = 1;
+                    }
+                } else {
+
+                }
+            },
+            allowPageScroll: "vertical",
+            threshold: 100,
+            maxTimeThreshold: 2500,
+            fingers: 'all'
+        });
+    }
+</script>

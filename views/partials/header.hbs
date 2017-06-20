@@ -1,0 +1,45 @@
+<header class="main-header">
+    {{#if session.user.logoPath}}
+    <a href="/system/manage" id="personaliseLogoPath" class="logo" style="background-image: url('{{session.user.logoPath}}');background-size:cover;">
+    {{else}}
+    <a href="/system/manage" id="personaliseLogoPath" class="logo">
+    {{/if}}
+    <span class="logo-mini">
+        {{#if session.user.shortName}}
+            <b id="personaliseShortName" style="font-size: 10px">{{session.user.shortName}}</b>
+        {{else}}
+            <b id="personaliseShortName" style="font-size: 10px">Cloud</b>
+        {{/if}}
+    </span>
+    <span class="logo-lg">
+        {{#if session.user.fullName}}
+            <b id="personaliseFullName">{{session.user.fullName}}</b>
+        {{else}}
+            <b id="personaliseFullName">MyCloud</b>
+        {{/if}}
+    </span>
+</a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">菜单折叠</span>
+        </a>
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <!-- Messages: style can be found in dropdown.less-->
+                {{>messagesBar}}
+                <!-- Notifications: style can be found in dropdown.less -->
+                {{>notifications}}
+                <!-- Tasks -->
+                {{>tasks}}
+                <!-- 用户菜单 -->
+                {{>usermenus}}
+                <!-- 设置页 -->
+                <li>
+                    <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

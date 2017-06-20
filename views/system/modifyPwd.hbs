@@ -1,0 +1,102 @@
+<link rel="stylesheet" href="/stylesheets/styles.css"/>
+<script src="/javascripts/jquery.md5.js"></script>
+<script src="/plugins/sweetalert/dist/sweetalert-dev.js"></script>
+<link rel="stylesheet" href="/plugins/sweetalert/dist/sweetalert.css">
+<style type="text/css">
+    <!--
+    body {
+        background-image: url('/images/bg.jpg');
+    }
+
+    -->
+</style>
+<body>
+<div class="container">
+    <div class="row">
+        <br>
+        <div class="col-lg-8 col-lg-offset-2 text-center">
+            <h2 class="text-primary" style="color:#fff;">修改密码</h2>
+            <hr class="primary">
+        </div>
+        <div class="col-lg-4 col-lg-offset-4">
+            <form class="contact-form row" style="background:#fff;padding:20px;">
+                <div class="col-md-12">
+                    <label></label>
+                    <input type="password" id="newPass1" class="form-control" placeholder="新密码">
+                </div>
+                <div class="col-md-12">
+                    <label></label>
+                    <input type="password" id="newPass2" class="form-control" placeholder="确认密码">
+                </div>
+                <div class="col-md-12 text-left" style="margin-top: 20px">
+                    <img src="/system/ccap" alt="验证码" height="20" align="bottom"
+                         style="cursor:pointer;width: 200px;height: 35px;float:left;" title="看不清可单击图片刷新"
+                         onclick="this.src='/system/ccap?d='+Math.random();"/><input id="ccap" type="text" class="form-control"
+                                                                                     style="width: 80px;float:right;margin-top:0;"
+                                                                                     placeholder="验证码" name="CcapCode"><br style="clear:both;"/>
+                </div>
+                <div class="col-md-8 col-md-offset-3" style="margin-top: 30px">
+                    <label></label>
+                    <button type="button" onclick="modifyPwd()" class="btn btn-log1 btn-lg" style="width:90px;float:left;margin-right:20px;">提交</button>
+                    <a onclick="javascripts:self.location='/'" style="line-height:40px;font-size:18px;">返回登录
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<input id="mailTokenKey" type="text" value="{{mailTokenKey}}" style="display: none">
+</body>
+
+<script>
+    function modifyPwd() {
+        var newPass1 = $("#newPass1").val();
+        var newPass2 = $("#newPass2").val();
+        if (newPass1 && newPass1.length < 6 || newPass1.length > 12) {
+            errorSwal('密码格式不对，需要在6到12位之间');
+            return;
+        }
+        if (newPass1 != newPass2) {
+            errorSwal("两次密码不一样！");
+            return;
+        }
+        newPass1 = $.md5(newPass1);
+        newPass2 = $.md5(newPass2);
+        var mailTokenKey = $("#mailTokenKey").val();
+        var ccap = $("#ccap").val();
+        $.ajax({
+            type: 'POST',
+            url: "/system/user/modifyPassword",
+            data: {
+                newPass1: newPass1,
+                newPass2: newPass2,
+                mailTokenKey: mailTokenKey,
+                ccap: ccap
+            },
+            success: function (data) {
+                if (data.flag < 0) {
+                    errorSwal(data.message);
+                } else {
+                    swal({title: "Success!", text: "密码修改成功！", type: "success", confirmButtonText: "确认"},
+                            function () {
+                                self.location = '/';
+                            }
+                    );
+                }
+            },
+            error: function () {
+                errorSwal("密码修改失败！");
+            },
+            async: true,
+            dataType: "json"
+        });
+    }
+    function errorSwal(message) {
+        swal({
+            title: "错误",
+            text: message ? message : "操作失败！",
+            type: "error",
+            closeOnConfirm: false
+        });
+    }
+</script>

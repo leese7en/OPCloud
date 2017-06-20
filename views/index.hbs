@@ -1,0 +1,427 @@
+<style type="text/css">
+    #first {
+        background-image: url('/images/bg.jpg');
+    }
+</style>
+<link rel="stylesheet" href="/stylesheets/styles.css"/>
+<script src="/plugins/sweetalert/dist/sweetalert.min.js"></script>
+<script src="/javascripts/jquery.md5.js"></script>
+<link rel="stylesheet" type="text/css" href="/plugins/sweetalert/dist/sweetalert.css">
+<nav id="topNav" class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid" style="background-color:#228fbd;text-align: center;">
+        <div class="navbar-header">
+            <a class="navbar-brand page-scroll" href="#first" style="font-size: 20px"><i
+                    class="ion-ios-analytics-outline"></i><B>windranger</B></a>
+        </div>
+        <div class="navbar-collapse collapse" id="bs-navbar">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a class="page-scroll" href="#introduce">首页</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#solution">解决方案</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#application">应用展示</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#four">产品优势</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#last">APP开发</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#footer">联系我们</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="page-scroll" data-toggle="modal" title="登录后进入个人空间"
+                       href="#loginModal"
+                       id="userInfo">登录</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<header id="first" class="first">
+    <div class="header-content">
+        <div class="inner">
+            <h1 class="cursive" style="font-family:'微软雅黑';line-height: 100px;">麦杰工业云</h1>
+            <p style="text-indent: 3em;line-height:36px;color:#fff;font-size:20px;">
+                通过提高工业企业智能化程度，整合行业上下游过程大数据，推动大数据应用，打通行业上下游产业链，领先重构工业物联网生态圈，最终形成海量数据入口、数据处理与服务平台的产业格局。</p>
+            <a href="#introduce" class="btn btn-primary btn-xl page-scroll">进入主页</a>&nbsp;
+            <a href="#loginModal" data-toggle="modal" title="登录后进入个人空间" class="btn btn-primary btn-xl">立即登录</a>
+        </div>
+    </div>
+</header>
+<section class="bg-primary" id="introduce">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 text-center">
+                <h2 class="margin-top-0 text-primary">麦杰工业云</h2>
+                <br>
+            </div>
+        </div>
+        <p class="text-faded" style="text-align: left">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;麦杰科技成立于信息技术发展方兴未艾的2000年，逐步成长为领先的实时数据库系统和行业整体解决方案提供者。我们专注于流程数据的处理，帮助电力、石油、化工等工业行业客户实现透明化生产和智能化决策，并将成熟的解决方案成功应用于节能、环保和智慧城市等领域，帮助改变传统的管理方法，实现信息化管理，提升管理智慧。
+            麦杰openPlant实时数据库系统的主要性能指标处于国际先进水平，能够满足高达百万级的过程数据从采集、存储、分析到展示的各种需求，能够帮助客户及时准确地发现过程中的问题、优化过程运行、预警未来风险，实现整个过程管理的智能化和智慧化。
+            当今，高度发达的信息化技术通过应用深刻地改变着每个行业和领域。物联网、云计算、移动物联网和大数据等技术开始广泛应用。麦杰科技作为海量动态数据的管理专家，能够利用成熟的技术和丰富的应用经验，帮助用户实现更大规模的数据采集和面向应用的存储和分析，帮助更多的客户实现精细化管理和智能化决策，实现更多领域的智慧化，把我们的生活变得更加美好。
+            “记录数据 揭示未来”。麦杰将和你一起发掘每一比特数据蕴含的意义，拥抱“大数据”时代的到来。
+        </p>
+
+        <div style="text-align: center"><a href="#application" class="btn btn-index btn-xl page-scroll">应用展示</a></div>
+    </div>
+</section>
+<section id="solution">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="margin-top-0 text-primary">解决方案</h2>
+            </div>
+        </div>
+    </div>
+    <div class="case">
+        <ul>
+            <li class="company">
+                <h2>中小企业生产信息化</h2>
+                <span>实时采集生产运行数</span>
+                <span>无线传输</span>
+                <span>实时生产过程远程监控、报警、分析</span>
+                <span>&nbsp;</span>
+                <a class="btn" href="#">查看详情</a>
+            </li>
+            <li class="equipment">
+                <h2>设备制造企业远程管理</h2>
+                <span>实时采集设备运行、gps数据</span>
+                <span>无线传输</span>
+                <span>提供设备远程监控</span>
+                <span>实现远程运维</span>
+                <a class="btn" href="#">查看详情</a>
+            </li>
+        </ul>
+    </div>
+</section>
+<section id="application" class="no-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="margin-top-0 text-primary" style="line-height:100px;margin-top:100px;">产品与服务</h2>
+            </div>
+        </div>
+        <div class="product">
+            <ul>
+                <li id="net"><img src="../images/net.png"/>
+
+                    <h3>物联网连接器</h3>
+                    <span>modbus/opc/BACnet/PLC/定制协议</span>
+                    <span>网口/串口/IO/图像识别</span>
+                    <span>有线/Zigbee/3G/4G</span>
+                    <span>标准协议/定制协议</span>
+                </li>
+                <li id="data"><img src="../images/data.png"/>
+                    <h3>数据托管</h3>
+                    <span>实时数据库服务openPlant</span>
+                    <span>关系数据库服务</span>
+                    <span>非结构化数据库服务</span>
+                </li>
+                <li id="tool"><img src="../images/tool.png"/>
+
+                    <h3>分析工具</h3>
+                    <span>Web组态</span>
+                    <span>曲线分析</span>
+                    <span>参数报警</span>
+                    <span>设备可靠性</span>
+                </li>
+                <li id="app"><img src="../images/app.png"/>
+
+                    <h3>手机APP</h3>
+                    <span>实时数据</span>
+                    <span>曲线对比</span>
+                    <span>报警信息</span>
+                </li>
+                <br style="clear:both;"/>
+            </ul>
+        </div>
+    </div>
+</section>
+<section class="container-fluid" id="four" style="background-color:#fcfcfc;margin-top:30px;">
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+            <h2 class="text-center text-primary">产品优势</h2>
+
+            <div class="media wow fadeInRight">
+                <h3>高速数据访问能力</h3>
+
+                <div class="media-body media-middle">
+                    <p>动态数据高速响应,100万条记录200毫秒即可响应！</p>
+                </div>
+                <div class="media-right">
+                    <i class="icon-lg ion-ios-bolt-outline"></i>
+                </div>
+            </div>
+            <div class="media wow fadeIn">
+                <h3>实时生产流程监视</h3>
+
+                <div class="media-left">
+                    <a href="#alertModal" data-toggle="modal" data-target="#alertModal"><i
+                            class="icon-lg ion-ios-cloud-download-outline"></i></a>
+                </div>
+                <div class="media-body media-middle">
+                    <p>用户可通过多种终端设备,随时随地，工业生产过程全监控！</p>
+                </div>
+            </div>
+            <div class="media wow fadeInRight">
+                <h3>无限期历史存储</h3>
+
+                <div class="media-body media-middle">
+                    <p>windranger为您永久保存历史，保障服务永久在线！</p>
+                </div>
+                <div class="media-right">
+                    <i class="icon-lg ion-ios-speedometer"></i>
+                </div>
+            </div>
+            <div class="media wow fadeIn">
+                <h3>分析模型自助化</h3>
+                <div class="media-left">
+                    <i class="icon-lg ion-ios-heart-outline"></i>
+                </div>
+                <div class="media-body media-middle">
+                    <p>流程模型可根据业务需要完全自助完成，并提供丰富的图表展示。</p>
+                </div>
+            </div>
+            <div class="media wow fadeInRight">
+                <h3>应用平台</h3>
+
+                <div class="media-body media-middle">
+                    <p>系统平台支持在线二次开发，用户可根据自有业务进行灵活扩展。</p>
+                </div>
+                <div class="media-right">
+                    <i class="icon-lg ion-ios-flask-outline"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="last" style="display: none">
+    <aside class="bg-dark">
+        <br>
+        <div class="container text-center">
+            <div class="call-to-action">
+                <h2 class="text-primary">API 支持</h2>
+            </div>
+            <br>
+            <br>
+
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <div class="row">
+                        <h6 class="wide-space text-center">API 语言支持图标</h6>
+                        <div class="col-sm-3 col-xs-6 text-center">
+                            <i class="icon-lg ion-social-windows-outline" title="html 5"></i>
+                        </div>
+                        <div class="col-sm-3 col-xs-6 text-center">
+                            <i class="icon-lg ion-social-tux" title="sass"></i>
+                        </div>
+                        <div class="col-sm-3 col-xs-6 text-center">
+                            <i class="icon-lg ion-social-html5" title="javascript"></i>
+                        </div>
+                        <div class="col-sm-3 col-xs-6 text-center">
+                            <i class="icon-lg ion-social-google-outline" title="css 3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <a href="/api" target="ext"
+               class="btn btn-index btn-xl wow flipInX">开发示例</a>
+        </div>
+    </aside>
+    <div class="container">
+        <div class="row">
+            <br>
+
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2 class="text-primary">联系我们</h2>
+
+                <p>您对我们产品的任何疑问请直接联系我们！</p>
+            </div>
+            <div class="col-lg-10 col-lg-offset-1 text-center">
+                <form class="contact-form row">
+                    <div class="col-md-4">
+                        <label></label>
+                        <input type="text" class="form-control" placeholder="姓名">
+                    </div>
+                    <div class="col-md-4">
+                        <label></label>
+                        <input type="text" class="form-control" placeholder="邮箱">
+                    </div>
+                    <div class="col-md-4">
+                        <label></label>
+                        <input type="text" class="form-control" placeholder="联系电话">
+                    </div>
+                    <div class="col-md-12">
+                        <label></label>
+                        <textarea class="form-control" rows="9" placeholder="您的问题.."></textarea>
+                    </div>
+                    <div class="col-md-4 col-md-offset-4">
+                        <label></label>
+                        <button type="button" data-toggle="modal" data-target="#alertModal"
+                                class="btn btn-index btn-block btn-xl" id="send">发送<i
+                                class="ion-android-arrow-forward"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<footer id="footer">
+    <p style="color:#fff;text-align: center;margin-bottom:0;">Copyright © Shanghai Magus Technology Co., Ltd. All rights
+        reserved　　ICP:沪ICP备06020171号 咨询热线：021-33674358 客户服务QQ：1772566210 </p>
+</footer>
+<div id="galleryModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img src="//placehold.it/1200x700/222?text=..." id="galleryImage" class="img-responsive"/>
+                <p>
+                    <br/>
+                    <button class="btn btn-index btn-xl center-block" data-dismiss="modal" aria-hidden="true">Close
+                    </button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="loginModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 50px">
+    <div class="modal-dialog">
+        <div class="modal-content" style="align-content: center;">
+            <h2 class="text-center"> 用户登录</h2>
+            <h5 class="text-center">
+                欢迎使用Magus-OPCloud系统
+            </h5>
+
+            <div class="modal-body">
+                <form id="login_form">
+                    <div style="margin-top: 0px">
+                        <input type="text" class="form-control" id="userName" name="userName" placeholder="用户名"
+                               value="admin">
+                    </div>
+                    <div style="margin-top: 20px">
+                        <input type="password" class="form-control" placeholder="密码" id="password" name="password"
+                               value="123456">
+                    </div>
+                    <div style="margin-top: 20px">
+                        <a href="/system/customer/register">企业注册</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="/system/customer/registerIndividual">个人注册</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="/system/forgetPwd">忘记密码</a>
+                    </div>
+                    <button class="btn btn-log btn-lg center-block" data-dismiss="modal" style="margin-top: 10px"
+                            aria-hidden="true"
+                            onclick="login()">立即登录
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    if (window.parent.length > 0) {
+        window.parent.location = location;
+    }
+    (function ($) {
+        "use strict";
+        $('body').scrollspy({
+            target: '.navbar-fixed-top',
+            offset: 60
+        });
+
+        $('#topNav').affix({
+            offset: {
+                top: 200
+            }
+        });
+        // new WOW().init();
+
+        $('a.page-scroll').bind('click', function (event) {
+            var $ele = $(this);
+            $('html, body').stop().animate({
+                scrollTop: ($($ele.attr('href')).offset().top - 60)
+            }, 1450, 'easeInOutExpo');
+            event.preventDefault();
+        });
+
+        $('.navbar-collapse ul li a').click(function () {
+            /* always close responsive nav after click */
+            $('.navbar-toggle:visible').click();
+        });
+
+        $('#galleryModal').on('show.bs.modal', function (e) {
+            $('#galleryImage').attr("src", $(e.relatedTarget).data("src"));
+        });
+
+    })(jQuery);
+
+    function login() {
+        var userName = ($("#userName").val());
+        var password = ($.md5($("#password").val()));
+        $.ajax({
+            type: 'POST',
+            url: "/system/user/login?t=" + new Date().getTime(),
+            data: {
+                userName: userName,
+                password: password
+            },
+            success: function (data) {
+                if (data.msg == "success") {
+                    $("#userInfo").html(userName);
+                    self.location = '/system/manage';
+                } else {
+                    swal({
+                        title: "登录异常",
+                        text: data.msg,
+                        type: "error",
+                        closeOnConfirm: false
+                    });
+                }
+            },
+            error: function (data) {
+                swal({
+                    title: "登录异常",
+                    text: "访问错误",
+                    type: "error",
+                    closeOnConfirm: false
+                });
+                console.log(data)
+            },
+            dataType: "json"
+        });
+    }
+    $("#net").on('mouseover', function (event) {
+        $("img", this).attr('src', '../images/net_h.png');
+    });
+    $("#net").on('mouseout', function (event) {
+        $("img", this).attr('src', '../images/net.png');
+    });
+    $("#data").on('mouseover', function (event) {
+        $("img", this).attr('src', '../images/data_h.png');
+    });
+    $("#data").on('mouseout', function (event) {
+        $("img", this).attr('src', '../images/data.png');
+    });
+    $("#tool").on('mouseover', function (event) {
+        $("img", this).attr('src', '../images/tool_h.png');
+    });
+    $("#tool").on('mouseout', function (event) {
+        $("img", this).attr('src', '../images/tool.png');
+    });
+    $("#app").on('mouseover', function (event) {
+        $("img", this).attr('src', '../images/app_h.png');
+    });
+    $("#app").on('mouseout', function (event) {
+        $("img", this).attr('src', '../images/app.png');
+    });
+
+</script>

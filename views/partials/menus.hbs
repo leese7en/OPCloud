@@ -1,0 +1,53 @@
+<ul class="sidebar-menu" id="userMenuPage">
+</ul>
+<script type="application/javascript">
+    $
+            .ajax({
+                type: 'get',
+                url: '/system/page/getMenuPage',
+                dataType: 'json',
+                success: function (data) {
+                    var flag = data.flag;
+                    if (flag < 0) {
+                        console.log('获取数据失败');
+                        return;
+                    }
+                    var html = '<li class="has-sub"> <a href="javascript:void(0);"><span>导航选中演示</span><i class="fa fa-caret-right fa-fw pull-right"></i></a>' + '<ul class="sub-menu"> <li><a href="left1.html"><i class="fa fa-circle-o fa-fw"></i>&nbsp;left1</a></li><li>' + '<a href="left2.html"><i class="fa fa-circle-o fa-fw"></i>&nbsp;left2</a></li> <li><a href="left3.html">' + '<i class="fa fa-circle-o fa-fw"></i>&nbsp;left3</a></li> </ul></li>'
+                    var value = data.data;
+                    var menu = '';
+                    for (var i in value) {
+                        var obj = value[i];
+                        var url = '';
+                        if (obj.url) {
+                            url = obj.url;
+                        }
+                        menu = '';
+                        //如果是父级节点
+                        if (obj.prePageId == 0) {
+                            //是否显示
+                            menu = ' <li class="header" id ="menu_' + obj.pageId + '">' + obj.pageName + '</li>';
+                            $('#userMenuPage').append(menu);
+                        } else {
+                            if (!url) {
+                                menu = '<li class="treeview"><a href="#"> <i class="' + (obj.icon ? obj.icon : 'fa fa-list') + '"></i> <span>' + obj.pageName + '</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>';
+                                menu += ' <ul class="treeview-menu" id="menu_' + obj.pageId + '"></ul></li>';
+                                $('#menu_' + obj.prePageId).after(menu);
+                            } else {
+                                menu = ' <li><a href="#" url="' + obj.url + '"><i class="' + (obj.icon ? obj.icon : 'fa fa-circle-o') + '"></i>' + obj.pageName + '</a></li>';
+                                $('#menu_' + obj.prePageId).append(menu);
+                            }
+                        }
+                    }
+                    $('.sidebar-menu a').click(function (e) {
+                        var obj = $(this);
+                        var url = $(obj).attr('url');
+                        if (url) {
+                            $('#contentIfream').attr('src', url + '?times=' + new Date().getTime());
+                        }
+                    });
+                },
+                error: function () {
+                    console.log('获取资源出错');
+                }
+            });
+</script>

@@ -1,0 +1,289 @@
+{{>systemTable}}
+<script src="/javascripts/jquery.md5.js"></script>
+<link rel="stylesheet" href="/plugins/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css"/>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdata.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdatatable.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxtreegrid.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxpanel.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxtree.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxcheckbox.js"></script>
+<link rel="stylesheet" href="/plugins/bootstrap-select/css/bootstrap-select.min.css"/>
+<script src="/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+<div id="myToolbar" style="display: none">
+    <div class="row" style=" padding-left: 10px;">
+        <div class="col-md-3">
+            <span class="input-group" style="color: black; padding: 3px;">
+                <span class="input-group-addon" style="color: black;">用户名</span>
+                <input type="text" id="userName" class="form-control" placeholder="请输入用户名"> </span>
+        </div>
+        <div class="col-md-3">
+            <span class="input-group">
+                <span class="input-group-addon">描述</span>
+                <input type="text" id="description" class="form-control" placeholder="请输入用户描述"> </span>
+        </div>
+        <button id="queryUser" class="btn btn-success add" onclick="queryUser()">
+            查询
+        </button>
+        <button id="addUser" class="btn btn-success add" onclick="showAddUser()">
+            添加
+        </button>
+    </div>
+    <div id="addUserModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" style="width: 340px;">
+            <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+                <h4 class="text-left"> 添加用户</h4>
+                <div class="modal-body" style="padding-bottom:0;">
+                    <form id="addUser" style="margin-bottom:0;">
+                        <table>
+                            <tr>
+                                <td>用户名：</td>
+                                <td><input type="text" class="form-control" id="addJobNo" onblur="validateAddJobNo()"
+                                           style="width: 200px;align-content: center;"></td>
+                            </tr>
+                            <tr>
+                                <td>姓名：</td>
+                                <td><input type="text" class="form-control" id="addUserName" onblur="validateAddUserName()"
+                                           style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                            </tr>
+                            <tr>
+                                <td>密码：</td>
+                                <td><input type="password" class="form-control" id="addPassword" onblur="validateAddPassword()"
+                                           style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                            </tr>
+                            <tr>
+                                <td>确认密码：</td>
+                                <td><input type="password" class="form-control" id="addPassword2" onblur="validateAddPassword2()"
+                                           style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                            </tr>
+                            <tr>
+                                <td>邮箱：</td>
+                                <td><input type="text" class="form-control" id="addMail" onblur="validateAddEmail()"
+                                           style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                            </tr>
+                            <tr>
+                                <td>联系方式：</td>
+                                <td><input type="text" class="form-control" id="addPhone" onblur="validateAddPhone()"
+                                           style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                            </tr>
+                            <tr>
+                                <td>性别：</td>
+                                <td>
+                                    <select onchange="validateAddSex()" class="form-control" id="addSex"
+                                            style="width: 200px;margin-top: 10px;align-content: center;">
+                                        <option value="0" selected>性别选择</option>
+                                        <option value="1">男</option>
+                                        <option value="2">女</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>职务：</td>
+                                <td><select class="form-control" id="addDuty" onchange="validateAddDuty()"
+                                            style="width: 200px;margin-top: 10px;align-content: center;">
+                                </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>描述：</td>
+                                <td><input type="text" class="form-control" id="addDesc" onblur="trimDesc()"
+                                           style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                            </tr>
+                            <tr>
+                                <td align="center" valign="middle" colspan="2">
+                                    <button type="button" class="btn btn-primary  center-block"
+                                            style="margin-top: 16px;display: inline-block;"
+                                            aria-hidden="true" onclick="addUser()">提交
+                                    </button>
+                                    <button type="button" class="btn btn-primary  center-block" data-dismiss="modal"
+                                            style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                                            aria-hidden="true" onclick="closeAddUserModal()">取消
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="editUserModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 50px;">
+        <div class="modal-dialog" style="width: 340px;">
+            <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+                <h4 class="text-left"> 编辑用户</h4>
+                <div class="modal-body" style="padding-bottom:0;">
+                    <form id="editUser" style="margin-bottom:0;">
+                        <table>
+                            <tr style="display: none">
+                                <td>ID：</td>
+                                <td><input type="text" class="form-control" id="editId"
+                                           style="width: 200px;align-content: center;"></td>
+                            </tr>
+                            <tr>
+                                <td>用户名：</td>
+                                <td><input type="text" class="form-control" id="editJobNo"
+                                           style="width: 200px;align-content: center;"></td>
+                            </tr>
+                            <tr>
+                                <td>姓名：</td>
+                                <td><input type="text" class="form-control" id="editUserName" onblur="validateEditUserName()"
+                                           style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                            </tr>
+                            <tr>
+                                <td>邮箱：</td>
+                                <td><input type="text" class="form-control" id="editMail" onblur="validateEditEmail()"
+                                           style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                            </tr>
+                            <tr>
+                                <td>联系方式：</td>
+                                <td><input type="text" class="form-control" id="editPhone" onblur="validateEditPhone()"
+                                           style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                            </tr>
+                            <tr>
+                                <td>性别：</td>
+                                <td><select class="form-control" id="editSex" onchange="validateEditSex()"
+                                            style="width: 200px;margin-top: 10px;align-content: center;">
+                                    <option value="1">男</option>
+                                    <option value="2">女</option>
+                                </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>职务：</td>
+                                <td>
+                                    <select class="form-control" id="editDuty" onchange="validateEditDuty()"
+                                            style="width: 200px;margin-top: 10px;align-content: center;">
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>描述：</td>
+                                <td><input type="text" class="form-control" id="editDesc" onblur="trimDesc()"
+                                           style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                            </tr>
+                            <tr>
+
+                                <td align="center" valign="middle" colspan="2">
+
+                                    <button type="button" class="btn btn-primary  center-block"
+                                            style="margin-top: 16px;display: inline-block;"
+                                            aria-hidden="true" onclick="editUser()">提交
+                                    </button>
+                                    <button type="button" class="btn btn-primary  center-block" data-dismiss="modal"
+                                            style="margin-top: 16px;display: inline-block;margin-left:10px;"
+
+                                            aria-hidden="true" onclick="closeEditUserModal()">取消
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="roleModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 50px;">
+        <div class="modal-dialog" style="width: 500px;">
+            <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+                <h5>角色绑定</h5>
+                <input type="text" id="roleUserId" style="display: none">
+                <table id="roleTable" data-toggle="table" data-pagination="false">
+                </table>
+                <center>
+                    <button class="btn btn-primary  center-block" data-dismiss="modal" style="margin-top: 16px;display: inline-block;"
+                            aria-hidden="true" onclick="">关闭
+                    </button>
+                </center>
+            </div>
+        </div>
+    </div>
+
+    <div id="menuModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 50px;">
+        <div class="modal-dialog" style="width: 600px;">
+            <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+                <h5>菜单绑定</h5>
+                <input type="text" id="pageUserId" style="display: none">
+                <div id="menuTable" style="margin-top: 10px">
+                </div>
+                <center>
+                    <button class="btn btn-primary  center-block" data-dismiss="modal" style="margin-top: 16px;display: inline-block;"
+                            aria-hidden="true" onclick="">关闭
+                    </button>
+                </center>
+            </div>
+        </div>
+    </div>
+    <div id="domainModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 50px;">
+        <div class="modal-dialog" style="width: 600px;">
+            <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+                <h5>域划分</h5>
+                <input type="hidden" id="domainUserId"/>
+                <div id="domainTree"></div>
+                <center>
+                    <button class="btn btn-success  center-block" style="margin-top: 16px;display: inline-block;"
+                            onclick="updateUserDomain()">提交
+                    </button>
+                    <button class="btn btn-primary  center-block" data-dismiss="modal" style="margin-top: 16px;display: inline-block;"
+                            aria-hidden="true" onclick="">关闭
+                    </button>
+                </center>
+            </div>
+        </div>
+    </div>
+    <div id="passwordModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 50px;">
+        <div class="modal-dialog" style="width: 350px;">
+            <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+                <h5>修改密码</h5>
+                <input type="hidden" id="passwordUserId"/>
+                <div class="modal-body" style="padding-bottom:0;">
+                    <table>
+                        <tr>
+                            <td>密码：</td>
+                            <td><input type="password" class="form-control" id="resetPassword" style="width: 200px;margin-top: 10px;align-content: center;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>确认密码：</td>
+                            <td><input type="password" class="form-control" id="resetPassword2"
+                                       style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="middle" colspan="2">
+                                <button type="button" class="btn btn-primary  center-block"
+                                        style="margin-top: 16px;display: inline-block;"
+                                        aria-hidden="true" onclick="resetPassword()">提交
+                                </button>
+                                <button type="button" class="btn btn-primary  center-block" data-dismiss="modal"
+                                        style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                                        aria-hidden="true" onclick="closeResetPassword()">取消
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--记录原始邮箱，用于编辑用户时邮箱验证-->
+    <input id="originEmail" type="hidden">
+    <input id="originPhone" type="hidden">
+    <style>
+        .fixed-table-toolbar .columns {
+            margin-top: -38px !important;
+            margin-right: 5px !important;
+        }
+
+        .inputErr {
+            border-color: red;
+            border-width: 1px;
+        }
+    </style>
+    <script>
+        var userType = {{userType}};
+        if (userType == 1) {
+            $('#addUser').remove();
+        }
+    </script>
+    <script type="text/javascript" src="/javascripts/system/user.js"></script>

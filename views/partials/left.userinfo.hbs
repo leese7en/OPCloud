@@ -1,0 +1,28 @@
+<div class="user-panel">
+    <div class="pull-left image">
+        {{#if session.user.ICON}}
+            <img id="userHeadImgLeftSide" src="{{session.user.ICON}}" class="img-circle" alt="User Image" style="width:40px;height: 40px;">
+        {{else}}
+            <img id="userHeadImgLeftSide" src="/images/user2-160x160.jpg" class="img-circle" alt="User Image" style="width:40px;height: 40px;">
+        {{/if}}
+    </div>
+    <div class="pull-left info">
+        <p id="personaliseUserNameLeft"> {{session.user.USER_NAME}}</p>
+        <a href="#"><i class="fa fa-circle text-success"></i><span id="isSystem">开发者</span></a>
+    </div>
+</div>
+
+<script>
+    var isSystem ={{session.user.IS_SYSTEM}};
+    var value = '超级管理员';
+    if (isSystem == 1) {
+        value = '超级管理员';
+    } else if (isSystem == 2) {
+        value = '企业管理员';
+    } else if (isSystem == 3) {
+        value = '企业用户';
+    } else {
+        value = '开发者';
+    }
+    $('#isSystem').html(value);
+</script>

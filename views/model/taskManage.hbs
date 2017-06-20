@@ -1,0 +1,1065 @@
+<link rel="stylesheet" href="/plugins/bootstrap-table/src/bootstrap-table.css">
+<link rel="stylesheet" href="/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+<script src="/plugins/bootstrap-table/src/bootstrap-table.js"></script>
+<script src="/plugins/bootstrap-table/src/locale/bootstrap-table-zh-CN.js" type="text/javascript"></script>
+<script src="/plugins/bootstrap-table/src/bootstrap-table-export.js"></script>
+<script src="/plugins/bootstrap-table/src/tableExport.js"></script>
+<link href="/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet"/>
+<script src="/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script src="/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<link rel="stylesheet" href="/stylesheets/font-awesome.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/plugins/bootstrap-spinner/css/bootstrap-spinner.css">
+<script src="/plugins/bootstrap-spinner/js/jquery.spinner.js"></script>
+<script src="/plugins/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/plugins/sweetalert/dist/sweetalert.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="/stylesheets/AdminLTE.min.css">
+<script src="/javascripts/model/taskManage.js"></script>
+<section class="content-header text-left">
+    <h1 style="margin-bottom: 5px">
+        {{pageName}}
+    </h1>
+    <ul class="breadcrumb">
+        <li><a href="/system/manage" target="_top">首页</a></li>
+        <li class="active">{{pageName}}</li>
+    </ul>
+</section>
+<div class="container" style="width: 100%">
+    <div class="box box-primary">
+        <div class="row" style="padding-top: 8px; padding-left: 20px;">
+            <div class="col-md-3" style="padding:2px 2px;">
+                <span class="input-group"> <span class="input-group-addon"
+                                                 style="color: black; padding: 8px;">名称</span> <input
+                        type="text" id="taskNameQuery" class="form-control" placeholder="请输入任务名称"> </span>
+            </div>
+            <div class="col-md-3" style="padding:2px 2px;">
+                <span class="input-group"> <span class="input-group-addon"
+                                                 style="color: black; padding: 8px;">描述</span> <input
+                        type="text" id="taskDescQuery" class="form-control" placeholder="请输入任务描述"> </span>
+            </div>
+            <div class="col-md-3" style="padding:2px 2px;">
+                <span class="input-group">
+                    <span class="input-group-addon" style="color: black; padding: 8px;">任务状态</span>
+                    <select id="taskStatus" class="selectpicker form-control">
+                            <option value="-1">请选择</option>
+                            <option value="1">未开始</option>
+                            <option value="2">运行中</option>
+                            <option value="3">完成</option>
+                            <option value="4">失败</option>
+                    </select>
+                </span>
+            </div>
+            <div class="col-md-3" style="padding:2px 2px;">
+                <ul class="nav navbar-left">
+                    <button type="button" class="btn btn-primary" onclick="taskQuery()">
+                        <span class="glyphicon glyphicon-ok"></span> 查询
+                    </button>
+                    <button type="button" class="btn btn-info" onclick="createTaskModal()">
+                        <span class="glyphicon glyphicon-plus"></span> 创建任务
+                    </button>
+                </ul>
+            </div>
+        </div>
+        <table id="taskTable"></table>
+    </div>
+</div>
+<!-- 添加 -->
+<div id="addTaskModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="false" style="margin-top: 10px;">
+    <div class="modal-dialog" style="width: 800px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 id="pointTitle" class="text-left"> 添加任务</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <input type="hidden" id="taskID">
+                <div>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#immediate" aria-controls="immediate" role="tab" data-toggle="tab">即时任务</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#timing" aria-controls="timing" role="tab" data-toggle="tab">定时任务</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="immediate">
+                            <form class="form-horizontal" role="form" action="#" style="padding-top: 10px;">
+                                <div class="row" style="display: flex;align-items: center;">
+                                    <div class="col-md-1" style="padding:3px 2px;">任务名称</div>
+                                    <div class="col-md-5" style="padding:3px 2px;"><input type="text"
+                                                                                          class="form-control"
+                                                                                          id="taskName"></div>
+                                    <div class="col-md-1" style="padding:3px 2px;">任务描述</div>
+                                    <div class="col-md-5" style="padding:3px 2px;"><input type="text"
+                                                                                          class="form-control"
+                                                                                          id="taskDesc"></div>
+                                </div>
+                                <div class="row" style="display: flex;align-items: center;">
+                                    <div class="col-md-1" style="padding:3px 2px;">开始时间</div>
+                                    <div class="col-md-5" style="padding:3px 2px;">
+                                        <div id="imBeginTime" class="input-group date form_datetime">
+                                            <input class="form-control" type="text" value="2016-11-01 00:00:00">
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1" style="padding:3px 2px;">结束时间</div>
+                                    <div class="col-md-5" style="padding:3px 2px;">
+                                        <div id="imEndTime" class="input-group date form_datetime">
+                                            <input class="form-control" type="text" value="2016-11-01 00:00:00">
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="display: flex;align-items: center;">
+                                    <div class="col-md-1" style="padding:3px 2px;">分片数量</div>
+                                    <div class="col-md-2" style="padding:3px 2px;">
+                                        <div class="input-group spinner" data-trigger="spinner">
+                                            <input type="text" class="form-control text-center" value="1" id="taskSlice"
+                                                   data-min="1">
+                                            <div class="input-group-addon">
+                                                <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                        class="fa fa-caret-up"></i></a>
+                                                <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                        class="fa fa-caret-down"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1" style="padding:3px 2px;">作业文件</div>
+                                    <div class="col-md-7" style="padding:3px 2px;">
+                                        <input type="hidden" id="taskFileIds"/>
+                                        <input type="text" id="taskFiles" readonly="readonly" class="form-control"></div>
+                                    <div class="col-md-1" style="padding:3px 2px;">
+                                        <button class="btn btn-primary" type="button" onclick="getTaskFile('createTask')">选择
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="modal-footer" style="text-align: center;">
+                                <button class="btn btn-primary" type="button" onclick="createTask()">提交</button>
+                                <button class="btn btn-default" type="button" onclick="closeTaskModal()">取消</button>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="timing">
+                            <form class="form-horizontal" role="form" action="#" style="padding-top: 10px;">
+                                <div class="row" style="display: flex; align-items: center;">
+                                    <div class="col-md-1" style="padding:3px 2px;">任务名称</div>
+                                    <div class="col-md-5" style="padding:3px 2px;"><input type="text"
+                                                                                          class="form-control"
+                                                                                          id="timerName"></div>
+                                    <div class="col-md-1" style="padding:3px 2px;">任务描述</div>
+                                    <div class="col-md-5" style="padding:3px 2px;"><input type="text"
+                                                                                          class="form-control"
+                                                                                          id="timerDesc"></div>
+                                </div>
+                                <div class="row" style="display: flex; align-items: center;">
+                                    <div class="col-md-1" style="padding:3px 2px;">截止时间</div>
+                                    <div class="col-md-5" style="padding:3px 2px;">
+                                        <div class="col-md-4"
+                                             style="padding:3px 2px;display: flex; align-items: center;">
+                                            <div class="col-md-10" style="padding:3px 2px;">
+                                                <div class="input-group spinner" data-trigger="spinner"
+                                                     style="margin-left:-4px;">
+                                                    <input id="timerCutOffDay" type="text" class="form-control text-center" value="0"
+                                                           data-min="0">
+                                                    <div class="input-group-addon">
+                                                        <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                                class="fa fa-caret-up"></i></a>
+                                                        <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                                class="fa fa-caret-down"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2" style="padding:3px 2px;">天</div>
+                                        </div>
+                                        <div class="col-md-4"
+                                             style="padding:3px 2px;display: flex; align-items: center;">
+                                            <div class="col-md-10" style="padding:3px 2px;">
+                                                <div class="input-group spinner" data-trigger="spinner">
+                                                    <input id="timerCutOffHour" type="text" class="form-control text-center" value="0"
+                                                           data-min="0">
+                                                    <div class="input-group-addon">
+                                                        <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                                class="fa fa-caret-up"></i></a>
+                                                        <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                                class="fa fa-caret-down"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2" style="padding:3px 2px;">时</div>
+                                        </div>
+                                        <div class="col-md-4"
+                                             style="padding:3px 2px;display: flex; align-items: center;">
+                                            <div class="col-md-10" style="padding:3px 2px;">
+                                                <div class="input-group spinner" data-trigger="spinner">
+                                                    <input id="timerCutOffMinute" type="text" class="form-control text-center" value="0"
+                                                           data-min="0">
+                                                    <div class="input-group-addon">
+                                                        <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                                class="fa fa-caret-up"></i></a>
+                                                        <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                                class="fa fa-caret-down"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2" style="padding:3px 2px;">分</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1" style="padding:3px 2px;">取数时长</div>
+                                    <div class="col-md-5" style="padding:3px 2px;">
+                                        <div class="col-md-4"
+                                             style="padding:3px 2px;display: flex; align-items: center;">
+                                            <div class="col-md-10" style="padding:3px 2px;">
+                                                <div class="input-group spinner" data-trigger="spinner"
+                                                     style="margin-left:-4px;">
+                                                    <input id="durtionDay" type="text" class="form-control text-center" value="0"
+                                                           data-min="0">
+                                                    <div class="input-group-addon">
+                                                        <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                                class="fa fa-caret-up"></i></a>
+                                                        <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                                class="fa fa-caret-down"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2" style="padding:3px 2px;">天</div>
+                                        </div>
+                                        <div class="col-md-4"
+                                             style="padding:3px 2px;display: flex; align-items: center;">
+                                            <div class="col-md-10" style="padding:3px 2px;">
+                                                <div class="input-group spinner" data-trigger="spinner">
+                                                    <input id="durtionHour" type="text" class="form-control text-center" value="0"
+                                                           data-min="0">
+                                                    <div class="input-group-addon">
+                                                        <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                                class="fa fa-caret-up"></i></a>
+                                                        <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                                class="fa fa-caret-down"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2" style="padding:3px 2px;">时</div>
+                                        </div>
+                                        <div class="col-md-4"
+                                             style="padding:3px 2px;display: flex; align-items: center;">
+                                            <div class="col-md-10" style="padding:3px 2px;">
+                                                <div class="input-group spinner" data-trigger="spinner">
+                                                    <input id="durtionMinute" type="text" class="form-control text-center" value="0"
+                                                           data-min="0">
+                                                    <div class="input-group-addon">
+                                                        <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                                class="fa fa-caret-up"></i></a>
+                                                        <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                                class="fa fa-caret-down"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2" style="padding:3px 2px;">分</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="display: flex; align-items: center;">
+                                    <div class="col-md-1" style="padding:3px 2px;">重复类型</div>
+                                    <div class="col-md-5" style="padding:3px 2px;">
+                                        <select id="timerType" class="selectpicker" data-width="100%">
+                                            <option value="1">
+                                                天
+                                            </option>
+                                            <option value="2">
+                                                周
+                                            </option>
+                                            <option value="3">
+                                                月
+                                            </option>
+                                            <option value="4">
+                                                时间间隔
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1" style="padding:3px 2px;">分片数量</div>
+                                    <div class="col-md-5" style="padding:3px 2px;">
+                                        <div class="input-group spinner" data-trigger="spinner"
+                                             style="margin-left:-4px;">
+                                            <input id="timerSlice" type="text" class="form-control text-center" value="1"
+                                                   data-min="1">
+                                            <div class="input-group-addon">
+                                                <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                        class="fa fa-caret-up"></i></a>
+                                                <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                        class="fa fa-caret-down"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="display: flex; align-items: center;">
+                                    <div class="col-md-1" style="padding:3px 2px;">任务类型</div>
+                                    <div class="col-md-2" style="padding:3px 2px;">
+                                        <select id="taskType" class="selectpicker" data-width="100%">
+                                            <option value="1">
+                                                并行
+                                            </option>
+                                            <option value="2">
+                                                串行
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1" style="padding:3px 2px;">运行次数</div>
+                                    <div class="col-md-2" style="padding:3px 2px;">
+                                        <div class="input-group spinner" data-trigger="spinner"
+                                             style="margin-left:-4px;">
+                                            <input id="timerRunnum" type="text" class="form-control text-center" value="0"
+                                                   data-min="0">
+                                            <div class="input-group-addon">
+                                                <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                        class="fa fa-caret-up"></i></a>
+                                                <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                        class="fa fa-caret-down"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1" style="padding:3px 2px;">作业文件</div>
+                                    <div class="col-md-4" style="padding:3px 2px;">
+                                        <input type="hidden" id="timerFileIds"/>
+                                        <input id="timerFiles" type="text" readonly="readonly" class="form-control">
+                                    </div>
+                                    <div class="col-md-1" style="padding:3px 2px;">
+                                        <button class="btn btn-primary" type="button" onclick="getTaskFile('createTimer')">选择
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row" style="display: flex; align-items: center;">
+                                    <div id="timerTypeDay" class="col-md-6" style="display: flex; align-items: center;padding:0px 0px;">
+                                        <div class="col-md-2" style="padding:3px 2px;">每天</div>
+                                        <div class="col-md-10" style="padding:3px 2px;display: flex; align-items: center;">
+                                            <div class="col-md-5" style="padding:3px 2px;">
+                                                <div class="input-group spinner" data-trigger="spinner"
+                                                     style="margin-left:-4px;">
+                                                    <input id="dayHour" type="text" class="form-control text-center" value="0"
+                                                           data-max="23"
+                                                           data-min="0">
+                                                    <div class="input-group-addon">
+                                                        <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                                class="fa fa-caret-up"></i></a>
+                                                        <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                                class="fa fa-caret-down"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1" style="padding:3px 2px;">时</div>
+                                            <div class="col-md-5" style="padding:3px 2px;">
+                                                <div class="input-group spinner" data-trigger="spinner">
+                                                    <input id="dayMinute" type="text" class="form-control text-center" value="0"
+                                                           data-max="59"
+                                                           data-min="0">
+                                                    <div class="input-group-addon">
+                                                        <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                                class="fa fa-caret-up"></i></a>
+                                                        <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                                class="fa fa-caret-down"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1" style="padding:3px 2px;">分</div>
+                                        </div>
+                                    </div>
+                                    <div id="timerTypeWeek" class="col-md-6" style="display: flex; align-items: center;padding:0px 0px;">
+                                        <div class="col-md-2" style="padding:3px 2px;">每周</div>
+                                        <div class="col-md-10" style="padding:3px 2px;display: flex; align-items: center;">
+                                            <div class="col-md-4" style="padding:3px 2px;">
+                                                <select id="weekDay" class="selectpicker" data-width="100%">
+                                                    <option value="1">
+                                                        星期一
+                                                    </option>
+                                                    <option value="2">
+                                                        星期二
+                                                    </option>
+                                                    <option value="3">
+                                                        星期三
+                                                    </option>
+                                                    <option value="4">
+                                                        星期四
+                                                    </option>
+                                                    <option value="5">
+                                                        星期五
+                                                    </option>
+                                                    <option value="6">
+                                                        星期六
+                                                    </option>
+                                                    <option value="7">
+                                                        星期日
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3" style="padding:3px 2px;">
+                                                <div class="input-group spinner" data-trigger="spinner">
+                                                    <input id="weekHour" type="text" class="form-control text-center" value="0"
+                                                           data-max="23"
+                                                           data-min="0">
+                                                    <div class="input-group-addon">
+                                                        <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                                class="fa fa-caret-up"></i></a>
+                                                        <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                                class="fa fa-caret-down"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1" style="padding:3px 2px;">时</div>
+                                            <div class="col-md-3" style="padding:3px 2px;">
+                                                <div class="input-group spinner" data-trigger="spinner">
+                                                    <input id="weekMinute" type="text" class="form-control text-center" value="0"
+                                                           data-max="59"
+                                                           data-min="0">
+                                                    <div class="input-group-addon">
+                                                        <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                                class="fa fa-caret-up"></i></a>
+                                                        <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                                class="fa fa-caret-down"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1" style="padding:3px 2px;">分</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="display: flex; align-items: center;">
+                                    <div id="timerTypeMonth" class="col-md-6" style="display: flex; align-items: center;padding:0px 0px;">
+                                        <div class="col-md-2" style="padding:3px 2px;">每月</div>
+                                        <div class="col-md-10" style="padding:3px 2px;display: flex; align-items: center;">
+                                            <div class="col-md-3" style="padding:3px 2px;">
+                                                <div class="input-group spinner" data-trigger="spinner"
+                                                     style="margin-left:-4px;">
+                                                    <input id="monthDay" type="text" class="form-control text-center" value="0"
+                                                           data-min="0">
+                                                    <div class="input-group-addon">
+                                                        <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                                class="fa fa-caret-up"></i></a>
+                                                        <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                                class="fa fa-caret-down"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1" style="padding:3px 2px;">日</div>
+                                            <div class="col-md-3" style="padding:3px 2px;">
+                                                <div class="input-group spinner" data-trigger="spinner">
+                                                    <input id="monthHour" type="text" class="form-control text-center" value="0"
+                                                           data-max="23"
+                                                           data-min="0">
+                                                    <div class="input-group-addon">
+                                                        <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                                class="fa fa-caret-up"></i></a>
+                                                        <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                                class="fa fa-caret-down"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1" style="padding:3px 2px;">时</div>
+                                            <div class="col-md-3" style="padding:3px 2px;">
+                                                <div class="input-group spinner" data-trigger="spinner">
+                                                    <input id="monthMinute" type="text" class="form-control text-center" value="0"
+                                                           data-max="59"
+                                                           data-min="0">
+                                                    <div class="input-group-addon">
+                                                        <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                                class="fa fa-caret-up"></i></a>
+                                                        <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                                class="fa fa-caret-down"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1" style="padding:3px 2px;">分</div>
+                                        </div>
+                                    </div>
+                                    <div id="timerTypeCustomize" class="col-md-6" style="display: flex; align-items: center;padding:0px 0px;">
+                                        <div class="col-md-2" style="padding:3px 2px;">时间间隔</div>
+                                        <div class="col-md-10" style="padding:3px 2px;display: flex; align-items: center;">
+                                            <div class="col-md-3" style="padding:3px 2px;">
+                                                <div class="input-group spinner" data-trigger="spinner"
+                                                     style="margin-left:-4px;">
+                                                    <input id="timerDay" type="text" class="form-control text-center" value="0"
+                                                           data-min="0">
+                                                    <div class="input-group-addon">
+                                                        <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                                class="fa fa-caret-up"></i></a>
+                                                        <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                                class="fa fa-caret-down"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1" style="padding:3px 2px;">天</div>
+                                            <div class="col-md-3" style="padding:3px 2px;">
+                                                <div class="input-group spinner" data-trigger="spinner">
+                                                    <input id="timerHour" type="text" class="form-control text-center" value="0"
+                                                           data-max="23"
+                                                           data-min="0">
+                                                    <div class="input-group-addon">
+                                                        <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                                class="fa fa-caret-up"></i></a>
+                                                        <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                                class="fa fa-caret-down"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1" style="padding:3px 2px;">时</div>
+                                            <div class="col-md-3" style="padding:3px 2px;">
+                                                <div class="input-group spinner" data-trigger="spinner">
+                                                    <input id="timerMinute" type="text" class="form-control text-center" value="0
+"
+                                                           data-max="59"
+                                                           data-min="0">
+                                                    <div class="input-group-addon">
+                                                        <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                                class="fa fa-caret-up"></i></a>
+                                                        <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                                class="fa fa-caret-down"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1" style="padding:3px 2px;">分</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                            <div class="modal-footer" style="text-align: center;">
+                                <button class="btn btn-primary" type="button" onclick="createTimerTask()">提交</button>
+                                <button class="btn btn-default" type="button" onclick="closeTaskModal()">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="editImTaskModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="false" style="margin-top: 10px;">
+    <div class="modal-dialog" style="width: 800px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 id="pointTitle" class="text-left"> 编辑任务</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <input type="hidden" id="editTaskId">
+                <div>
+                    <form class="form-horizontal" role="form" action="#" style="padding-top: 10px;">
+                        <div class="row" style="display: flex;align-items: center;">
+                            <div class="col-md-1" style="padding:3px 2px;">任务名称</div>
+                            <div class="col-md-5" style="padding:3px 2px;"><input type="text"
+                                                                                  class="form-control"
+                                                                                  id="editTaskName"></div>
+                            <div class="col-md-1" style="padding:3px 2px;">任务描述</div>
+                            <div class="col-md-5" style="padding:3px 2px;"><input type="text"
+                                                                                  class="form-control"
+                                                                                  id="editTaskDesc"></div>
+                        </div>
+                        <div class="row" style="display: flex;align-items: center;">
+                            <div class="col-md-1" style="padding:3px 2px;">开始时间</div>
+                            <div class="col-md-5" style="padding:3px 2px;">
+                                <div id="editImBeginTime" class="input-group date form_datetime">
+                                    <input class="form-control" type="text" value="2016-11-01 00:00:00">
+                                    <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="padding:3px 2px;">结束时间</div>
+                            <div class="col-md-5" style="padding:3px 2px;">
+                                <div id="editImEndTime" class="input-group date form_datetime">
+                                    <input class="form-control" type="text" value="2016-11-01 00:00:00">
+                                    <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex;align-items: center;">
+                            <div class="col-md-1" style="padding:3px 2px;">分片数量</div>
+                            <div class="col-md-2" style="padding:3px 2px;">
+                                <div class="input-group spinner" data-trigger="spinner">
+                                    <input type="text" class="form-control text-center" value="1" id="editTaskSlice"
+                                           data-min="1">
+                                    <div class="input-group-addon">
+                                        <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                class="fa fa-caret-up"></i></a>
+                                        <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                class="fa fa-caret-down"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="padding:3px 2px;">作业文件</div>
+                            <div class="col-md-7" style="padding:3px 2px;">
+                                <input type="hidden" id="editTaskFileIds"/>
+                                <input type="text" id="editTaskFiles" readonly="readonly" class="form-control"/>
+                            </div>
+                            <div class="col-md-1" style="padding:3px 2px;">
+                                <button class="btn btn-primary" type="button" onclick="getTaskFile('editTask')">选择
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="modal-footer" style="text-align: center;">
+                        <button class="btn btn-primary" type="button" onclick="editImTask()">提交</button>
+                        <button class="btn btn-default" type="button" onclick="closeEditImTaskModal()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="editTimerTaskModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="false" style="margin-top: 10px;">
+    <div class="modal-dialog" style="width: 800px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 id="pointTitle" class="text-left"> 编辑任务</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <input type="hidden" id="editTimerId">
+                <div>
+                    <form class="form-horizontal" role="form" action="#" style="padding-top: 10px;">
+                        <div class="row" style="display: flex; align-items: center;">
+                            <div class="col-md-1" style="padding:3px 2px;">任务名称</div>
+                            <div class="col-md-5" style="padding:3px 2px;"><input type="text"
+                                                                                  class="form-control"
+                                                                                  id="editTimerName"></div>
+                            <div class="col-md-1" style="padding:3px 2px;">任务描述</div>
+                            <div class="col-md-5" style="padding:3px 2px;"><input type="text"
+                                                                                  class="form-control"
+                                                                                  id="editTimerDesc"></div>
+                        </div>
+                        <div class="row" style="display: flex; align-items: center;">
+                            <div class="col-md-1" style="padding:3px 2px;">截止时间</div>
+                            <div class="col-md-5" style="padding:3px 2px;">
+                                <div class="col-md-4"
+                                     style="padding:3px 2px;display: flex; align-items: center;">
+                                    <div class="col-md-10" style="padding:3px 2px;">
+                                        <div class="input-group spinner" data-trigger="spinner"
+                                             style="margin-left:-4px;">
+                                            <input id="editTimerCutOffDay" type="text" class="form-control text-center" value="0"
+                                                   data-min="0">
+                                            <div class="input-group-addon">
+                                                <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                        class="fa fa-caret-up"></i></a>
+                                                <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                        class="fa fa-caret-down"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2" style="padding:3px 2px;">天</div>
+                                </div>
+                                <div class="col-md-4"
+                                     style="padding:3px 2px;display: flex; align-items: center;">
+                                    <div class="col-md-10" style="padding:3px 2px;">
+                                        <div class="input-group spinner" data-trigger="spinner">
+                                            <input id="editTimerCutOffHour" type="text" class="form-control text-center" value="0"
+                                                   data-min="0">
+                                            <div class="input-group-addon">
+                                                <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                        class="fa fa-caret-up"></i></a>
+                                                <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                        class="fa fa-caret-down"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2" style="padding:3px 2px;">时</div>
+                                </div>
+                                <div class="col-md-4"
+                                     style="padding:3px 2px;display: flex; align-items: center;">
+                                    <div class="col-md-10" style="padding:3px 2px;">
+                                        <div class="input-group spinner" data-trigger="spinner">
+                                            <input id="editTimerCutOffMinute" type="text" class="form-control text-center" value="0"
+                                                   data-min="0">
+                                            <div class="input-group-addon">
+                                                <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                        class="fa fa-caret-up"></i></a>
+                                                <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                        class="fa fa-caret-down"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2" style="padding:3px 2px;">分</div>
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="padding:3px 2px;">取数时长</div>
+                            <div class="col-md-5" style="padding:3px 2px;">
+                                <div class="col-md-4"
+                                     style="padding:3px 2px;display: flex; align-items: center;">
+                                    <div class="col-md-10" style="padding:3px 2px;">
+                                        <div class="input-group spinner" data-trigger="spinner"
+                                             style="margin-left:-4px;">
+                                            <input id="editDurtionDay" type="text" class="form-control text-center" value="0"
+                                                   data-min="0">
+                                            <div class="input-group-addon">
+                                                <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                        class="fa fa-caret-up"></i></a>
+                                                <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                        class="fa fa-caret-down"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2" style="padding:3px 2px;">天</div>
+                                </div>
+                                <div class="col-md-4"
+                                     style="padding:3px 2px;display: flex; align-items: center;">
+                                    <div class="col-md-10" style="padding:3px 2px;">
+                                        <div class="input-group spinner" data-trigger="spinner">
+                                            <input id="editDurtionHour" type="text" class="form-control text-center" value="0"
+                                                   data-min="0">
+                                            <div class="input-group-addon">
+                                                <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                        class="fa fa-caret-up"></i></a>
+                                                <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                        class="fa fa-caret-down"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2" style="padding:3px 2px;">时</div>
+                                </div>
+                                <div class="col-md-4"
+                                     style="padding:3px 2px;display: flex; align-items: center;">
+                                    <div class="col-md-10" style="padding:3px 2px;">
+                                        <div class="input-group spinner" data-trigger="spinner">
+                                            <input id="editDurtionMinute" type="text" class="form-control text-center" value="0"
+                                                   data-min="0">
+                                            <div class="input-group-addon">
+                                                <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                        class="fa fa-caret-up"></i></a>
+                                                <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                        class="fa fa-caret-down"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2" style="padding:3px 2px;">分</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; align-items: center;">
+                            <div class="col-md-1" style="padding:3px 2px;">重复类型</div>
+                            <div class="col-md-5" style="padding:3px 2px;">
+                                <select id="editTimerType" class="selectpicker" data-width="100%">
+                                    <option value="1">
+                                        天
+                                    </option>
+                                    <option value="2">
+                                        周
+                                    </option>
+                                    <option value="3">
+                                        月
+                                    </option>
+                                    <option value="4">
+                                        时间间隔
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-1" style="padding:3px 2px;">分片数量</div>
+                            <div class="col-md-5" style="padding:3px 2px;">
+                                <div class="input-group spinner" data-trigger="spinner"
+                                     style="margin-left:-4px;">
+                                    <input id="editTimerSlice" type="text" class="form-control text-center" value="1"
+                                           data-min="1">
+                                    <div class="input-group-addon">
+                                        <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                class="fa fa-caret-up"></i></a>
+                                        <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                class="fa fa-caret-down"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; align-items: center;">
+                            <div class="col-md-1" style="padding:3px 2px;">任务类型</div>
+                            <div class="col-md-2" style="padding:3px 2px;">
+                                <select id="editTaskType" class="selectpicker" data-width="100%">
+                                    <option value="1">
+                                        并行
+                                    </option>
+                                    <option value="2">
+                                        串行
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-1" style="padding:3px 2px;">运行次数</div>
+                            <div class="col-md-2" style="padding:3px 2px;">
+                                <div class="input-group spinner" data-trigger="spinner"
+                                     style="margin-left:-4px;">
+                                    <input id="editTimerRunnum" type="text" class="form-control text-center" value="1"
+                                           data-min="1">
+                                    <div class="input-group-addon">
+                                        <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                class="fa fa-caret-up"></i></a>
+                                        <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                class="fa fa-caret-down"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="padding:3px 2px;">作业文件</div>
+                            <div class="col-md-4" style="padding:3px 2px;">
+                                <input type="hidden" id="editTimerFileIds"/>
+                                <input id="editTimerFiles" type="text" readonly="readonly" class="form-control"/>
+                            </div>
+                            <div class="col-md-1" style="padding:3px 2px;">
+                                <button class="btn btn-primary" type="button" onclick="getTaskFile('editTimer')">选择
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; align-items: center;">
+                            <div id="editTimerTypeDay" class="col-md-6" style="display: flex; align-items: center;padding:0px 0px;">
+                                <div class="col-md-2" style="padding:3px 2px;">每天</div>
+                                <div class="col-md-10" style="padding:3px 2px;display: flex; align-items: center;">
+                                    <div class="col-md-5" style="padding:3px 2px;">
+                                        <div class="input-group spinner" data-trigger="spinner"
+                                             style="margin-left:-4px;">
+                                            <input id="editDayHour" type="text" class="form-control text-center" value="0"
+                                                   data-max="23"
+                                                   data-min="0">
+                                            <div class="input-group-addon">
+                                                <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                        class="fa fa-caret-up"></i></a>
+                                                <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                        class="fa fa-caret-down"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1" style="padding:3px 2px;">时</div>
+                                    <div class="col-md-5" style="padding:3px 2px;">
+                                        <div class="input-group spinner" data-trigger="spinner">
+                                            <input id="editDayMinute" type="text" class="form-control text-center" value="0"
+                                                   data-max="59"
+                                                   data-min="0">
+                                            <div class="input-group-addon">
+                                                <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                        class="fa fa-caret-up"></i></a>
+                                                <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                        class="fa fa-caret-down"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1" style="padding:3px 2px;">分</div>
+                                </div>
+                            </div>
+                            <div id="editTimerTypeWeek" class="col-md-6" style="display: flex; align-items: center;padding:0px 0px;">
+                                <div class="col-md-2" style="padding:3px 2px;">每周</div>
+                                <div class="col-md-10" style="padding:3px 2px;display: flex; align-items: center;">
+                                    <div class="col-md-4" style="padding:3px 2px;">
+                                        <select id="editWeekDay" class="selectpicker" data-width="100%">
+                                            <option value="1">
+                                                星期一
+                                            </option>
+                                            <option value="2">
+                                                星期二
+                                            </option>
+                                            <option value="3">
+                                                星期三
+                                            </option>
+                                            <option value="4">
+                                                星期四
+                                            </option>
+                                            <option value="5">
+                                                星期五
+                                            </option>
+                                            <option value="6">
+                                                星期六
+                                            </option>
+                                            <option value="7">
+                                                星期日
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3" style="padding:3px 2px;">
+                                        <div class="input-group spinner" data-trigger="spinner">
+                                            <input id="editWeekHour" type="text" class="form-control text-center" value="0"
+                                                   data-max="23"
+                                                   data-min="0">
+                                            <div class="input-group-addon">
+                                                <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                        class="fa fa-caret-up"></i></a>
+                                                <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                        class="fa fa-caret-down"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1" style="padding:3px 2px;">时</div>
+                                    <div class="col-md-3" style="padding:3px 2px;">
+                                        <div class="input-group spinner" data-trigger="spinner">
+                                            <input id="editWeekMinute" type="text" class="form-control text-center" value="0"
+                                                   data-max="59"
+                                                   data-min="0">
+                                            <div class="input-group-addon">
+                                                <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                        class="fa fa-caret-up"></i></a>
+                                                <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                        class="fa fa-caret-down"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1" style="padding:3px 2px;">分</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; align-items: center;">
+                            <div id="editTimerTypeMonth" class="col-md-6" style="display: flex; align-items: center;padding:0px 0px;">
+                                <div class="col-md-2" style="padding:3px 2px;">每月</div>
+                                <div class="col-md-10" style="padding:3px 2px;display: flex; align-items: center;">
+                                    <div class="col-md-3" style="padding:3px 2px;">
+                                        <div class="input-group spinner" data-trigger="spinner"
+                                             style="margin-left:-4px;">
+                                            <input id="editMonthDay" type="text" class="form-control text-center" value="0"
+                                                   data-min="0">
+                                            <div class="input-group-addon">
+                                                <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                        class="fa fa-caret-up"></i></a>
+                                                <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                        class="fa fa-caret-down"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1" style="padding:3px 2px;">日</div>
+                                    <div class="col-md-3" style="padding:3px 2px;">
+                                        <div class="input-group spinner" data-trigger="spinner">
+                                            <input id="editMonthHour" type="text" class="form-control text-center" value="0"
+                                                   data-max="23"
+                                                   data-min="0">
+                                            <div class="input-group-addon">
+                                                <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                        class="fa fa-caret-up"></i></a>
+                                                <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                        class="fa fa-caret-down"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1" style="padding:3px 2px;">时</div>
+                                    <div class="col-md-3" style="padding:3px 2px;">
+                                        <div class="input-group spinner" data-trigger="spinner">
+                                            <input id="editMonthMinute" type="text" class="form-control text-center" value="0"
+                                                   data-max="59"
+                                                   data-min="0">
+                                            <div class="input-group-addon">
+                                                <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                        class="fa fa-caret-up"></i></a>
+                                                <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                        class="fa fa-caret-down"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1" style="padding:3px 2px;">分</div>
+                                </div>
+                            </div>
+                            <div id="editTimerTypeCustomize" class="col-md-6" style="display: flex; align-items: center;padding:0px 0px;">
+                                <div class="col-md-2" style="padding:3px 2px;">时间间隔</div>
+                                <div class="col-md-10" style="padding:3px 2px;display: flex; align-items: center;">
+                                    <div class="col-md-3" style="padding:3px 2px;">
+                                        <div class="input-group spinner" data-trigger="spinner"
+                                             style="margin-left:-4px;">
+                                            <input id="editTimerDay" type="text" class="form-control text-center" value="0"
+                                                   data-min="0">
+                                            <div class="input-group-addon">
+                                                <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                        class="fa fa-caret-up"></i></a>
+                                                <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                        class="fa fa-caret-down"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1" style="padding:3px 2px;">天</div>
+                                    <div class="col-md-3" style="padding:3px 2px;">
+                                        <div class="input-group spinner" data-trigger="spinner">
+                                            <input id="editTimerHour" type="text" class="form-control text-center" value="0"
+                                                   data-max="23"
+                                                   data-min="0">
+                                            <div class="input-group-addon">
+                                                <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                        class="fa fa-caret-up"></i></a>
+                                                <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                        class="fa fa-caret-down"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1" style="padding:3px 2px;">时</div>
+                                    <div class="col-md-3" style="padding:3px 2px;">
+                                        <div class="input-group spinner" data-trigger="spinner">
+                                            <input id="editTimerMinute" type="text" class="form-control text-center" value="0"
+                                                   data-max="59"
+                                                   data-min="0">
+                                            <div class="input-group-addon">
+                                                <a href="javascript:;" class="spin-up" data-spin="up"><i
+                                                        class="fa fa-caret-up"></i></a>
+                                                <a href="javascript:;" class="spin-down" data-spin="down"><i
+                                                        class="fa fa-caret-down"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1" style="padding:3px 2px;">分</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                    <div class="modal-footer" style="text-align: center;">
+                        <button class="btn btn-primary" type="button" onclick="editTimerTask()">提交</button>
+                        <button class="btn btn-default" type="button" onclick="closeEditTimerTaskModal()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade in" id="taskFileSelectedModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width: 600px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <div>
+                <table id="taskFileTable">
+                </table>
+            </div>
+            <div class="modal-footer" style="align-content: center;padding-bottom: 2px;padding-top: 40px;">
+                <button class="btn btn-primary" type="button" onclick="confirmTaskFile()">提交
+                </button>
+                <button class="btn btn-default" type="button" onclick="closeTaskFileModal()">关闭
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade in" id="taskRunModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width: 800px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <div>
+                <table id="taskRunTable">
+                </table>
+            </div>
+            <div class="modal-footer" style="align-content: center;padding-bottom: 2px;padding-top: 40px;">
+                <button class="btn btn-default" type="button" onclick="closeTaskRunModal()">关闭
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade in" id="taskRunLogModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width: 600px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <div>
+                <table id="taskRunLogTable">
+                </table>
+            </div>
+            <div class="modal-footer" style="align-content: center;padding-bottom: 2px;padding-top: 40px;">
+                <button class="btn btn-default" type="button" onclick="closeTaskLogRunModal()">关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //维护全局变量
+    if (window.parent.socket) {
+        socket = window.parent.socket;
+    } else {
+        var token = '{{token}}';
+        socket = io.connect(socketURI, {
+            'query': 'token=' + token
+        });
+    }
+    initSocketOn(socket);
+</script>

@@ -1,0 +1,147 @@
+<link rel="stylesheet" href="/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+<link href="/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet"/>
+<script src="/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+<link rel="stylesheet" href="/plugins/bootstrap-table/src/bootstrap-table.css">
+<script src="/plugins/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/plugins/sweetalert/dist/sweetalert.css"/>
+<!-- Theme style -->
+<link rel="stylesheet" href="/stylesheets/AdminLTE.min.css">
+<script src="/plugins/bootstrap-table/src/bootstrap-table.js"></script>
+<script src="/plugins/bootstrap-table/src/bootstrap-table-export.js"></script>
+<script src="/plugins/bootstrap-table/src/tableExport.js"></script>
+<script src="/plugins/bootstrap-table/src/locale/bootstrap-table-zh-CN.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/plugins/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css"/>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdata.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxdatatable.js"></script>
+<script type="text/javascript" src="/plugins/jqwidgets/jqwidgets/jqxtreegrid.js"></script>
+<section class="content-header text-left">
+    <h1 style="margin-bottom: 5px">
+        {{pageName}}
+    </h1>
+    <ul class="breadcrumb">
+        <li><a href="/system/manage" target="_top">首页</a></li>
+        <li class="active">{{pageName}}</li>
+    </ul>
+</section>
+<div class="container" style="width: 100%">
+    <div class="box box-primary">
+        <div class="row" style=" padding-left: 10px;">
+            <div class="col-md-3">
+            <span class="input-group" style="color: black; padding: 3px;">
+                                <span
+                                        class="input-group-addon"
+                                        style="color: black;">角色名</span> <input
+                    type="text" id="roleName" class="form-control"
+                    placeholder="请输入角色名"> </span>
+            </div>
+            <button id="queryUser" class="btn btn-success add" onclick="queryRole()">
+                查询
+            </button>
+            <button id="addUser" class="btn btn-success add" onclick="showAddRole()">
+                添加
+            </button>
+        </div>
+        <table id="table"></table>
+    </div>
+</div>
+<div id="addRoleModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 150px;">
+    <div class="modal-dialog" style="width:330px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left"> 添加角色</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <form id="addUser" style="margin-bottom:0;">
+                    <table>
+                        <tr>
+                            <td>角色名：</td>
+                            <td><input type="text" class="form-control" id="addRoleName" style="width: 200px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>描述：</td>
+                            <td><input type="text" class="form-control" id="addDesc" style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="middle" colspan="2">
+                                <button type="button" class="btn btn-primary  center-block" style="margin-top: 16px;display: inline-block;"
+                                        aria-hidden="true" onclick="addRole()">提交
+                                </button>
+                                <button type="button" class="btn btn-primary  center-block" data-dismiss="modal"
+                                        style="margin-top: 16px;display: inline-block;margin-left:10px;"
+                                        aria-hidden="true" onclick="reset()">取消
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="editRoleModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 150px;">
+    <div class="modal-dialog" style="width:330px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h4 class="text-left"> 编辑角色</h4>
+            <div class="modal-body" style="padding-bottom:0;">
+                <form id="editUser" style="margin-bottom:0;">
+                    <table>
+                        <tr style="display: none">
+                            <td>ID：</td>
+                            <td><input type="text" class="form-control" id="editId" style="width: 200px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>角色名：</td>
+                            <td><input type="text" class="form-control" id="editRoleName" style="width: 200px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+                            <td>描述：</td>
+                            <td><input type="text" class="form-control" id="editDesc" style="width: 200px;margin-top: 10px;align-content: center;"></td>
+                        </tr>
+                        <tr>
+
+                            <td align="center" valign="middle" colspan="2">
+                                <button class="btn btn-primary  center-block" data-dismiss="modal" style="margin-top: 16px;display: inline-block;"
+                                        aria-hidden="true" onclick="editRole()">提交
+                                </button>
+                                <button class="btn btn-primary  center-block" data-dismiss="modal"
+                                        style="margin-top: 16px;display: inline-block;margin-left:10px;"
+
+                                        aria-hidden="true" onclick="reset()">取消
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id="menuModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 50px;">
+    <div class="modal-dialog" style="width: 600px;">
+        <div class="modal-content" style="align-content: center;padding:15px;padding-top:10px;">
+            <h5>菜单绑定</h5>
+            <input type="text" id="pageRoleId" style="display: none">
+            <div id="menuTable" style="margin-top: 10px">
+            </div>
+            <center>
+                <button class="btn btn-primary  center-block" data-dismiss="modal" style="margin-top: 16px;display: inline-block;"
+                        aria-hidden="true" onclick="">关闭
+                </button>
+            </center>
+        </div>
+    </div>
+</div>
+<style>
+    .fixed-table-toolbar .columns {
+         margin-top: -38px !important;
+         margin-right: 5px !important;
+         z-index: 2000;
+     }
+</style>
+<script type="text/javascript" src="/javascripts/system/role.js"></script>
