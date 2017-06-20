@@ -1,0 +1,9 @@
+Id,Desc,Scope,Tips,Default,TextType,TextData,Validate
+source_add,源IP,addServer,,,,,
+source_port,源port,addServer,,,,,
+source_pass,源密码,addServer,,500,,,
+dest_add,目的Ip,addServer,,,,,isip
+dest_port,目的端口,addServer,,,,,
+dest_user,用户名,addServer,,,,,
+dest_pass,密码,addServer,,,,,
+webport,web端口,addServer,,,,,isnull

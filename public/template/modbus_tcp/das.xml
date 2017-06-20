@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <DAS>
+      <DataSource device="modbus_tcp" type="2" add="1.2.3.4:5678" domain="" clsid="" user="" password="" caption="" prefix="" subfix="" delay="100000" PL="PointsList.csv"></DataSource>
+      <DataDest mode="2" add="/dev/ttyO5,115200,n,8,1,100" cachesize="100"></DataDest>
+      <Web ListenAddress="9263"></Web>
+  </DAS>

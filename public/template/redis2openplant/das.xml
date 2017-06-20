@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DAS>
+<DataSource device="" LN="add=:2;pl=;db=0;webport=543;password=ss;"></DataSource>
+<DataDest LN="add=127.0.0.1:8200;user=sis;password=op;timezone=;"></DataDest>
+</DAS>

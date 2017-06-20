@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Openplant>
+<BackGround class="com.magustek.graph.ui.viewer.GBackGround">
+<Pr name="background.minsize" value="1024,768"/>
+<Pr name="background.drawfill" value="1/rgba(255,255,255,255)/rgba(64,64,64,255)/0/0/0"/>
+<Pr name="background.currentsize" value="1024,768"/>
+</BackGround>
+<Elements size="9">
+<El class="1"  >
+<Pr name="base.z.index" class="1" value="1"/>
+<Pr name="base.bounds" class="11" value="474/165/100/50"/>
+</El>
+<El class="2"  >
+<Pr name="base.z.index" class="1" value="1"/>
+<Pr name="base.bounds" class="11" value="257/260/100/50"/>
+</El>
+<El class="101"  >
+<Pr name="base.z.index" class="1" value="2"/>
+<Pr name="base.bounds" class="11" value="525/275/50/27"/>
+<Pr name="dashpoint.pointname" class="4" value="12"/>
+</El>
+<El class="102"  >
+<Pr name="base.z.index" class="1" value="2"/>
+<Pr name="time.value" />
+<Pr name="base.bounds" class="11" value="541/425/185/27"/>
+</El>
+<El class="200"  >
+<Pr name="base.z.index" class="1" value="2"/>
+<Pr name="shape.stroke" class="12" value="1/0/rgba(0,0,0,255)"/>
+<Pr name="base.bounds" class="11" value="423/416/30/100"/>
+<Pr name="dashpoint.pointname" class="4" value="12"/>
+</El>
+<El class="203"  >
+<Pr name="base.z.index" class="1" value="2"/>
+<Pr name="base.bounds" class="11" value="686/196/300/300"/>
+<Pr name="dashpoint.pointname" class="4" value="12"/>
+</El>
+<El class="150"  >
+<Pr name="base.z.index" class="1" value="2"/>
+<Pr name="base.bounds" class="11" value="202/500/200/230"/>
+<Pr name="piechart.point.listinfo" class="25" value="W3.UNIT01.POINT01#点一#100.0#rgba(255,0,0,255)##W3.UNIT01.POINT02#点二#60.0#rgba(0,0,0,255)##W3.UNIT01.POINT03#点三#70.0#rgba(255,0,0,255)##W3.UNIT01.POINT04#点四#100.0#rgba(255,0,0,255)"/>
+</El>
+<El class="151"  >
+<Pr name="base.z.index" class="1" value="2"/>
+<Pr name="base.bounds" class="11" value="704/455/200/230"/>
+<Pr name="barchart.point.listinfo" class="26" value="W3.UNIT01.POINT01#点一#70.0#10.0#rgba(255,0,0,255)##W3.UNIT01.POINT02#点二#55.0#30.0#rgba(255,0,0,255)##W3.UNIT01.POINT03#点三#60.1#48.1#rgba(255,0,0,255)##W3.UNIT01.POINT04#点四#80.2#20.2#rgba(255,0,0,255)##W3.UNIT01.POINT05#点五#70.3#70.3#rgba(255,0,0,255)"/>
+</El>
+<El class="201"  >
+<Pr name="base.z.index" class="1" value="2"/>
+<Pr name="trend.duration" class="1" value="600000"/>
+<Pr name="shape.fill" class="13" value="1/rgba(255,255,255,255)/rgba(255,255,255,255)/0/0/0"/>
+<Pr name="text.textfont" class="14" value="Dialog.plain/PLAIN/10"/>
+<Pr name="base.bounds" class="11" value="49/42/638/436"/>
+</El>
+</Elements>
+</Openplant>

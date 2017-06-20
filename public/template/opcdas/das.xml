@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OPCDAS>
+	<DataSource LN="add=192.168.107.228:0;clsid=A879768A-7387-11D4-B0D8-009027242C59;user=administrator;domain=;password=magusgate;caption=Root;prefix=text0.;subfix=;delay=1000;PL=PointsList.csv;"></DataSource>
+	<DataDest LN="mode=1;add=192.168.107.228:8200;cachesize=0;ListenAddress=7719;"></DataDest>
+</OPCDAS>

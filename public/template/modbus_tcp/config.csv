@@ -1,0 +1,17 @@
+Id,Desc,Scope,Tips,Default,TextType,TextData,Validate
+Id,ID(ID),addPoint,,,,,isnull
+Hw,地址(HW),addPoint,示例:1.3.0表示（device id）.（功能码）.（地址）,,,,isnull
+Pt,类型(PT),addPoint,modbus数据类型.COILS为开关量.其余为模拟量,INT16,select,COILS.INT16.UINT16.INT32.UINT32.FLOAT.FLOAT_L.INT64.UINT64.FLOAT64.FLOAT64_L,
+Rt,数据类型(RT),addPoint,实时数据库类型,AX,select,AX.DX.I2.I4.R8,
+Pn,点名(PN),addPoint,实时数据库，不能使用非法字符,,,,iscn
+Ed,点描述(ED),addPoint,,,,,
+Fk,比例系数(FK),addPoint,,1,,,
+Fb,偏移量(FB),addPoint,,0,,,
+Tv,上限(TV),addPoint,,,,,
+Bv,下限(BV),addPoint,,,,,
+Ph,采集点上限(PH),addPoint,,,,,
+Pl,采集点下限(PL),addPoint,,,,,
+das_sourceIP,源IP,addServer,,,,,
+das_sourcePort,源port,addServer,,,,,
+cachesize,缓存(单位:MB),addServer,,500,,,isnull
+rate,采集间隔(单位:秒),addServer,,1,,,isnull

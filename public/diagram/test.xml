@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Openplant>
+<BackGround class="com.magustek.graph.ui.viewer.GBackGround">
+<Pr name="background.minsize" value="1024,768"/>
+<Pr name="background.drawfill" value="1/rgba(255,255,255,255)/rgba(64,64,64,255)/0/0/0"/>
+<Pr name="background.currentsize" value="1024,768"/>
+</BackGround>
+<Elements size="4">
+<El class="101"  >
+<Pr name="base.z.index" class="1" value="2"/>
+<Pr name="base.bounds" class="11" value="500/164/80/49"/>
+<Pr name="dashpoint.pointname" class="4" value="/se7en/dnode1/node1/DX"/>
+</El>
+<El class="101"  >
+<Pr name="base.z.index" class="1" value="2"/>
+<Pr name="base.bounds" class="11" value="435/263/187/133"/>
+<Pr name="dashpoint.pointname" class="4" value="/se7en/dnode1/node2/AX"/>
+</El>
+<El class="8"  >
+<Pr name="base.z.index" class="1" value="1"/>
+<Pr name="base.bounds" class="11" value="189/168/193/52"/>
+<Pr name="text.textcontext" class="4" value="/se7en/dnode1/node1/DX"/>
+</El>
+<El class="8"  >
+<Pr name="base.z.index" class="1" value="1"/>
+<Pr name="base.bounds" class="11" value="198/307/193/52"/>
+<Pr name="text.textcontext" class="4" value="/se7en/dnode1/node2/AX"/>
+</El>
+</Elements>
+</Openplant>

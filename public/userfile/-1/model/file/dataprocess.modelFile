@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<modelComponent>
+    <model uuid="9c1bd7ba-0d9e-43e7-b11b-1818022cb73f">
+        <cat clazz="com.magus.cat.op.ReadHistoryComponent">
+            <basic>
+                <port><![CDATA["读历史数据"]]></port>
+                <port><![CDATA[5.0]]></port>
+                <port><![CDATA[99.0]]></port>
+                <port><![CDATA[0.0]]></port>
+                <port><![CDATA[0.0]]></port>
+            </basic>
+            <in>
+                <port><![CDATA[{"id":"test65"}]]></port>
+                <port><![CDATA[["W3.HEBEI_69.HEBEI_69_292_004_STRENGTH_HOUR","W3.HEBEI_69.HEBEI_69_292_003_STRENGTH_HOUR","W3.HEBEI_69.HEBEI_69_292_002_STRENGTH_HOUR","W3.HEBEI_69.HEBEI_69_292_001_STRENGTH_HOUR","W3.HEBEI_69.HEBEI_69_293_004_STRENGTH_HOUR"]]]></port>
+                <port><![CDATA[1481126400000]]></port>
+                <port><![CDATA[1483027200000]]></port>
+                <port><![CDATA[0]]></port>
+                <port><![CDATA[1]]></port>
+		<port><![CDATA[true]]></port>
+		<port><![CDATA[2]]></port>
+            </in>
+        </cat>
+        <cat clazz="com.magus.cat.op.FilterTimeOutDataComponent">
+            <basic>
+                <port><![CDATA["过滤超时数据"]]></port>
+                <port><![CDATA[31.0]]></port>
+                <port><![CDATA[339.0]]></port>
+                <port><![CDATA[0.0]]></port>
+                <port><![CDATA[0.0]]></port>
+            </basic>
+            <in>
+                <port cat="0" out="0"><![CDATA[null]]></port>
+            </in>
+        </cat>
+	<cat clazz="com.magus.cat.op.TxtComponent">
+            <basic>
+                <port><![CDATA["输出文本1"]]></port>
+                <port><![CDATA[771.0]]></port>
+                <port><![CDATA[278.0]]></port>
+                <port><![CDATA[0.0]]></port>
+                <port><![CDATA[0.0]]></port>
+            </basic>
+            <in>
+                <port cat="1" out="0"><![CDATA[null]]></port>
+                <port><![CDATA["/root/ybx/1.txt"]]></port>
+            </in>
+        </cat>
+    </model>
+    <exports>
+        <export cat="0" port="0" type="in"/>
+        <export cat="0" port="1" type="in"/>
+        <export cat="0" port="2" type="in"/>
+        <export cat="0" port="3" type="in"/>
+       
+    </exports>
+</modelComponent>
