@@ -1,0 +1,2007 @@
+{  "BackGround": {
+    "size": {
+      "w": 1024,
+      "h": 768
+    },
+    "fill": {
+      "type": 1,
+      "bg": "rgba(255,255,255,255)"
+    }
+  },
+  "Elements": [
+    {
+      "class": 1,
+      "zIndex": 2,
+      "bounds": {
+        "x": 91,
+        "y": 404,
+        "w": 222,
+        "h": 148
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(192,192,192,255)"
+      },
+      "onPaint": "",
+      "onClick": "g.showCTRL(\"W3.TEST.DX\")",
+      "var": {
+        "P1": "W3.TEST.DX"
+      }
+    },
+    {
+      "class": 9,
+      "ref": "g_0",
+      "var": {
+        "P1": "W3.TEST.DX"
+      },
+      "onPaint": "if(asmask('W3.TEST.DX',SET)){\\n setvisible(false);\\n}else{\\n setvisible(true);\\n}",
+      "bounds": {
+        "x": 259,
+        "y": 419,
+        "w": 42,
+        "h": 41
+      },
+      "zIndex": 2
+    },
+    {
+      "class": 1,
+      "pref": "g_0",
+      "zIndex": 2,
+      "bounds": {
+        "x": 262,
+        "y": 437,
+        "w": 36,
+        "h": 20
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(224,224,0,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(224,224,0,255)"
+      },
+      "var": {
+        "P1": "W3.TEST.DX"
+      }
+    },
+    {
+      "class": 5,
+      "pref": "g_0",
+      "zIndex": 2,
+      "bounds": {
+        "x": 265,
+        "y": 422,
+        "w": 24,
+        "h": 32
+      },
+      "start": 0,
+      "extent": 180,
+      "type": 0,
+      "fill": {
+        "type": 0
+      },
+      "stroke": {
+        "width": 2,
+        "style": 0,
+        "color": "rgba(224,224,0,255)"
+      },
+      "var": {
+        "P1": "W3.TEST.DX"
+      }
+    },
+    {
+      "class": 9,
+      "ref": "g_1",
+      "var": {
+        "P1": "W3.TEST.DX"
+      },
+      "onPaint": "if(asmask('W3.TEST.DX',SET)){\\n setvisible(false);\\n}else{\\n setvisible(true);\\n}",
+      "bounds": {
+        "x": 532,
+        "y": 390,
+        "w": 130,
+        "h": 115
+      },
+      "zIndex": 2
+    },
+    {
+      "class": 1,
+      "pref": "g_1",
+      "zIndex": 2,
+      "bounds": {
+        "x": 535,
+        "y": 438,
+        "w": 124,
+        "h": 64
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(224,224,0,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(224,224,0,255)"
+      },
+      "var": {
+        "P1": "W3.TEST.DX"
+      }
+    },
+    {
+      "class": 5,
+      "pref": "g_1",
+      "zIndex": 2,
+      "bounds": {
+        "x": 545,
+        "y": 393,
+        "w": 83,
+        "h": 101
+      },
+      "start": 0,
+      "extent": 180,
+      "type": 0,
+      "fill": {
+        "type": 0
+      },
+      "stroke": {
+        "width": 2,
+        "style": 0,
+        "color": "rgba(224,224,0,255)"
+      },
+      "var": {
+        "P1": "W3.TEST.DX"
+      }
+    },
+    {
+      "class": 9,
+      "ref": "g_2",
+      "bounds": {
+        "x": 119,
+        "y": 434,
+        "w": 138,
+        "h": 90
+      },
+      "zIndex": 3
+    },
+    {
+      "class": 4,
+      "pref": "g_2",
+      "zIndex": 3,
+      "points": [
+        {
+          "x": "134",
+          "y": "472"
+        },
+        {
+          "x": "145",
+          "y": "472"
+        },
+        {
+          "x": "145",
+          "y": "498"
+        },
+        {
+          "x": "133",
+          "y": "498"
+        },
+        {
+          "x": "127",
+          "y": "498"
+        },
+        {
+          "x": "123",
+          "y": "495"
+        },
+        {
+          "x": "122",
+          "y": "488"
+        },
+        {
+          "x": "122",
+          "y": "482"
+        },
+        {
+          "x": "123",
+          "y": "475"
+        },
+        {
+          "x": "128",
+          "y": "472"
+        }
+      ],
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "bounds": {
+        "x": 122,
+        "y": 472,
+        "w": 23,
+        "h": 26
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 144,
+        "y": 497,
+        "w": 32,
+        "h": 14
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(151,151,151,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(10,10,10,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 242,
+        "y": 468,
+        "w": 9,
+        "h": 19
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(40,40,40,255)"
+      }
+    },
+    {
+      "class": 4,
+      "pref": "g_2",
+      "zIndex": 3,
+      "points": [
+        {
+          "x": "185",
+          "y": "505"
+        },
+        {
+          "x": "185",
+          "y": "449"
+        },
+        {
+          "x": "200",
+          "y": "462"
+        },
+        {
+          "x": "200",
+          "y": "493"
+        }
+      ],
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "bounds": {
+        "x": 185,
+        "y": 449,
+        "w": 15,
+        "h": 56
+      }
+    },
+    {
+      "class": 4,
+      "pref": "g_2",
+      "zIndex": 3,
+      "points": [
+        {
+          "x": "227",
+          "y": "505"
+        },
+        {
+          "x": "205",
+          "y": "505"
+        },
+        {
+          "x": "205",
+          "y": "449"
+        },
+        {
+          "x": "227",
+          "y": "449"
+        },
+        {
+          "x": "231",
+          "y": "452"
+        },
+        {
+          "x": "235",
+          "y": "457"
+        },
+        {
+          "x": "237",
+          "y": "462"
+        },
+        {
+          "x": "237",
+          "y": "492"
+        },
+        {
+          "x": "235",
+          "y": "496"
+        },
+        {
+          "x": "231",
+          "y": "503"
+        }
+      ],
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "bounds": {
+        "x": 205,
+        "y": 449,
+        "w": 32,
+        "h": 56
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 196,
+        "y": 460,
+        "w": 25,
+        "h": 3
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(190,190,190,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 4,
+      "pref": "g_2",
+      "zIndex": 3,
+      "points": [
+        {
+          "x": "153",
+          "y": "449"
+        },
+        {
+          "x": "174",
+          "y": "449"
+        },
+        {
+          "x": "174",
+          "y": "505"
+        },
+        {
+          "x": "153",
+          "y": "505"
+        },
+        {
+          "x": "148",
+          "y": "502"
+        },
+        {
+          "x": "144",
+          "y": "498"
+        },
+        {
+          "x": "143",
+          "y": "492"
+        },
+        {
+          "x": "143",
+          "y": "462"
+        },
+        {
+          "x": "144",
+          "y": "458"
+        },
+        {
+          "x": "149",
+          "y": "452"
+        }
+      ],
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "bounds": {
+        "x": 143,
+        "y": 449,
+        "w": 31,
+        "h": 56
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 198,
+        "y": 437,
+        "w": 38,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(10,10,10,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 174,
+        "y": 442,
+        "w": 6,
+        "h": 69
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(10,10,10,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 180,
+        "y": 442,
+        "w": 6,
+        "h": 69
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(10,10,10,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 172,
+        "y": 444,
+        "w": 3,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 172,
+        "y": 454,
+        "w": 3,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 172,
+        "y": 465,
+        "w": 3,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 172,
+        "y": 475,
+        "w": 3,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 172,
+        "y": 495,
+        "w": 3,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 172,
+        "y": 485,
+        "w": 3,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 172,
+        "y": 505,
+        "w": 3,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 185,
+        "y": 444,
+        "w": 3,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 185,
+        "y": 454,
+        "w": 3,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 185,
+        "y": 465,
+        "w": 3,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 185,
+        "y": 475,
+        "w": 3,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 185,
+        "y": 495,
+        "w": 3,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 185,
+        "y": 485,
+        "w": 3,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 185,
+        "y": 505,
+        "w": 3,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 196,
+        "y": 458,
+        "w": 25,
+        "h": 3
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(236,236,236,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 196,
+        "y": 491,
+        "w": 25,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(236,236,236,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 196,
+        "y": 475,
+        "w": 25,
+        "h": 3
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(236,236,236,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 196,
+        "y": 477,
+        "w": 25,
+        "h": 3
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(190,190,190,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 196,
+        "y": 494,
+        "w": 25,
+        "h": 3
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(190,190,190,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 200,
+        "y": 447,
+        "w": 6,
+        "h": 62
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(10,10,10,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 126,
+        "y": 475,
+        "w": 15,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(168,168,168,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(168,168,168,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 125,
+        "y": 485,
+        "w": 11,
+        "h": 12
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(247,247,246,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 208,
+        "y": 441,
+        "w": 17,
+        "h": 9
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(40,40,40,255)"
+      }
+    },
+    {
+      "class": 4,
+      "pref": "g_2",
+      "zIndex": 3,
+      "points": [
+        {
+          "x": "237",
+          "y": "462"
+        },
+        {
+          "x": "237",
+          "y": "493"
+        },
+        {
+          "x": "240",
+          "y": "492"
+        },
+        {
+          "x": "243",
+          "y": "485"
+        },
+        {
+          "x": "245",
+          "y": "478"
+        },
+        {
+          "x": "243",
+          "y": "472"
+        },
+        {
+          "x": "241",
+          "y": "465"
+        }
+      ],
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "bounds": {
+        "x": 237,
+        "y": 462,
+        "w": 8,
+        "h": 31
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 250,
+        "y": 457,
+        "w": 4,
+        "h": 40
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(10,10,10,255)"
+      }
+    },
+    {
+      "class": 4,
+      "pref": "g_2",
+      "zIndex": 3,
+      "points": [
+        {
+          "x": "236",
+          "y": "517"
+        },
+        {
+          "x": "199",
+          "y": "517"
+        },
+        {
+          "x": "215",
+          "y": "505"
+        },
+        {
+          "x": "227",
+          "y": "505"
+        }
+      ],
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(151,151,151,255)"
+      },
+      "bounds": {
+        "x": 199,
+        "y": 505,
+        "w": 37,
+        "h": 12
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 195,
+        "y": 517,
+        "w": 46,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(151,151,151,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(10,10,10,255)"
+      }
+    },
+    {
+      "class": 2,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 150,
+        "y": 506,
+        "w": 3,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(255,255,255,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(255,255,255,255)"
+      }
+    },
+    {
+      "class": 2,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 145,
+        "y": 506,
+        "w": 3,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(255,255,255,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(255,255,255,255)"
+      }
+    },
+    {
+      "class": 4,
+      "pref": "g_2",
+      "zIndex": 3,
+      "points": [
+        {
+          "x": "144",
+          "y": "498"
+        },
+        {
+          "x": "129",
+          "y": "498"
+        },
+        {
+          "x": "129",
+          "y": "504"
+        },
+        {
+          "x": "131",
+          "y": "504"
+        },
+        {
+          "x": "131",
+          "y": "517"
+        },
+        {
+          "x": "129",
+          "y": "517"
+        },
+        {
+          "x": "129",
+          "y": "521"
+        },
+        {
+          "x": "153",
+          "y": "521"
+        },
+        {
+          "x": "153",
+          "y": "517"
+        },
+        {
+          "x": "135",
+          "y": "517"
+        },
+        {
+          "x": "135",
+          "y": "503"
+        },
+        {
+          "x": "144",
+          "y": "503"
+        }
+      ],
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(151,151,151,255)"
+      },
+      "bounds": {
+        "x": 129,
+        "y": 498,
+        "w": 24,
+        "h": 23
+      }
+    },
+    {
+      "class": 2,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 128,
+        "y": 488,
+        "w": 6,
+        "h": 6
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(0,0,0,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 133,
+        "y": 465,
+        "w": 3,
+        "h": 6
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 131,
+        "y": 455,
+        "w": 7,
+        "h": 13
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(223,223,223,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 151,
+        "y": 451,
+        "w": 21,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(168,168,168,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(168,168,168,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 175,
+        "y": 447,
+        "w": 5,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(168,168,168,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(168,168,168,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 180,
+        "y": 447,
+        "w": 5,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(168,168,168,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(168,168,168,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 200,
+        "y": 450,
+        "w": 27,
+        "h": 4
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(168,168,168,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(168,168,168,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 200,
+        "y": 438,
+        "w": 8,
+        "h": 3
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(168,168,168,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(168,168,168,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 209,
+        "y": 441,
+        "w": 2,
+        "h": 8
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(168,168,168,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(168,168,168,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 221,
+        "y": 505,
+        "w": 2,
+        "h": 12
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(236,236,236,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 245,
+        "y": 471,
+        "w": 5,
+        "h": 2
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(168,168,168,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(168,168,168,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 237,
+        "y": 468,
+        "w": 5,
+        "h": 3
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(168,168,168,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(168,168,168,255)"
+      }
+    },
+    {
+      "class": 1,
+      "pref": "g_2",
+      "zIndex": 3,
+      "bounds": {
+        "x": 251,
+        "y": 460,
+        "w": 2,
+        "h": 6
+      },
+      "fill": {
+        "type": 1,
+        "bg": "rgba(168,168,168,255)"
+      },
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(168,168,168,255)"
+      }
+    },
+    {
+      "class": 9,
+      "ref": "g_3",
+      "var": {
+        "P1": "W3.TEST.DX"
+      },
+      "bounds": {
+        "x": 38,
+        "y": 219,
+        "w": 608,
+        "h": 91
+      },
+      "zIndex": 1
+    },
+    {
+      "class": 101,
+      "pref": "g_3",
+      "zIndex": 2,
+      "bounds": {
+        "x": 237,
+        "y": 227,
+        "w": 50,
+        "h": 27
+      },
+      "tag": "W3.TEST.DX",
+      "onClick": "setValue(\"W3.TEST.DX\",1)",
+      "fm": 0,
+      "var": {
+        "P1": "W3.TEST.DX"
+      }
+    },
+    {
+      "class": 8,
+      "pref": "g_3",
+      "zIndex": 1,
+      "bounds": {
+        "x": 41,
+        "y": 224,
+        "w": 176,
+        "h": 30
+      },
+      "text": "开关量W3.TEST.DX操作",
+      "var": {
+        "P1": "W3.TEST.DX"
+      }
+    },
+    {
+      "class": 7,
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      },
+      "pref": "g_3",
+      "zIndex": 2,
+      "font": {
+        "name": "Dialog",
+        "style": "PLAIN",
+        "size": 20
+      },
+      "bounds": {
+        "x": 425,
+        "y": 222,
+        "w": 98,
+        "h": 32
+      },
+      "showFill": true,
+      "showBorder": true,
+      "fill": {
+        "type": 3,
+        "bg": "rgba(204,204,204,255)",
+        "fg": "rgba(255,255,255,255)",
+        "gradient": {
+          "type": 0,
+          "orient": 3
+        }
+      },
+      "text": "弹出控制",
+      "onClick": "showCTRL(\"W3.TEST.DX\")",
+      "var": {
+        "P1": "W3.TEST.DX"
+      }
+    },
+    {
+      "class": 7,
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      },
+      "pref": "g_3",
+      "zIndex": 2,
+      "font": {
+        "name": "Dialog",
+        "style": "PLAIN",
+        "size": 23
+      },
+      "bounds": {
+        "x": 305,
+        "y": 222,
+        "w": 98,
+        "h": 32
+      },
+      "showFill": true,
+      "showBorder": true,
+      "fill": {
+        "type": 3,
+        "bg": "rgba(204,204,204,255)",
+        "fg": "rgba(255,255,255,255)",
+        "gradient": {
+          "type": 0,
+          "orient": 3
+        }
+      },
+      "text": "写实时",
+      "onClick": "setValue(\"W3.TEST.DX\",1)",
+      "var": {
+        "P1": "W3.TEST.DX"
+      }
+    },
+    {
+      "class": 7,
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      },
+      "pref": "g_3",
+      "zIndex": 2,
+      "font": {
+        "name": "Dialog",
+        "style": "PLAIN",
+        "size": 20
+      },
+      "bounds": {
+        "x": 545,
+        "y": 222,
+        "w": 98,
+        "h": 32
+      },
+      "showFill": true,
+      "showBorder": true,
+      "fill": {
+        "type": 3,
+        "bg": "rgba(204,204,204,255)",
+        "fg": "rgba(255,255,255,255)",
+        "gradient": {
+          "type": 0,
+          "orient": 3
+        }
+      },
+      "text": "手工强制",
+      "onClick": "showCTRL(\"W3.TEST.DX\")",
+      "var": {
+        "P1": "W3.TEST.DX"
+      }
+    },
+    {
+      "class": 7,
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      },
+      "pref": "g_3",
+      "zIndex": 2,
+      "font": {
+        "name": "Dialog",
+        "style": "PLAIN",
+        "size": 20
+      },
+      "bounds": {
+        "x": 305,
+        "y": 275,
+        "w": 98,
+        "h": 32
+      },
+      "showFill": true,
+      "showBorder": true,
+      "fill": {
+        "type": 3,
+        "bg": "rgba(204,204,204,255)",
+        "fg": "rgba(255,255,255,255)",
+        "gradient": {
+          "type": 0,
+          "orient": 3
+        }
+      },
+      "text": "挂牌",
+      "onClick": "showCTRL(\"W3.TEST.DX\")",
+      "var": {
+        "P1": "W3.TEST.DX"
+      }
+    },
+    {
+      "class": 7,
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      },
+      "pref": "g_3",
+      "zIndex": 2,
+      "font": {
+        "name": "Dialog",
+        "style": "PLAIN",
+        "size": 20
+      },
+      "bounds": {
+        "x": 425,
+        "y": 275,
+        "w": 98,
+        "h": 32
+      },
+      "showFill": true,
+      "showBorder": true,
+      "fill": {
+        "type": 3,
+        "bg": "rgba(204,204,204,255)",
+        "fg": "rgba(255,255,255,255)",
+        "gradient": {
+          "type": 0,
+          "orient": 3
+        }
+      },
+      "text": "报警确认",
+      "onClick": "showCTRL(\"W3.TEST.DX\")",
+      "var": {
+        "P1": "W3.TEST.DX"
+      }
+    },
+    {
+      "class": 7,
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      },
+      "pref": "g_3",
+      "zIndex": 2,
+      "font": {
+        "name": "Dialog",
+        "style": "PLAIN",
+        "size": 20
+      },
+      "bounds": {
+        "x": 545,
+        "y": 275,
+        "w": 98,
+        "h": 32
+      },
+      "showFill": true,
+      "showBorder": true,
+      "fill": {
+        "type": 3,
+        "bg": "rgba(204,204,204,255)",
+        "fg": "rgba(255,255,255,255)",
+        "gradient": {
+          "type": 0,
+          "orient": 3
+        }
+      },
+      "text": "报警抑制",
+      "onClick": "showCTRL(\"W3.TEST.DX\")",
+      "var": {
+        "P1": "W3.TEST.DX"
+      }
+    },
+    {
+      "class": 9,
+      "ref": "g_4",
+      "var": {
+        "P1": "W3.TEST.AX"
+      },
+      "bounds": {
+        "x": 39,
+        "y": 44,
+        "w": 596,
+        "h": 98
+      },
+      "zIndex": 1
+    },
+    {
+      "class": 101,
+      "pref": "g_4",
+      "zIndex": 2,
+      "bounds": {
+        "x": 232,
+        "y": 50,
+        "w": 50,
+        "h": 27
+      },
+      "tag": "W3.TEST.AX",
+      "onClick": "setValue(\"W3.TEST.AX\",50)",
+      "var": {
+        "P1": "W3.TEST.AX"
+      }
+    },
+    {
+      "class": 8,
+      "pref": "g_4",
+      "zIndex": 1,
+      "bounds": {
+        "x": 42,
+        "y": 48,
+        "w": 169,
+        "h": 33
+      },
+      "text": "模拟量W3.TEST.AX操作",
+      "var": {
+        "P1": "W3.TEST.AX"
+      }
+    },
+    {
+      "class": 7,
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      },
+      "pref": "g_4",
+      "zIndex": 2,
+      "font": {
+        "name": "Dialog",
+        "style": "PLAIN",
+        "size": 20
+      },
+      "bounds": {
+        "x": 419,
+        "y": 47,
+        "w": 98,
+        "h": 32
+      },
+      "showFill": true,
+      "showBorder": true,
+      "fill": {
+        "type": 3,
+        "bg": "rgba(204,204,204,255)",
+        "fg": "rgba(255,255,255,255)",
+        "gradient": {
+          "type": 0,
+          "orient": 3
+        }
+      },
+      "text": "弹出控制",
+      "onClick": "showCTRL(\"W3.TEST.AX\")",
+      "var": {
+        "P1": "W3.TEST.AX"
+      }
+    },
+    {
+      "class": 7,
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      },
+      "pref": "g_4",
+      "zIndex": 2,
+      "font": {
+        "name": "Dialog",
+        "style": "PLAIN",
+        "size": 23
+      },
+      "bounds": {
+        "x": 304,
+        "y": 47,
+        "w": 98,
+        "h": 32
+      },
+      "showFill": true,
+      "showBorder": true,
+      "fill": {
+        "type": 3,
+        "bg": "rgba(204,204,204,255)",
+        "fg": "rgba(255,255,255,255)",
+        "gradient": {
+          "type": 0,
+          "orient": 3
+        }
+      },
+      "text": "写实时",
+      "onClick": "setValue(\"W3.TEST.AX\",50)",
+      "var": {
+        "P1": "W3.TEST.AX"
+      }
+    },
+    {
+      "class": 7,
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      },
+      "pref": "g_4",
+      "zIndex": 2,
+      "font": {
+        "name": "Dialog",
+        "style": "PLAIN",
+        "size": 20
+      },
+      "bounds": {
+        "x": 534,
+        "y": 47,
+        "w": 98,
+        "h": 32
+      },
+      "showFill": true,
+      "showBorder": true,
+      "fill": {
+        "type": 3,
+        "bg": "rgba(204,204,204,255)",
+        "fg": "rgba(255,255,255,255)",
+        "gradient": {
+          "type": 0,
+          "orient": 3
+        }
+      },
+      "text": "手工强制",
+      "onClick": "showCTRL(\"W3.TEST.AX\")",
+      "var": {
+        "P1": "W3.TEST.AX"
+      }
+    },
+    {
+      "class": 7,
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      },
+      "pref": "g_4",
+      "zIndex": 2,
+      "font": {
+        "name": "Dialog",
+        "style": "PLAIN",
+        "size": 20
+      },
+      "bounds": {
+        "x": 304,
+        "y": 107,
+        "w": 98,
+        "h": 32
+      },
+      "showFill": true,
+      "showBorder": true,
+      "fill": {
+        "type": 3,
+        "bg": "rgba(204,204,204,255)",
+        "fg": "rgba(255,255,255,255)",
+        "gradient": {
+          "type": 0,
+          "orient": 3
+        }
+      },
+      "text": "挂牌",
+      "onClick": "showCTRL(\"W3.TEST.AX\")",
+      "var": {
+        "P1": "W3.TEST.AX"
+      }
+    },
+    {
+      "class": 7,
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      },
+      "pref": "g_4",
+      "zIndex": 2,
+      "font": {
+        "name": "Dialog",
+        "style": "PLAIN",
+        "size": 20
+      },
+      "bounds": {
+        "x": 419,
+        "y": 107,
+        "w": 98,
+        "h": 32
+      },
+      "showFill": true,
+      "showBorder": true,
+      "fill": {
+        "type": 3,
+        "bg": "rgba(204,204,204,255)",
+        "fg": "rgba(255,255,255,255)",
+        "gradient": {
+          "type": 0,
+          "orient": 3
+        }
+      },
+      "text": "报警确认",
+      "onClick": "showCTRL(\"W3.TEST.AX\")",
+      "var": {
+        "P1": "W3.TEST.AX"
+      }
+    },
+    {
+      "class": 7,
+      "stroke": {
+        "width": 1,
+        "style": 0,
+        "color": "rgba(0,0,0,255)"
+      },
+      "pref": "g_4",
+      "zIndex": 2,
+      "font": {
+        "name": "Dialog",
+        "style": "PLAIN",
+        "size": 20
+      },
+      "bounds": {
+        "x": 534,
+        "y": 107,
+        "w": 98,
+        "h": 32
+      },
+      "showFill": true,
+      "showBorder": true,
+      "fill": {
+        "type": 3,
+        "bg": "rgba(204,204,204,255)",
+        "fg": "rgba(255,255,255,255)",
+        "gradient": {
+          "type": 0,
+          "orient": 3
+        }
+      },
+      "text": "报警抑制",
+      "onClick": "showCTRL(\"W3.TEST.AX\")",
+      "var": {
+        "P1": "W3.TEST.AX"
+      }
+    }
+  ],
+  "filePath": "tt.zxml"
+}
