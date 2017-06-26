@@ -122,7 +122,6 @@ server.on('connection', function (socket) {
                                     sql = sqlQuery.update().into('box_box_info').set({
                                         status: 'on',
                                         serial_no: sn,
-                                        time: date,
                                         heartbeat_time: date,
                                         is_push: 0,
                                         out_count: 0

@@ -959,7 +959,7 @@ var customer = {
         var industryId = +req.body.industryId || 0;
         var pageNumber = +req.body.pageNumber || 1;
         var pageSize = +req.body.pageSize || 10;
-        var sql = 'select e.ENTERPRISE_ID, e.ENTERPRISE_CODE, e.DOMAIN_ID, e.ENTERPRISE_NAME, e.DESCRIPTION, e.LINK_MAN, ' +
+        var sql = 'select e.ENTERPRISE_ID, e.DOMAIN_ID, e.ENTERPRISE_NAME, e.DESCRIPTION, e.LINK_MAN, ' +
             'e.PHONE, e.INDUSTRY_ID, e.CREATE_DATE, e.UPDATE_DATE, i.INDUSTRY_NAME, e.IS_ENABLED ' +
             'from sys_enterprise e left join sys_industry i ' +
             'on e.INDUSTRY_ID = i.INDUSTRY_ID ' +

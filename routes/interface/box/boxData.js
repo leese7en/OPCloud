@@ -64,26 +64,49 @@ var boxInfo = {
                     });
                 },
                 function (callback) {
-                    devCode = 'UNIT1';
-                    var sqlReal = 'select GN,ED from Point where GN like "W3.' + devCode + '.%"';
+                    var sql = 'SELECT point_ID as ID,URI as GN,UUID as UD from sys_point where  URI LIKE (SELECT CONCAT(URI,"/%") FROM sys_mtree  WHERE name  ="' + devCode + '" and MTREE_SOURCE = 3)';
                     if (ED) {
-                        sqlReal += ' and ED like "%' + ED + '%"'
+                        sql += ' and description like "%' + ED + '%"'
                     }
-                    logger.debug('获取测点数据sql:' + sqlReal);
-                    opPool.query(sqlReal, function (error, rows, colums) {
-                        if (error && error.code) {
-                            logger.error('查询测点数据错误：' + JSON.stringify(error));
+                    logger.debug('获取测点信息sql:', sql);
+                    query(sql, function (error, rows) {
+                        if (error) {
+                            logger.error('查询测点数据错误：', error);
                             message.Status = false;
                             message.message = '获取测点数据出错';
                             message.Data = [];
-                            callback(new Error('获取实时数据出错'), message);
+                            callback(new Error('获取测点数据出错'), message);
                         } else {
-                            message.Status = true;
-                            message.message = 'OK';
-                            message.Data = rows;
-                            callback(null, message);
+                            if (rows.length < 1) {
+                                message.Status = true;
+                                message.message = 'OK';
+                                message.Data = [];
+                                callback(new Error('没有数据'), message);
+                            } else {
+                                callback(null, rows);
+                            }
                         }
                     });
+                },
+                function (rs, callback) {
+                    var cols = ['ID', 'GN'];
+                    var IDs = [];
+                    var size = rs.length;
+                    var pointsObj = {};
+                    for (var i = 0; i < size; i++) {
+                        IDs.push(rs[i].ID);
+                        pointsObj[rs[i].ID] = rs[i];
+                    }
+                    var points = opPool.syncFind('ID', IDs, cols).rows;
+                    size = points.length;
+                    for (var i = 0; i < size; i++) {
+                        var point = points[i];
+                        point.GN = pointsObj[point.ID].GN;
+                    }
+                    message.Status = true;
+                    message.message = 'OK';
+                    message.Data = points;
+                    callback(null, message);
                 }
             ],
             function (error, message) {
@@ -491,7 +514,7 @@ var boxInfo = {
                         sql += ' and ED like "%' + ED + '%"'
                         sqlHistory += ' and ED like "%' + ED + '%"'
                     }
-                    sqlHistory += 'order by TM limit ' + offset + ',' + limit;
+                    sqlHistory += 'order by TM desc limit ' + offset + ',' + limit;
                     logger.debug('查询报警历史数据sql：' + sqlHistory);
                     var count = opPool.syncQuery(sql).rows[0].count;
                     opPool.query(sqlHistory, function (error, rows, colums) {

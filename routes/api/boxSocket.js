@@ -2,7 +2,7 @@
 var router = express.Router();
 var net = require('net');
 var async = require('async');
-var send_host = '192.168.3.198';
+var send_host = '192.168.2.197';
 var sendport = 7788;
 
 var logger = require('log4js').getLogger('Ibox');
@@ -40,9 +40,11 @@ router.SignalOB = function (key, callback) {
         }
     }
 }
-function connectMsg(data, callback) {
+function connectMsg(data, successMsg, callback) {
     var socket = new net.Socket();
     try {
+        var contentData;
+        var index = 0;
         socket.connect(sendport, send_host, function () {
             logger.warn('连接Box 成功 host:' + send_host, 'port:' + sendport);
             socket.write(data, "utf8");
@@ -57,15 +59,28 @@ function connectMsg(data, callback) {
             // console.log('commondFlag:', commondFlag);
             var devCode = buf.slice(4, 12).toString();
             // console.log('devCode:', devCode);
-            var totalPackage = parseInt(buf[12] << 8) + parseInt(buf[13]);
-            // console.log('totalPackage:', totalPackage);
-            var firstPackage = parseInt(buf[14] << 8) + parseInt(buf[15]);
-            // console.log('firstPackage:', firstPackage);
+            var firstPackage = parseInt(buf[12] << 8) + parseInt(buf[13]);
+            console.log('firstPackage:', firstPackage);
+            var totalPackage = parseInt(buf[14] << 8) + parseInt(buf[15]);
+            console.log('totalPackage:', totalPackage);
+            if (index == 0) {
+                contentData = new Array(totalPackage);
+            }
             var content = buf.slice(16);
-            // console.log(content.toString());
             var value = content.toString();
-            callback(null, value);
-            socket.end();
+            contentData[firstPackage - 1] = value;
+            index++;
+            if (totalPackage != 1) {
+                socket.write(successMsg, "utf8");
+            }
+            if (totalPackage == index) {
+                var size = contentData.length;
+                var callMessage = '';
+                for (var i = 0; i < size; i++) {
+                    callMessage += contentData[i];
+                }
+                callback(null, callMessage);
+            }
         });
         socket.on('close', function () {
             socket = null;
@@ -108,8 +123,14 @@ function sendMsg(func_code, devcode, flag, data, callback) {
     var nb = new Buffer(2, 'hex');
     nb[0] = (len >> 8);
     nb[1] = (len % 256);
+
+    var successMsg = new Buffer(11, 'hex');
+    successMsg[0] = 0;
+    successMsg[1] = 9
+    successMsg.write(devcode, 2, 10);
+    successMsg[10] = 0;
     var sendbuf = Buffer.concat([nb, buf]);
-    connectMsg(sendbuf, callback);
+    connectMsg(sendbuf, successMsg, callback);
 }
 
 const COMMAND_FLAG = 0x33 // 指令标识
@@ -127,16 +148,17 @@ const EDM_ALL_POINT = 0x08  //获取所有点
 
 const EDM_ALL_DRIVER = 0x06  //查询所有驱动信息
 const EDM_DRIVER_CONF = 0x21  //驱动配置信息
-const DRIVER_NAME = 'Modbus_TCP'
-const BOX_NAME = '9SMCY6Z1'
+const DRIVER_NAME = 'ModbusTcp'
+const BOX_NAME = 'B18NFATH'
 
 
-// sendMsg(EDM_DRIVER_CONF, BOX_NAME, COMMAND_FLAG, DRIVER_NAME, function (error, data) {
-//     console.log(error);
-//     if (!error) {
-//         console.log(data.slice(2).toString());
-//     }
-// });
+sendMsg(EDM_DRIVER_CONF, BOX_NAME, COMMAND_FLAG, DRIVER_NAME, function (error, data) {
+    console.log('----------------------------------');
+    console.log(error);
+    if (!error) {
+        console.log(data.toString());
+    }
+});
 
 // sendMsg(EDM_STOP_DAS, BOX_NAME, COMMAND_FLAG, 'test2', function (error, data) {
 //     if (error) {
@@ -164,8 +186,14 @@ router.sendMsg = function (func_code, devcode, flag, data, callback) {
     var nb = new Buffer(2, 'hex');
     nb[0] = (len >> 8);
     nb[1] = (len % 256);
+
+    var successMsg = new Buffer(11, 'hex');
+    successMsg[0] = 0;
+    successMsg[1] = 9
+    successMsg.write(devcode, 2, 10);
+    successMsg[10] = 0;
     var sendbuf = Buffer.concat([nb, buf]);
-    connectMsg(sendbuf, callback);
+    connectMsg(sendbuf, successMsg, callback);
 }
 module.exports = router;
 // var str = 'Y'

@@ -96,6 +96,7 @@ var boxUser = {
                                     password: md5(password),
                                     mobile_phone: registerPhone,
                                     PHONE_MOBILE: registerPhone,
+                                    description: '盒子普通用户注册',
                                     SOURCE: 1,
                                     CREATE_DATE: Utils.dateFormat(new Date().getTime(), Utils.yyyyMMddhhmmss)
                                 }).build();
@@ -119,7 +120,7 @@ var boxUser = {
                                 });
                             },
                             function (user, callback) {
-                                var sql = 'SELECT se.ENTERPRISE_ID as companyId ,se.ENTERPRISE_NAME as companyName,su.job_no as jobNo from sys_user su left join sys_enterprise se on su.ENTERPRISE_ID = se.ENTERPRISE_ID where su.source =2 and su.MOBILE_PHONE = "' + registerPhone + '"';
+                                var sql = 'SELECT se.ENTERPRISE_ID as companyId ,se.ENTERPRISE_ID as groupId,se.ENTERPRISE_NAME as companyName,su.job_no as jobNo from sys_user su left join sys_enterprise se on su.ENTERPRISE_ID = se.ENTERPRISE_ID where su.source =2 and su.MOBILE_PHONE = "' + registerPhone + '"';
                                 logger.debug('获取上级用户信息：', sql);
                                 conn.query(sql, function (err, rows) {
                                     if (err) {
@@ -137,7 +138,7 @@ var boxUser = {
                                 if (rs.length > 0) {
                                     callback(null, rs[0], rs[0], user);
                                 } else {
-                                    var sql = 'SELECT ENTERPRISE_ID as companyId from sys_enterprise where TYPE =3 and PHONE = "' + registerPhone + '"';
+                                    var sql = 'SELECT ENTERPRISE_ID as groupId from sys_enterprise where TYPE =3 and PHONE = "' + registerPhone + '"';
                                     logger.debug('获取是否有同级用户注册过信息：', sql);
                                     conn.query(sql, function (err, rows) {
                                         if (err) {
@@ -147,21 +148,25 @@ var boxUser = {
                                             message.data = null;
                                             callback(new Error('获取是否有同级用户注册过信息', message));
                                         } else {
-                                            callback(null, rows, null, user);
+                                            if (rows.length == 1) {
+                                                callback(null, null, rows[0], user);
+                                            } else {
+                                                callback(null, null, null, user);
+                                            }
                                         }
                                     });
                                 }
                             },
-                            function (rs, company, user, callback) {
-                                if (rs) {
-                                    callback(null, rs, company, user);
+                            function (companyFlag, company, user, callback) {
+                                if (companyFlag || company) {
+                                    callback(null, companyFlag, company, user);
                                 } else {
                                     var sqlCompany = sqlQuery.insert().into('sys_enterprise').set({
                                         ENTERPRISE_NAME: user.jobNo,
                                         TYPE: 3,
-                                        DESCRIPTION: 'box个人用户注册',
+                                        DESCRIPTION: 'box个人用户注册,域分组',
                                         LINK_MAN: user.jobNo,
-                                        PHONE: user.phone,
+                                        PHONE: registerPhone,
                                         CREATE_DATE: Utils.dateFormat(new Date().getTime(), Utils.yyyyMMddhhmmss)
                                     }).build();
                                     logger.debug('添加个人开发者企业基本信息sql：' + sqlCompany);
@@ -173,9 +178,8 @@ var boxUser = {
                                             message.data = null;
                                             callback(new Error('操作失败', message));
                                         } else {
-                                            rs = {
-                                                companyId: rows.insertId,
-                                                companyName: user.jobNo,
+                                            var rs = {
+                                                groupId: rows.insertId,
                                                 jobNo: user.jobNo
                                             };
                                             callback(null, null, rs, user);
@@ -185,17 +189,46 @@ var boxUser = {
                             },
                             function (companyFlag, company, user, callback) {
                                 if (companyFlag) {
-                                    var sql = 'select domain_id as domainId,URI,company_ID as companyId from sys_doamin where URI = "/' + companyFlag.companyName + '/' + companyFlag.jobNo + '"';
-                                    logger.debug('更新用戶信息sql:' + sql);
-                                    conn.query(sql, function (cerr, rows) {
-                                        if (cerr) {
-                                            logger.error('获取上级域信息失败：' + cerr);
+                                    callback(null, companyFlag, company, user);
+                                } else {
+                                    var sqlCompany = sqlQuery.insert().into('sys_enterprise').set({
+                                        ENTERPRISE_NAME: user.jobNo,
+                                        TYPE: 2,
+                                        DESCRIPTION: 'box个人用户注册',
+                                        LINK_MAN: user.jobNo,
+                                        PHONE: registerPhone,
+                                        CREATE_DATE: Utils.dateFormat(new Date().getTime(), Utils.yyyyMMddhhmmss)
+                                    }).build();
+                                    logger.debug('添加个人开发者企业基本信息sql：' + sqlCompany);
+                                    conn.query(sqlCompany, function (err, rows) {
+                                        if (err) {
+                                            logger.error('插入私有用戶企业信息失败：' + err);
+                                            message.flag = -1;
+                                            message.message = "操作失败";
+                                            message.data = null;
+                                            callback(new Error('操作失败', message));
+                                        } else {
+                                            company.companyId = rows.insertId;
+                                            company.companyName = user.jobNo;
+                                            company.jobNo = user.jobNo;
+                                            callback(null, null, company, user);
+                                        }
+                                    });
+                                }
+                            },
+                            function (companyFlag, company, user, callback) {
+                                if (companyFlag) {
+                                    var sql = 'select domain_id as domainId,URI,company_ID as companyId from sys_domain where URI = "/' + companyFlag.companyName + '/' + companyFlag.jobNo + '"';
+                                    logger.debug('获取上级域信息sql:' + sql);
+                                    conn.query(sql, function (error, rows) {
+                                        if (error) {
+                                            logger.error('获取上级域信息失败：' + error);
                                             message.flag = -1;
                                             message.message = "获取上级域信息失败";
                                             message.data = null;
                                             callback(new Error('获取上级域信息失败', message));
                                         } else {
-                                            callback(null, rows[0], companyFlag, company, user);
+                                            callback(null, companyFlag, rows[0], company, user);
                                         }
                                     });
                                 } else {
@@ -205,7 +238,7 @@ var boxUser = {
                             function (companyFlag, domain, company, user, callback) {
                                 var sql, URI;
                                 if (companyFlag) {
-                                    URI = domain.URI + '/' + companyFlag.jobNo + '/' + companyFlag.jobNo;
+                                    URI = domain.URI + '/' + user.jobNo;
                                     sql = sqlQuery.insert().into('sys_domain').set({
                                         PRE_DOMAIN_ID: domain.domainId,
                                         COMPANY_ID: company.companyId,
@@ -215,6 +248,7 @@ var boxUser = {
                                         ADMIN_USER: user.USER_ID,
                                         DOMAIN_CODE: uuid.v1(),
                                         DESCRIPTION: 'box个人用户注册时创建',
+                                        TYPE: 2,
                                         CREATE_DATE: Utils.dateFormat(new Date().getTime(), Utils.yyyyMMddhhmmss)
                                     }).build();
                                 } else {
@@ -291,12 +325,12 @@ var boxUser = {
                             function (companyFlag, domain, company, mtree, user, callback) {
                                 var sql, URI;
                                 if (companyFlag) {
-                                    URI = mtree.URI + '/' + companyFlag.jobNo + '/' + companyFlag.jobNo;
+                                    URI = mtree.URI + '/' + user.jobNo;
                                     sql = sqlQuery.insert().into('sys_mtree').set({
                                         PID: mtree.ID,
                                         DOMAIN_ID: domain.domainId,
                                         URI: URI,
-                                        NAME: companyFlag.jobNo,
+                                        NAME: user.jobNo,
                                         LAYER: 0,
                                         MTREE_SOURCE: 1,
                                         DESCRIPTION: 'Box个人用戶注册创建',
@@ -332,7 +366,7 @@ var boxUser = {
                             function (companyFlag, company, user, callback) {
                                 var sqlCustomer = sqlQuery.update().into('sys_user').set({
                                     ENTERPRISE_ID: company.companyId,
-                                    OPGROUP_ID: company.companyId,
+                                    OPGROUP_ID: company.groupId,
                                     UPDATE_DATE: Utils.dateFormat(new Date().getTime(), Utils.yyyyMMddhhmmss)
                                 }).where({
                                     USER_ID: user.USER_ID
@@ -372,13 +406,20 @@ var boxUser = {
                                 //数据库sys_user保存mailTokenKey
                                 message.flag = 0;
                                 message.message = "OK";
-                                message.data = null;
                                 //创建对应的文件夹
                                 var path = './public/userfile/';
                                 if (companyFlag) {
-                                    path += company.companyId + 'resources/' + company.companyName + '/' + company.jobNo + '/' + user.jobNo;
-                                    fs.mkdirSync(path);
-                                    callback(null, message);
+                                    path += company.companyId + '/' + 'resources/' + company.companyName + '/' + company.jobNo + '/' + user.jobNo;
+                                    fs.exists(path, function (exists) {
+                                        if (exists) {
+                                            fileUtils.rmdirSync(path);
+                                            fs.mkdirSync(path);
+                                        }
+                                        if (!exists) {
+                                            fs.mkdirSync(path);
+                                        }
+                                        callback(null, message);
+                                    });
                                 } else {
                                     path += company.companyId;
                                     fs.exists(path, function (exists) {
@@ -501,6 +542,7 @@ var boxUser = {
                             password: md5(password),
                             mobile_phone: registerPhone,
                             PHONE_MOBILE: registerPhone,
+                            description: '盒子企业用户注册',
                             SOURCE: 2,
                             IS_SYSTEM: 3,
                             IS_ACTIVE: 0,
@@ -539,8 +581,7 @@ var boxUser = {
                     res.json(message);
                 }
             );
-        }
-        ,
+        },
         /**
          * 用户登录
          * @param req
@@ -626,8 +667,7 @@ var boxUser = {
                 message.data = null;
                 res.json(message);
             }
-        }
-        ,
+        },
         /**
          * 审核
          * @param req
@@ -675,6 +715,35 @@ var boxUser = {
                     async.waterfall(
                         [
                             function (callback) {
+                                var sql = 'SELECT USER_ID as userId,job_no as jobNo,mobile_phone as phone,enterprise_name as companyName,is_active as isActive from sys_user where user_id = ' + userId;
+                                logger.debug('获取用户信息sql:', sql);
+                                query(sql, function (error, rows) {
+                                    if (error) {
+                                        logger.error('获取用户信息错误:', error);
+                                        message.flag = -1;
+                                        message.message = '获取用户信息错误';
+                                        message.data = null;
+                                        callback(new Error('获取用户信息出错'), message);
+                                    } else {
+                                        if (rows.length != 1) {
+                                            message.flag = -1;
+                                            message.message = '用户不存在';
+                                            message.data = null;
+                                            callback(new Error('用户不存在'), message);
+                                        } else {
+                                            if (rows[0].isActive == 1) {
+                                                message.flag = -1;
+                                                message.message = '用户已审核';
+                                                message.data = null;
+                                                callback(new Error('用户已审核'), message);
+                                            } else {
+                                                callback(null, rows[0]);
+                                            }
+                                        }
+                                    }
+                                });
+                            },
+                            function (user, callback) {
                                 var sql = sqlQuery.update().into('sys_user').set({
                                     is_active: isActive,
                                     review: review,
@@ -687,36 +756,15 @@ var boxUser = {
                                         message.flag = -1;
                                         message.message = '用户审核错误';
                                         message.data = null;
+                                        callback(new Error('审核出错出错'), message);
                                     } else {
                                         if (isActive == 1) {
-                                            callback(null);
+                                            callback(null, user);
                                         } else {
                                             message.flag = 0;
                                             message.message = 'OK';
                                             message.data = null;
                                             callback(new Error('审核没有通过'), message);
-                                        }
-                                    }
-                                });
-                            },
-                            function (callback) {
-                                var sql = 'SELECT USER_ID as userId,job_no as jobNo,mobile_phone as phone,enterprise_name as companyName from sys_user where user_id = ' + userId;
-                                logger.debug('获取用户基本信息sql:', sql);
-                                conn.query(sql, function (error, rows) {
-                                    if (error) {
-                                        logger.error('获取用户信息错误：', error);
-                                        message.flag = -1;
-                                        message.message = '获取用户信息失败';
-                                        message.data = null;
-                                        callback(new Error('获取用户信息错误'), message);
-                                    } else {
-                                        if (rows.length == 1) {
-                                            callback(null, rows[0]);
-                                        } else {
-                                            message.flag = -1;
-                                            message.message = '用户不存在';
-                                            message.data = null;
-                                            callback(new Error('用户不存在'), message);
                                         }
                                     }
                                 });
@@ -790,7 +838,7 @@ var boxUser = {
                                             message.data = null;
                                             callback(new Error('操作失败', message));
                                         } else {
-                                            callback(null, null, rows.insertId, user);
+                                            callback(null, null, companyId, rows.insertId, user);
                                         }
                                     });
                                 }
@@ -867,7 +915,7 @@ var boxUser = {
                                     callback(null, company, companyId, domainId, mtreeId, user);
                                 }
                             },
-                            function (company, companyId, domainId, user, callback) {
+                            function (company, companyId, domainId, mtreeId, user, callback) {
                                 var sqlDomain = sqlQuery.insert().into('sys_domain').set({
                                     PRE_DOMAIN_ID: domainId,
                                     NAME: user.jobNo,
@@ -875,7 +923,9 @@ var boxUser = {
                                     CREATE_USER: 1,
                                     ADMIN_USER: user.userId,
                                     DOMAIN_CODE: uuid.v1(),
+                                    COMPANY_ID: companyId,
                                     DESCRIPTION: 'box用户审核时创建',
+                                    TYPE: 2,
                                     CREATE_DATE: Utils.dateFormat(new Date().getTime(), Utils.yyyyMMddhhmmss)
                                 }).build();
                                 logger.debug('添加box用户审核的时候初始化Domain信息sql：' + sqlDomain);
@@ -891,7 +941,7 @@ var boxUser = {
                                     }
                                 });
                             },
-                            function (company, companyId, domainId, user, mtreeId, callback) {
+                            function (company, companyId, domainId, mtreeId, user, callback) {
                                 var sqlDomain = sqlQuery.insert().into('sys_user_domain').set({
                                     USER_ID: user.userId,
                                     DOMAIN_ID: domainId,
@@ -963,7 +1013,7 @@ var boxUser = {
                                     OPGROUP_ID: companyId,
                                     UPDATE_DATE: Utils.dateFormat(new Date().getTime(), Utils.yyyyMMddhhmmss)
                                 }).where({
-                                    USER_ID: user.USER_ID
+                                    USER_ID: user.userId
                                 }).build();
                                 logger.debug('更新用戶信息sql:' + sqlCustomer);
                                 conn.query(sqlCustomer, function (cerr, rows) {
@@ -980,19 +1030,19 @@ var boxUser = {
                             },
                             function (company, companyId, user, callback) {
                                 var sqlRole = sqlQuery.insert().into('sys_user_role').set({
-                                    USER_ID: user.USER_ID,
+                                    USER_ID: user.userId,
                                     ROLE_ID: 5
                                 }).build();
                                 logger.debug('插入用戶基本权限sql:' + sqlRole);
-                                conn.query(sqlRole, function (ccerr, rows) {
-                                    if (ccerr) {
-                                        logger.error('插入个人开发者基础权限失败：' + ccerr);
+                                conn.query(sqlRole, function (error, rows) {
+                                    if (error) {
+                                        logger.error('插入个人开发者基础权限失败：' + error);
                                         message.flag = -1;
                                         message.message = "操作失败";
                                         message.data = null;
                                         callback(new Error('操作失败', message));
                                     } else {
-                                        callback(null, company, domainId, companyId, user);
+                                        callback(null, company, companyId, user);
                                     }
                                 });
                             },
@@ -1024,12 +1074,16 @@ var boxUser = {
                                             fs.mkdirSync(path + '/model' + '/file');
                                             fs.mkdirSync(path + '/model' + '/jar');
                                         }
+                                        company = {
+                                            companyId: companyId,
+                                            companyName: user.companyName
+                                        }
                                         callback(null, company, user);
                                     });
                                 }
                             },
                             function (company, user, callback) {
-                                var sql = 'select user_id as usreId,job_no as jobNo from sys_user source = 1 and mobile = "' + user.phone + '"'
+                                var sql = 'select user_id as userId,job_no as jobNo,enterprise_id as companyId from sys_user where source = 1 and mobile_phone = "' + user.phone + '"'
                                 logger.debug('获取当前手机号下面的用户sql:', sql);
                                 conn.query(sql, function (error, rows) {
                                     if (error) {
@@ -1044,7 +1098,6 @@ var boxUser = {
                                             message.message = 'OK';
                                             message.data = null;
                                             callback(new Error('当前手机号没有对应的下属用户'), message);
-
                                         } else {
                                             callback(null, rows, company, user);
                                         }
@@ -1096,16 +1149,36 @@ var boxUser = {
                                 });
                             },
                             function (mtree, domain, rs, company, user, callback) {
-                                var date = '"' + Utils.dateFormat(new Date().getTime(), Utils.yyyyMMddhhmmss) + '"';
-                                async.eachSeries(rs, function (item, callbackSeries) {
-                                    var rr = rs[item];
+                                var date = Utils.dateFormat(new Date().getTime(), Utils.yyyyMMddhhmmss);
+                                async.eachSeries(rs, function (rr, callbackSeries) {
                                     async.waterfall(
                                         [
                                             function (callbackWater) {
+                                                var sql = sqlQuery.update().into('sys_user').set({
+                                                    ENTERPRISE_ID: domain.companyId,
+                                                    update_date: date
+                                                }).where({
+                                                    user_ID: rr.userId
+                                                }).build();
+                                                logger.debug('更新对应的用户顶级域sql:', sql);
+                                                conn.query(sql, function (error, rows) {
+                                                    if (error) {
+                                                        logger.error('更新对应的用户顶级域错误：', error);
+                                                        message.flag = -1;
+                                                        message.message = '更新顶级域错误';
+                                                        message.data = null;
+                                                        callbackWater(new Error('更新顶级域错误'), message);
+                                                    } else {
+                                                        callbackWater(null);
+                                                    }
+                                                });
+                                            },
+                                            function (callbackWater) {
                                                 var sql = sqlQuery.update().into('sys_domain').set({
                                                     pre_domain_Id: domain.domainId,
-                                                    URI: '/' + user.companyName + '/' + user.jobNo + rr.URI,
+                                                    URI: '/' + user.companyName + '/' + user.jobNo + '/' + rr.jobNo,
                                                     COMPANY_ID: domain.companyId,
+                                                    TYPE: 2,
                                                     update_date: date
                                                 }).where({
                                                     URI: '/' + rr.jobNo
@@ -1126,7 +1199,7 @@ var boxUser = {
                                             function (callbackWater) {
                                                 var sql = sqlQuery.update().into('sys_mtree').set({
                                                     PID: mtree.ID,
-                                                    URI: '/' + user.companyName + '/' + user.jobNo + rr.URI,
+                                                    URI: '/' + user.companyName + '/' + user.jobNo + '/' + rr.jobNo,
                                                     COMPANY_ID: domain.companyId,
                                                     update_date: date
                                                 }).where({
@@ -1147,7 +1220,7 @@ var boxUser = {
                                             },
                                             function (callbackWater) {
                                                 var sql = 'update sys_domain set URI ="/' + user.companyName + '/' + user.jobNo + '"+URI,company_id = ' + domain.companyId +
-                                                    'update_date=' + date + ' where URI like "/' + rr.jobNo + '/%"';
+                                                    ',update_date="' + date + '" where URI like "/' + rr.jobNo + '/%"';
                                                 logger.debug('更新对应的下属域信息sql:', sql);
                                                 conn.query(sql, function (error, rows) {
                                                     if (error) {
@@ -1163,7 +1236,7 @@ var boxUser = {
                                             },
                                             function (callbackWater) {
                                                 var sql = 'update sys_mtree set URI ="/' + user.companyName + '/' + user.jobNo + '"+URI,company_id = ' + domain.companyId +
-                                                    'update_date=' + date + ' where URI like "/' + rr.jobNo + '/%"';
+                                                    ',update_date="' + date + '" where URI like "/' + rr.jobNo + '/%"';
                                                 logger.debug('更新对应的下属MTree信息sql:', sql);
                                                 conn.query(sql, function (error, rows) {
                                                     if (error) {
@@ -1194,7 +1267,7 @@ var boxUser = {
                                             },
                                             function (rows, callbackWater) {
                                                 if (!rows || rows.length < 1) {
-                                                    callback(null, false, null);
+                                                    callbackWater(null, false, null);
                                                 } else {
                                                     var cols = [];
                                                     var rrs = [];
@@ -1206,12 +1279,11 @@ var boxUser = {
                                                         sqlPointURI = '',
                                                         sqlPointIds = [];
                                                     var size = rows.length;
-
                                                     for (var i = 0; i < size; i++) {
                                                         var row = rows[i];
                                                         var rr = [];
                                                         rr.push(row.POINT_ID);
-                                                        var pointURI = '/' + user.companyName + '/' + user.jobNo + row.POINT_NAME;
+                                                        var pointURI = '/' + user.companyName + '/' + user.jobNo + '/' + row.POINT_NAME;
                                                         var UUID = opPool.makeUUID(pointURI);
                                                         rr.push(UUID);
                                                         UUID = '0x' + UUID;
@@ -1219,10 +1291,9 @@ var boxUser = {
                                                         rrs.push(rr);
                                                         sqlPointsUUID += 'when ' + row.POINT_ID + ' then "' + UUID + '" ';
                                                         sqlPointURI += 'when ' + row.POINT_ID + ' then "' + pointURI + '" ';
-
                                                         sqlPointIds.push(row.POINT_ID);
                                                     }
-                                                    sqlPoints = 'update sys_point set UUID = case POINT_ID ' + sqlPointsUUID + ' end,URI= case POINT_ID ' + sqlPointURI + ' end ,DOMAIN_ID = ' + targetRow.DOMAIN_ID + ' where point_ID in( ' + sqlPointIds.toString() + ')';
+                                                    sqlPoints = 'update sys_point set UUID = case POINT_ID ' + sqlPointsUUID + ' end,URI= case POINT_ID ' + sqlPointURI + ' end ,DOMAIN_ID = ' + domain.domainId + ' where point_ID in( ' + sqlPointIds.toString() + ')';
                                                     opPool.update('Point', rrs, cols, function (error, rows, columns) {
                                                         if ((error != 0 && error && error.code) || rows[0].EC != 0) {
                                                             logger.error('编辑测点信息错误：' + JSON.stringify(error));
@@ -1231,7 +1302,7 @@ var boxUser = {
                                                             message.data = null;
                                                             callbackWater(new Error('更新测点信息错误'), message);
                                                         } else {
-                                                            callback(null, true, sqlPoints);
+                                                            callbackWater(null, true, sqlPoints);
                                                         }
                                                     });
                                                 }
@@ -1256,11 +1327,11 @@ var boxUser = {
                                             },
                                             function (callbackWater) {
                                                 var path = './public/userfile/';
-                                                var sourceURI = path + rr.userId + '/resources';
+                                                var sourceURI = path + rr.companyId + '/resources';
                                                 var targetURI = path + domain.companyId + '/resources/' + user.companyName + '/' + user.jobNo;
                                                 fileUtils.copyFileSync(sourceURI, targetURI);
                                                 fileUtils.copyFileSync(path + rr.userId + '/model', path + domain.companyId + '/model');
-                                                fileUtils.rmdirSync(path + rr.userId);
+                                                fileUtils.rmdirSync(path + rr.companyId);
                                                 message.flag = 0;
                                                 message.message = 'OK';
                                                 message.data = null;
@@ -1274,7 +1345,16 @@ var boxUser = {
                                                 callbackSeries(null, message);
                                             }
                                         });
-                                }, function (err, message) {
+                                }, function (err) {
+                                    if (err) {
+                                        message.flag = -1;
+                                        message.message = '操作失败';
+                                        message.data = null;
+                                    } else {
+                                        message.flag = 0;
+                                        message.message = 'OK';
+                                        message.data = null;
+                                    }
                                     callback(err, message);
                                 });
                             }
@@ -1284,8 +1364,7 @@ var boxUser = {
                         });
                 }
             });
-        }
-        ,
+        },
         /**
          * 升级
          * @param req
@@ -1361,8 +1440,7 @@ var boxUser = {
                 }
             )
 
-        }
-        ,
+        },
         /**
          * 修改密码
          * @param req
@@ -1450,8 +1528,7 @@ var boxUser = {
                     res.json(message);
                 }
             );
-        }
-        ,
+        },
         /**
          * 忘记密码
          * @param req
@@ -1523,8 +1600,7 @@ var boxUser = {
                     res.json(message);
                 }
             );
-        }
-        ,
+        },
         /**
          * 模糊查询用户信息
          * @param req
@@ -1548,8 +1624,7 @@ var boxUser = {
                     res.json(message);
                 }
             });
-        }
-        ,
+        },
         /**
          * 获取用户信息
          * @param req
@@ -1580,8 +1655,7 @@ var boxUser = {
                     res.json(message);
                 }
             });
-        }
-        ,
+        },
         /**
          * 更新用户信息
          * @param req
@@ -1633,8 +1707,7 @@ var boxUser = {
                     res.json(message);
                 }
             });
-        }
-        ,
+        },
         /**
          * 获取登录日志的接口
          * @param req
@@ -1665,8 +1738,7 @@ var boxUser = {
                     res.json(message);
                 }
             });
-        }
-        ,
+        },
         /**
          * 验证手机号和密码是否匹配
          * @param req
@@ -1730,8 +1802,7 @@ var boxUser = {
                     res.json(message);
                 }
             });
-        }
-        ,
+        },
         /**
          * 变更手机号
          * @param req
@@ -1846,8 +1917,7 @@ var boxUser = {
                     res.json(message);
                 }
             )
-        }
-        ,
+        },
         /**
          * 用户进入云页面
          * @param req

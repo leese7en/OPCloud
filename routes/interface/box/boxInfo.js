@@ -1,11 +1,16 @@
 var actionUtil = require("../../framework/action/actionUtils")();
+var transaction = actionUtil.transaction;
 var async = require("async");
 var query = actionUtil.query;
+var fs = require('fs');
 var Utils = require('../../utils/tools/utils');
 var logger = require('log4js').getLogger('Ibox');
 var GlobalAgent = require('../../message/GlobalAgent');
+var fileUtils = require("../../utils/tools/fileUtils");
+var opPool = require('../../openplant/openPlantPool');
 var sqlQuery = require('sql-query').Query();
 var SMS = require('../../utils/sms/sms');
+var uuid = require('node-uuid');
 var message = {
     Status: 0,
     message: '成功',
@@ -36,80 +41,413 @@ var boxInfo = {
             res.json(message);
             return;
         }
-        async.waterfall(
-            [
-                function (callback) {
-                    var sql = sqlQuery.select().from('box_box_info').select(['id']).where({dev_code: devCode, ver_code: verCode}).build();
-                    logger.debug('获取当前盒子是否存在sql:' + sql);
-                    query(sql, function (error, rows) {
-                        if (error) {
-                            logger.error('获取盒子信息错误：' + error);
-                            message.Status = false;
-                            message.message = '验证盒子信息出错';
-                            message.Data = null;
-                            callback(error, message);
-                        } else {
-                            if (rows.length != 1) {
-                                message.Status = false;
-                                message.message = '盒子不存在';
-                                message.Data = null;
-                                callback(new Error({msg: '盒子不存在'}), message);
+        var date = Utils.dateFormat(new Date().getTime(), Utils.yyyyMMddhhmmss);
+        transaction(function (err, conn) {
+            if (err) {
+                logger.error('绑定盒子 transaction ERROR：' + err);
+                message.Status = false;
+                message.message = "操作失败";
+                message.Data = null;
+                res.json(message);
+                return;
+            } else {
+                async.waterfall(
+                    [
+                        function (callback) {
+                            var sql = sqlQuery.select().from('box_box_info').select(['id']).where({dev_code: devCode, ver_code: verCode}).build();
+                            logger.debug('获取当前盒子是否存在sql:' + sql);
+                            conn.query(sql, function (error, rows) {
+                                if (error) {
+                                    logger.error('获取盒子信息错误：' + error);
+                                    message.Status = false;
+                                    message.message = '验证盒子信息出错';
+                                    message.Data = null;
+                                    callback(error, message);
+                                } else {
+                                    if (rows.length != 1) {
+                                        message.Status = false;
+                                        message.message = '盒子不存在';
+                                        message.Data = null;
+                                        callback(new Error({msg: '盒子不存在'}), message);
+                                    } else {
+                                        callback(null);
+                                    }
+                                }
+                            })
+                        },
+                        function (callback) {
+                            var sql = sqlQuery.select().from('box_user_box').select(['id']).where({dev_code: devCode, status: [2, 3]}).build();
+                            logger.debug('获取当前盒子是否绑定sql:' + sql);
+                            conn.query(sql, function (error, rows) {
+                                if (error) {
+                                    logger.error('获取盒子绑定信息错误：' + error);
+                                    message.Status = false;
+                                    message.message = '验证盒子绑定信息出错';
+                                    message.Data = null;
+                                    callback(error, message);
+                                } else {
+                                    if (rows.length > 0) {
+                                        message.Status = false;
+                                        message.message = '盒子已经绑定过';
+                                        message.Data = null;
+                                        callback(new Error('盒子已经绑定过'), message);
+                                    } else {
+                                        callback(null);
+                                    }
+                                }
+                            })
+                        },
+                        function (callback) {
+                            var sql = 'select user_id as userId,job_no as jobNo,enterprise_id as companyId,enterprise_name as companyName,source from sys_user where user_id = ' + userId;
+                            logger.debug('获取用户信息sql:', sql);
+                            conn.query(sql, function (error, rows) {
+                                if (error) {
+                                    logger.error('获取用户信息错误:', error);
+                                    message.Status = false;
+                                    message.message = '获取用户信息错误';
+                                    message.Data = null;
+                                    callback(new Error('获取用户信息错误'), message);
+                                } else {
+                                    if (rows.length != 1) {
+                                        message.Status = false;
+                                        message.message = '用户不存在';
+                                        message.Data = null;
+                                        callback(new Error('用户不存在'), message);
+                                    } else {
+                                        callback(null, rows[0]);
+                                    }
+                                }
+                            });
+                        },
+                        function (user, callback) {
+                            var sql = sqlQuery.insert().into('box_user_box').set({
+                                user_id: userId,
+                                dev_code: devCode,
+                                Status: 2,
+                                CREATE_DATE: date
+                            }).build();
+                            logger.debug('用户盒子关联信息sql：' + sql);
+                            conn.query(sql, function (error, rows) {
+                                if (error) {
+                                    message.Status = false;
+                                    message.message = '用户盒子关联';
+                                    message.Data = null;
+                                    callback(error, message);
+                                } else {
+                                    callback(null, user);
+                                }
+                            });
+                        },
+                        function (user, callback) {
+                            if (user.source == 2) {
+                                var URI = '/' + user.companyName + '/' + user.jobNo;
+                                callback(null, URI, user);
                             } else {
-                                callback(null);
+                                var sql = 'SELECT user_id as userId,job_no as jobNo,enterprise_id as companyId,enterprise_name as companyName from sys_user where SOURCE =2 and MOBILE_PHONE in (SELECT MOBILE_PHONE from sys_user where USER_ID = ' + userId + ' )';
+                                logger.debug('获取上级用户sql:', sql);
+                                conn.query(sql, function (error, rows) {
+                                    if (error) {
+                                        logger.error('获取上级用户错误:', error);
+                                        message.Status = false;
+                                        message.message = '获取上级用户错误';
+                                        message.Data = null;
+                                        callback(new Error('获取上级用户错误'), message);
+                                    } else {
+                                        var URI;
+                                        if (rows.length == 1) {
+                                            URI = '/' + rows[0].companyName + '/' + rows[0].jobNo + '/' + user.jobNo;
+                                        } else {
+                                            URI = '/' + user.jobNo;
+                                        }
+                                        callback(null, URI, user);
+                                    }
+                                });
                             }
-                        }
-                    })
-                },
-                function (callback) {
-                    var sql = sqlQuery.select().from('box_user_box').select(['id']).where({dev_code: devCode, status: [2, 3]}).build();
-                    logger.debug('获取当前盒子是否绑定sql:' + sql);
-                    query(sql, function (error, rows) {
-                        if (error) {
-                            logger.error('获取盒子绑定信息错误：' + error);
-                            message.Status = false;
-                            message.message = '验证盒子绑定信息出错';
-                            message.Data = null;
-                            callback(error, message);
-                        } else {
-                            if (rows.length > 0) {
-                                message.Status = false;
-                                message.message = '盒子已经绑定过';
-                                message.Data = null;
-                                callback(new Error('盒子已经绑定过'), message);
+                        },
+                        function (URI, user, callback) {
+                            var sql = 'select domain_id as domainId,URI,company_id as companyId from sys_domain where type = 3 and name = "' + devCode + '"';
+                            logger.debug('获取是否绑定过信息sql:', sql);
+                            conn.query(sql, function (error, rows) {
+                                if (error) {
+                                    logger.error('获取是否绑定过信息错误:', error);
+                                    message.Status = false;
+                                    message.message = '获取绑定信息错误'
+                                    message.Data = null;
+                                    callback(new Error('获取绑定信息错误'), message);
+                                } else {
+                                    if (rows.length == 1) {
+                                        callback(null, rows[0], URI, user);
+                                    } else {
+                                        callback(null, null, URI, user);
+                                    }
+                                }
+                            });
+                        },
+                        function (domain, URI, user, callback) {
+                            var sql = 'select domain_id as domainId,URI,company_id as companyId from sys_domain where URI ="' + URI + '"';
+                            logger.debug('获取上级域信息sql:', sql);
+                            conn.query(sql, function (error, rows) {
+                                if (error) {
+                                    logger.error('获取上级域信息错误:', error);
+                                    message.Status = false;
+                                    message.message = '获取上级域信息错误'
+                                    message.Data = null;
+                                    callback(new Error('获取上级域信息错误'), message);
+                                } else {
+                                    if (rows.length == 1) {
+                                        callback(null, rows[0], domain, URI, user);
+                                    } else {
+                                        message.Status = false;
+                                        message.message = '没有对应的上级域'
+                                        message.Data = null;
+                                        callback(new Error('没有对应的上级域'), message);
+                                    }
+                                }
+                            });
+                        },
+                        function (preDomain, domain, URI, user, callback) {
+                            var sql;
+                            if (domain) {
+                                sql = sqlQuery.update().into('sys_domain').set({
+                                    PRE_DOMAIN_ID: preDomain.domainId,
+                                    URI: URI + '/' + devCode,
+                                    COMPANY_ID: user.companyId,
+                                    IS_ACTIVE: 1,
+                                    update_date: date
+                                }).where({
+                                    domain_id: domain.domainId
+                                }).build();
                             } else {
-                                callback(null);
+                                sql = sqlQuery.insert().into('sys_domain').set({
+                                    PRE_DOMAIN_ID: preDomain.domainId,
+                                    COMPANY_ID: user.companyId,
+                                    NAME: devCode,
+                                    URI: URI + '/' + devCode,
+                                    CREATE_USER: user.userId,
+                                    ADMIN_USER: user.userId,
+                                    DOMAIN_CODE: uuid.v1(),
+                                    DESCRIPTION: '绑定box时创建',
+                                    TYPE: 3,
+                                    CREATE_DATE: date
+                                }).build();
                             }
-                        }
-                    })
-                },
-                function (callback) {
-                    var sql = sqlQuery.insert().into('box_user_box').set({
-                        user_id: userId,
-                        dev_code: devCode,
-                        Status: 2,
-                        CREATE_DATE: Utils.dateFormat(new Date().getTime(), Utils.yyyyMMddhhmmss)
-                    }).build();
-                    logger.debug('用户盒子关联信息sql：' + sql);
-                    query(sql, function (error, rows) {
-                        if (error) {
-                            message.Status = false;
-                            message.message = '用户盒子关联';
-                            message.Data = null;
-                            callback(error, message);
-                        } else {
+                            logger.debug('更新或添加信息sql:', sql);
+                            conn.query(sql, function (error, rows) {
+                                if (error) {
+                                    logger.error('更新或添加信息错误:', error);
+                                    message.Status = false;
+                                    message.message = '更新或添加信息错误'
+                                    message.Data = null;
+                                    callback(new Error('更新或添加信息错误'), message);
+                                } else {
+                                    if (domain) {
+                                        callback(null, domain, URI, user, domain.domainId);
+                                    } else {
+                                        callback(null, domain, URI, user, rows.insertId);
+                                    }
+
+                                }
+                            });
+                        },
+                        function (domain, URI, user, domainId, callback) {
+                            var sql = sqlQuery.insert().into('sys_user_domain').set({
+                                USER_ID: user.userId,
+                                DOMAIN_ID: domainId,
+                                IS_ADMIN: 1,
+                                CREATE_USER: 1,
+                                CREATE_DATE: date
+                            }).build();
+                            logger.debug('添加用户和Domain关联信息sql：' + sql);
+                            conn.query(sql, function (err, rows) {
+                                if (err) {
+                                    logger.error('添加用户和Domain关联信息错误：' + err);
+                                    message.Status = false;
+                                    message.message = "加用户和Domain关联信息错失败";
+                                    message.Data = null;
+                                    callback(new Error('加用户和Domain关联信息错失败', message));
+                                } else {
+                                    callback(null, domain, URI, user, domainId);
+                                }
+                            });
+                        },
+                        function (domain, URI, user, domainId, callback) {
+                            var sql = 'select id as Id,URI from sys_mtree where URI ="' + URI + '"';
+                            logger.debug('获取上级MTree信息sql:', sql);
+                            conn.query(sql, function (error, rows) {
+                                if (error) {
+                                    logger.error('获取上级MTree信息错误:', error);
+                                    message.Status = false;
+                                    message.message = '获取上级MTree信息错误'
+                                    message.Data = null;
+                                    callback(new Error('获取上级MTree信息错误'), message);
+                                } else {
+                                    if (rows.length == 1) {
+                                        callback(null, rows[0], domain, URI, user, domainId);
+                                    } else {
+                                        message.Status = false;
+                                        message.message = '没有对应的上级MTree'
+                                        message.Data = null;
+                                        callback(new Error('没有对应的上级MTree'), message);
+                                    }
+                                }
+                            });
+                        },
+                        function (preMtree, domain, URI, user, domainId, callback) {
+                            var sql;
+                            if (domain) {
+                                sql = sqlQuery.update().into('sys_mtree').set({
+                                    PID: preMtree.Id,
+                                    DOMAIN_ID: domainId,
+                                    URI: URI + '/' + devCode,
+                                    COMPANY_ID: user.companyId,
+                                    IS_ACTIVE: 1,
+                                    update_date: date
+                                }).where({
+                                    URI: domain.URI
+                                }).build();
+                            } else {
+                                sql = sqlQuery.insert().into('sys_mtree').set({
+                                    PID: preMtree.Id,
+                                    DOMAIN_ID: domainId,
+                                    URI: URI + '/' + devCode,
+                                    NAME: devCode,
+                                    LAYER: 0,
+                                    MTREE_SOURCE: 3,
+                                    DESCRIPTION: 'Box用戶审核创建',
+                                    COMPANY_ID: user.companyId,
+                                    CREATE_DATE: date
+                                }).build();
+                            }
+                            logger.debug('更新或添加信息sql:', sql);
+                            conn.query(sql, function (error, rows) {
+                                if (error) {
+                                    logger.error('更新或添加信息错误:', error);
+                                    message.Status = false;
+                                    message.message = '更新或添加信息错误'
+                                    message.Data = null;
+                                    callback(new Error('更新或添加信息错误'), message);
+                                } else {
+                                    if (domain) {
+                                        callback(null, domain, URI, user, domainId);
+                                    } else {
+                                        callback(null, domain, URI, user, domainId);
+                                    }
+                                }
+                            });
+                        },
+                        function (domain, URI, user, domainId, callback) {
+                            if (domain) {
+                                var sql = 'SELECT point.POINT_ID,point.UUID,point.POINT_NAME,point.URI from sys_point point where URI like "/' + URI + '/%"';
+                                logger.debug('获取节点下面的测信息sql：' + sql);
+                                conn.query(sql, function (err, rows) {
+                                    if (err) {
+                                        logger.error('获取节点下面测点信息错误：' + err);
+                                        message.Status = false;
+                                        message.message = '获取节点信息失败';
+                                        message.Data = null;
+                                        callback(err, message);
+                                    } else {
+                                        callback(null, domain, rows, URI, user, domainId);
+                                    }
+                                });
+                            } else {
+                                callback(null, domain, [], URI, user, domainId);
+                            }
+                        },
+                        function (domain, points, URI, user, domainId, callback) {
+                            if (points.length < 1) {
+                                callback(null, domain, false, URI, user, domainId, null);
+                            } else {
+                                var cols = [];
+                                var rrs = [];
+                                cols.push(["ID", OPAPI.TYPE.INT32]);
+                                cols.push(["PN", OPAPI.TYPE.STRING]);
+                                cols.push(["UD", OPAPI.TYPE.INT64]);
+                                var sqlPoints = '',
+                                    sqlPointsUUID = '',
+                                    sqlPointURI = '',
+                                    sqlPointIds = [];
+                                var size = points.length;
+                                for (var i = 0; i < size; i++) {
+                                    var row = points[i];
+                                    var rr = [];
+                                    rr.push(row.POINT_ID);
+                                    var pointURI = URI + '/' + row.POINT_NAME;
+                                    var UUID = opPool.makeUUID(pointURI);
+                                    rr.push(UUID);
+                                    UUID = '0x' + UUID;
+                                    rr.push(UUID);
+                                    rrs.push(rr);
+                                    sqlPointsUUID += 'when ' + row.POINT_ID + ' then "' + UUID + '" ';
+                                    sqlPointURI += 'when ' + row.POINT_ID + ' then "' + pointURI + '" ';
+                                    sqlPointIds.push(row.POINT_ID);
+                                }
+                                sqlPoints = 'update sys_point set UUID = case POINT_ID ' + sqlPointsUUID + ' end,URI= case POINT_ID ' + sqlPointURI + ' end ,DOMAIN_ID = ' + domainId + ' where point_ID in( ' + sqlPointIds.toString() + ')';
+                                opPool.update('Point', rrs, cols, function (error, rows, columns) {
+                                    if ((error != 0 && error && error.code) || rows[0].EC != 0) {
+                                        logger.error('编辑测点信息错误：' + JSON.stringify(error));
+                                        message.Status = false;
+                                        message.message = '更新测点信息失败';
+                                        message.Data = null;
+                                        callback(new Error('更新测点信息错误'), message);
+                                    } else {
+                                        callback(null, domain, true, URI, user, domainId, sqlPoints);
+                                    }
+                                });
+                            }
+                        },
+                        function (domain, points, URI, user, domainId, sqlPoints, callback) {
+                            if (points) {
+                                logger.debug('box用户审核更新测点信息sql:' + sqlPoints);
+                                conn.query(sqlPoints, function (err, rows) {
+                                    if (err) {
+                                        logger.error('更新关系库测点信息错误：' + err);
+                                        message.Status = false;
+                                        message.message = '更新数据库信息错误';
+                                        message.Data = null;
+                                        callback(new Error('更新测点信息错误'), message);
+                                    } else {
+                                        callback(null, domain, URI, user);
+                                    }
+                                });
+                            } else {
+                                callback(null, domain, URI, user);
+                            }
+                        },
+                        function (domain, URI, user, callback) {
+                            var path = './public/userfile/';
                             message.Status = true;
                             message.message = 'OK';
                             message.Data = null;
-                            callback(null, message);
+                            if (domain) {
+                                var sourceURI = path + domain.companyId + '/resources' + domain.URI;
+                                var targetURI = path + user.companyId + '/resources' + URI + '/' + devCode;
+                                if (sourceURI != targetURI) {
+                                    fileUtils.copyFileSync(sourceURI, targetURI);
+                                    fileUtils.rmdirSync(sourceURI);
+                                }
+                                callback(null, message);
+                            } else {
+                                path += user.companyId + '/resources' + URI + '/' + devCode;
+                                fs.exists(path, function (exists) {
+                                    if (exists) {
+                                        fileUtils.rmdirSync(path);
+                                        fs.mkdirSync(path);
+                                    }
+                                    if (!exists) {
+                                        fs.mkdirSync(path);
+                                    }
+                                    callback(null, message);
+                                });
+                            }
                         }
-                    });
-                }
-            ],
-            function (error, message) {
-                res.json(message);
+                    ],
+                    function (error, message) {
+                        res.json(message);
+                    }
+                );
             }
-        );
-
+        });
     },
     /**
      * 解除和盒子关联信息
@@ -154,120 +492,199 @@ var boxInfo = {
             res.json(message);
             return;
         }
-        async.waterfall(
-            [
-                function (callback) {
-                    var sql = sqlQuery.select().from('box_user_box').select(['user_id', 'from_user_id', 'to_user_id', 'dev_code', 'status']).where({
-                        user_id: userId,
-                        dev_code: devCode
-                    }).build();
-                    logger.debug('获取盒子绑定/分享信息sql:' + sql);
-                    query(sql, function (error, rows) {
-                        if (error) {
-                            logger.error('获取盒子绑定/分享信息错误：' + error);
-                            message.Status = false;
-                            message.message = '获取盒子绑定/分享信息失败';
-                            message.Data = null;
-                            callback(error, message);
-                        } else {
-                            if (rows.length != 1) {
-                                message.Status = false;
-                                message.message = '没有对应的绑定/分享信息';
-                                message.Data = null;
-                                callback(new Error('没有对应的绑定/分享信息'), message);
-                            } else {
-                                callback(null, rows[0]);
-                            }
-                        }
-                    });
-                },
-                function (row, callback) {
-                    var sql = sqlQuery.remove().from('box_user_box').where({user_id: userId, dev_code: devCode}).build();
-                    logger.debug('移除绑定/分享信息sql:' + sql);
-                    query(sql, function (error, rows) {
-                        if (error) {
-                            logger.error('移除绑定/分享信息错误：' + error);
-                            message.Status = false;
-                            message.message = '移除绑定/分享信息失败';
-                            message.Data = null;
-                            callback(error, message);
-                        } else {
-                            callback(null, row);
-                        }
-                    });
-                },
-                function (row, callback) {
-                    //判断是绑定还是分享过来的
-                    if (!row.from_user_id) {
-                        var sql = sqlQuery.remove().from('box_user_box').where({
-                            from_user_id: row.from_user_id,
-                            dev_code: devCode
-                        }).build();
-                        logger.debug('删除当前盒子分享信息sql:' + sql);
-                        query(sql, function (error, rows) {
-                            if (error) {
-                                logger.error('删除当前盒子分享信息错误：' + error);
-                                message.Status = false;
-                                message.message = '解绑盒子失败';
-                                message.Data = null;
-                                callback(error, message);
-                            } else {
-                                message.Status = true;
-                                message.message = 'OK';
-                                message.Data = null;
-                                callback(new Error('解除对应分享信息成功'), message);
-                            }
-                        });
-                    } else {
-                        var sql = sqlQuery.select().from('box_user_box').select(['id']).where({
-                            from_user_id: row.from_user_id,
-                            dev_code: devCode
-                        }).build();
-                        logger.debug('查询当前用户的当前盒子是否还有分享sql:' + sql);
-                        query(sql, function (error, rows) {
-                            if (error) {
-                                logger.error('查询当前用户的当前盒子是否还有分享错误：' + error);
-                                message.Status = false;
-                                message.message = '移除分享信息失败';
-                                message.Data = null;
-                                callback(error, message);
-                            } else {
-                                callback(null, rows.length, row);
-                            }
-                        });
-                    }
-                },
-                function (count, row, callback) {
-                    var sql = sqlQuery.update().into('box_user_box').set({
-                        update_date: Utils.dateFormat(new Date().getTime(), Utils.yyyyMMddhhmmss)
-                    }).where({user_id: row.from_user_id, dev_code: devCode}).build();
-                    if (count == 0) {
-                        sql = sqlQuery.update().into('box_user_box').set({
-                            status: 2,
-                            update_date: Utils.dateFormat(new Date().getTime(), Utils.yyyyMMddhhmmss)
-                        }).where({user_id: row.from_user_id, dev_code: devCode}).build();
-                    }
-                    logger.debug('更新盒子分享信息sql：' + sql);
-                    query(sql, function (error, rows) {
-                        if (error) {
-                            logger.error('更新盒子分享信息错误：' + error);
-                            message.Status = false;
-                            message.message = '更新盒子分享信息出错';
-                            message.Data = null;
-                            callback(error, message);
-                        } else {
-                            message.Status = true;
-                            message.message = 'OK';
-                            message.Data = null;
-                            callback(null, message);
-                        }
-                    });
-                }
-            ],
-            function (error, message) {
+        var date = Utils.dateFormat(new Date().getTime(), Utils.yyyyMMddhhmmss);
+        transaction(function (err, conn) {
+            if (err) {
+                logger.error('解绑盒子 transaction ERROR：' + err);
+                message.Status = false;
+                message.message = "操作失败";
+                message.Data = null;
                 res.json(message);
+                return;
+            } else {
+                async.waterfall(
+                    [
+                        function (callback) {
+                            var sql = sqlQuery.select().from('box_user_box').select(['user_id', 'from_user_id', 'to_user_id', 'dev_code', 'status']).where({
+                                user_id: userId,
+                                dev_code: devCode
+                            }).build();
+                            logger.debug('获取盒子绑定/分享信息sql:' + sql);
+                            conn.query(sql, function (error, rows) {
+                                if (error) {
+                                    logger.error('获取盒子绑定/分享信息错误：' + error);
+                                    message.Status = false;
+                                    message.message = '获取盒子绑定/分享信息失败';
+                                    message.Data = null;
+                                    callback(error, message);
+                                } else {
+                                    if (rows.length != 1) {
+                                        message.Status = false;
+                                        message.message = '没有对应的绑定/分享信息';
+                                        message.Data = null;
+                                        callback(new Error('没有对应的绑定/分享信息'), message);
+                                    } else {
+                                        callback(null, rows[0]);
+                                    }
+                                }
+                            });
+                        },
+                        function (row, callback) {
+                            var sql = sqlQuery.remove().from('box_user_box').where({user_id: userId, dev_code: devCode}).build();
+                            logger.debug('移除绑定/分享信息sql:' + sql);
+                            conn.query(sql, function (error, rows) {
+                                if (error) {
+                                    logger.error('移除绑定/分享信息错误：' + error);
+                                    message.Status = false;
+                                    message.message = '移除绑定/分享信息失败';
+                                    message.Data = null;
+                                    callback(error, message);
+                                } else {
+                                    callback(null, row);
+                                }
+                            });
+                        },
+                        function (row, callback) {
+                            //判断是绑定还是分享过来的
+                            if (row.from_user_id) {
+                                var sql = sqlQuery.remove().from('box_user_box').where({
+                                    from_user_id: row.from_user_id,
+                                    dev_code: devCode
+                                }).build();
+                                logger.debug('删除当前盒子分享信息sql:' + sql);
+                                conn.query(sql, function (error, rows) {
+                                    if (error) {
+                                        logger.error('删除当前盒子分享信息错误：' + error);
+                                        message.Status = false;
+                                        message.message = '解绑盒子失败';
+                                        message.Data = null;
+                                        callback(error, message);
+                                    } else {
+                                        var sql = 'select count(id) as id from box_user_box where from_user_id = ' + row.from_user_id;
+                                        logger.debug('获取是否还有盒子分享信息sql:' + sql);
+                                        conn.query(sql, function (error, rows) {
+                                            if (error) {
+                                                logger.error('获取是否还有盒子分享信息错误：' + error);
+                                                message.Status = false;
+                                                message.message = '获取是否还有盒子分享失败';
+                                                message.Data = null;
+                                                callback(error, message);
+                                            } else {
+                                                if (rows[0].count > 0) {
+                                                    message.Status = true;
+                                                    message.message = 'OK';
+                                                    message.Data = null;
+                                                    callback(new Error('解除对应分享信息成功'), message);
+                                                } else {
+                                                    sql = sqlQuery.update().into('box_user_box').set({
+                                                        status: 2,
+                                                        update_date: date
+                                                    }).where({user_id: userId, dev_code: devCode}).build();
+                                                    logger.debug('修改盒子状态信息sql:' + sql);
+                                                    conn.query(sql, function (error, rows) {
+                                                        if (error) {
+                                                            logger.error('修改盒子状态信息错误：' + error);
+                                                            message.Status = false;
+                                                            message.message = '修改盒子状态失败';
+                                                            message.Data = null;
+                                                            callback(error, message);
+                                                        } else {
+                                                            message.Status = true;
+                                                            message.message = 'OK';
+                                                            message.Data = null;
+                                                            callback(new Error('解除对应分享信息成功'), message);
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        });
+                                    }
+                                });
+                            } else {
+                                var sql = sqlQuery.remove().from('box_user_box').where({
+                                    from_user_id: row.user_id,
+                                    dev_code: devCode
+                                }).build();
+                                logger.debug('删除盒子分享信息sql:' + sql);
+                                conn.query(sql, function (error, rows) {
+                                    if (error) {
+                                        logger.error('删除盒子分享信息错误：' + error);
+                                        message.Status = false;
+                                        message.message = '删除盒子分享信息失败';
+                                        message.Data = null;
+                                        callback(error, message);
+                                    } else {
+                                        callback(null);
+                                    }
+                                });
+                            }
+                        },
+                        function (callback) {
+                            var sql = sqlQuery.update().into('sys_domain').set({
+                                IS_ACTIVE: 0,
+                                UPDATE_DATE: date
+                            }).where({
+                                name: devCode,
+                                type: 3
+                            }).build();
+                            logger.debug('更新box域信息sql:', sql);
+                            conn.query(sql, function (error, rows) {
+                                if (error) {
+                                    logger.error('更新box域信息错误:', error);
+                                    message.Status = false;
+                                    message.message = '更新box域错误'
+                                    message.Data = null;
+                                    callback(new Error('更新box域错误'), message);
+                                } else {
+                                    callback(null);
+                                }
+                            });
+                        },
+                        function (callback) {
+                            var sql = 'delete from sys_user_domain where user_id =' + userId + ' and domain_id in (SELECT domain_id from sys_domain where type=3 and name = "' + devCode + '")';
+                            logger.debug('删除用户box域关联信息sql:', sql);
+                            conn.query(sql, function (error, rows) {
+                                if (error) {
+                                    logger.error('删除用户box域关联信息错误:', error);
+                                    message.Status = false;
+                                    message.message = '删除用户box域关联错误'
+                                    message.Data = null;
+                                    callback(new Error('删除用户box域关联错误'), message);
+                                } else {
+                                    callback(null);
+                                }
+                            });
+                        },
+                        function (callback) {
+                            var sql = sqlQuery.update().into('sys_mtree').set({
+                                IS_ACTIVE: 0,
+                                UPDATE_DATE: date
+                            }).where({
+                                name: devCode,
+                                MTREE_SOURCE: 3
+                            }).build();
+                            logger.debug('更新box MTree信息sql:', sql);
+                            conn.query(sql, function (error, rows) {
+                                if (error) {
+                                    logger.error('更新box MTree信息错误:', error);
+                                    message.Status = false;
+                                    message.message = '更新box MTree错误'
+                                    message.Data = null;
+                                    callback(new Error('更新box MTree错误'), message);
+                                } else {
+                                    message.Status = true;
+                                    message.message = 'OK';
+                                    message.Data = null;
+                                    callback(null, message);
+                                }
+                            });
+                        }
+                    ],
+                    function (error, message) {
+                        res.json(message);
+                    });
             }
-        );
+        });
     },
     /**
      * 获取用户盒子列表
@@ -927,163 +1344,495 @@ var boxInfo = {
             return;
         }
         SMS.deleteSms(UUID);
-
-        async.waterfall(
-            [
-                function (callback) {
-                    var sql = 'SELECT user_Id , source,mobile_phone  from sys_user where user_id  = ' + userId + ' or (MOBILE_PHONE = "' + toPhoneNum + '" and JOB_NO = "' + jobNo + '" )';
-                    logger.debug('获取移交方和被移交方信息sql:' + sql);
-                    query(sql, function (error, rows) {
-                        if (error) {
-                            logger.error('获取移交方和被移交方信息错误：' + error);
-                            message.Status = false;
-                            message.message = '获取移交方和被移交方信息出错';
-                            message.Data = null;
-                            callback(error, message);
-                        }
-                        if (rows.length != 2) {
-                            message.Status = false;
-                            message.message = '移交方和被移交方不存在';
-                            message.Data = null;
-                            callback(new Error('移交方和被移交方不存在'), message);
-                        } else {
-                            if (rows[0].user_Id == userId) {
-                                callback(null, rows[0], rows[1]);
-                            } else {
-                                callback(null, rows[1], rows[0]);
-                            }
-                        }
-                    });
-                },
-                function (fromUser, toUser, callback) {
-                    var sql = '';
-                    if (fromUser.source == 2) {
-                        sql = 'SELECT USER_ID,dev_code from box_user_box where USER_ID in (SELECT USER_ID from sys_user where MOBILE_PHONE ="' + fromUser.mobile_phone + '")';
-                    } else {
-                        sql = sqlQuery.select().from('box_user_box').select(['user_id', 'dev_code']).where({user_id: userId}).build();
-                    }
-                    logger.debug('获取当前用户下属盒子信息sql:' + sql);
-                    query(sql, function (error, rows) {
-                        if (error) {
-                            logger.error('获取当前用户下属盒子信息错误：' + error);
-                            message.Status = false;
-                            message.message = '获取当前用户下属盒子信息出错';
-                            message.Data = null;
-                            callback(error, message);
-                        } else {
-                            if (rows.length < 1) {
-                                message.Status = true;
-                                message.message = 'OK';
-                                message.Data = null;
-                                callback(new Error('当前用户没有盒子'), message);
-                            } else {
-                                callback(null, toUser, rows);
-                            }
-                        }
-                    });
-                },
-                function (toUser, rs, callback) {
-                    var date = Utils.dateFormat(new Date().getTime(), Utils.yyyyMMddhhmmss);
-                    var devCodes = [];
-                    for (var i in rs) {
-                        devCodes.push(rs[i].dev_code);
-                    }
-                    var sql = sqlQuery.update().into('box_user_box').set({user_id: toUser.user_Id, update_date: date}).where({
-                        dev_code: devCodes,
-                        status: [2, 3]
-                    }).build();
-                    logger.debug('更新盒子归属信息sql:' + sql);
-                    query(sql, function (error, rows) {
-                        if (error) {
-                            logger.error('更新盒子归属错误：' + error);
-                            message.Status = false;
-                            message.message = '更新盒子归属出错';
-                            message.Data = null;
-                            callback(error, message);
-                        } else {
-                            callback(null, toUser, devCodes, date);
-                        }
-                    });
-                },
-                function (toUser, devCodes, date, callback) {
-                    var sql = sqlQuery.update().into('box_user_box').set({from_user_id: toUser.user_Id, update_date: date}).where({
-                        dev_code: devCodes,
-                        status: 4
-                    }).build();
-                    logger.debug('更新盒子归属分享信息sql:' + sql);
-                    query(sql, function (error, rows) {
-                        if (error) {
-                            logger.error('更新盒子归属分享错误：' + error);
-                            message.Status = false;
-                            message.message = '更新盒子归属分享出错';
-                            message.Data = null;
-                            callback(error, message);
-                        } else {
-                            callback(null);
-                        }
-                    });
-                },
-                function (callback) {
-                    var sql = 'select dev_code from box_user_box where user_id = from_user_id ';
-                    logger.debug('获取分享信息sql:' + sql);
-                    query(sql, function (error, rows) {
-                        if (error) {
-                            logger.error('获取分享错误：' + error);
-                            message.Status = false;
-                            message.message = '获取分享出错';
-                            message.Data = null;
-                            callback(error, message);
-                        } else {
-                            callback(null, rows);
-                        }
-                    });
-                },
-                function (rs, callback) {
-                    if (rs.length > 0) {
-                        var devCodes = [];
-                        for (var i in  rs) {
-                            devCodes.push(rs[i].dev_code);
-                        }
-                        var sql = sqlQuery.update().into('box_user_box').set({status: 2}).where({dev_code: devCodes}).build();
-                        logger.debug('更新分享信息sql:' + sql);
-                        query(sql, function (error, rows) {
-                            if (error) {
-                                logger.error('更新分享错误：' + error);
-                                message.Status = false;
-                                message.message = '更新分享出错';
-                                message.Data = null;
-                                callback(error, message);
-                            } else {
-                                callback(null);
-                            }
-                        });
-                    } else {
-                        callback(null);
-                    }
-                },
-                function (callback) {
-                    var sql = 'delete from box_user_box where user_id = from_user_id ';
-                    logger.debug('删除分享信息sql:' + sql);
-                    query(sql, function (error, rows) {
-                        if (error) {
-                            logger.error('删除分享错误：' + error);
-                            message.Status = false;
-                            message.message = '删除分享分享出错';
-                            message.Data = null;
-                            callback(error, message);
-                        } else {
-                            message.Status = true;
-                            message.message = 'OK';
-                            message.Data = null;
-                            callback(null, message);
-                        }
-                    });
-                }
-            ],
-            function (error, message) {
+        var date = Utils.dateFormat(new Date().getTime(), Utils.yyyyMMddhhmmss);
+        transaction(function (err, conn) {
+            if (err) {
+                logger.error('工程移交盒子 transaction ERROR：' + err);
+                message.Status = false;
+                message.message = "操作失败";
+                message.Data = null;
                 res.json(message);
+                return;
+            } else {
+                async.waterfall(
+                    [
+                        function (callback) {
+                            var sql = 'SELECT user_Id as userId ,job_no as jobNo, source,mobile_phone,enterprise_id as companyId,enterprise_name as companyName from sys_user where user_id  = ' + userId + ' or (MOBILE_PHONE = "' + toPhoneNum + '" and JOB_NO = "' + jobNo + '" )';
+                            logger.debug('获取移交方和被移交方信息sql:' + sql);
+                            conn.query(sql, function (error, rows) {
+                                if (error) {
+                                    logger.error('获取移交方和被移交方信息错误：' + error);
+                                    message.Status = false;
+                                    message.message = '获取移交方和被移交方信息出错';
+                                    message.Data = null;
+                                    callback(error, message);
+                                }
+                                if (rows.length != 2) {
+                                    message.Status = false;
+                                    message.message = '移交方和被移交方不存在';
+                                    message.Data = null;
+                                    callback(new Error('移交方和被移交方不存在'), message);
+                                } else {
+                                    if (rows[0].userId == userId) {
+                                        callback(null, rows[0], rows[1]);
+                                    } else {
+                                        callback(null, rows[1], rows[0]);
+                                    }
+                                }
+                            });
+                        },
+                        function (fromUser, toUser, callback) {
+                            var sql = '';
+                            if (fromUser.source == 2) {
+                                sql = 'SELECT USER_ID,dev_code from box_user_box where USER_ID in (SELECT USER_ID from sys_user where MOBILE_PHONE ="' + fromUser.mobile_phone + '")';
+                            } else {
+                                sql = sqlQuery.select().from('box_user_box').select(['user_id', 'dev_code']).where({user_id: userId}).build();
+                            }
+                            logger.debug('获取当前用户下属盒子信息sql:' + sql);
+                            conn.query(sql, function (error, rows) {
+                                if (error) {
+                                    logger.error('获取当前用户下属盒子信息错误：' + error);
+                                    message.Status = false;
+                                    message.message = '获取当前用户下属盒子信息出错';
+                                    message.Data = null;
+                                    callback(error, message);
+                                } else {
+                                    if (rows.length < 1) {
+                                        message.Status = true;
+                                        message.message = 'OK';
+                                        message.Data = null;
+                                        callback(new Error('当前用户没有盒子'), message);
+                                    } else {
+                                        callback(null, fromUser, toUser, rows);
+                                    }
+                                }
+                            });
+                        },
+                        function (fromUser, toUser, rs, callback) {
+                            var date = Utils.dateFormat(new Date().getTime(), Utils.yyyyMMddhhmmss);
+                            var devCodes = [];
+                            for (var i in rs) {
+                                devCodes.push(rs[i].dev_code);
+                            }
+                            var sql = sqlQuery.update().into('box_user_box').set({user_id: toUser.userId, update_date: date}).where({
+                                dev_code: devCodes,
+                                status: [2, 3]
+                            }).build();
+                            logger.debug('更新盒子归属信息sql:' + sql);
+                            conn.query(sql, function (error, rows) {
+                                if (error) {
+                                    logger.error('更新盒子归属错误：' + error);
+                                    message.Status = false;
+                                    message.message = '更新盒子归属出错';
+                                    message.Data = null;
+                                    callback(error, message);
+                                } else {
+                                    callback(null, fromUser, toUser, devCodes, date);
+                                }
+                            });
+                        },
+                        function (fromUser, toUser, devCodes, date, callback) {
+                            var sql = sqlQuery.update().into('box_user_box').set({from_user_id: toUser.userId, update_date: date}).where({
+                                dev_code: devCodes,
+                                status: 4
+                            }).build();
+                            logger.debug('更新盒子归属分享信息sql:' + sql);
+                            conn.query(sql, function (error, rows) {
+                                if (error) {
+                                    logger.error('更新盒子归属分享错误：' + error);
+                                    message.Status = false;
+                                    message.message = '更新盒子归属分享出错';
+                                    message.Data = null;
+                                    callback(error, message);
+                                } else {
+                                    callback(null, fromUser, toUser, devCodes);
+                                }
+                            });
+                        },
+                        function (fromUser, toUser, devCodes, callback) {
+                            var sql = 'select dev_code from box_user_box where user_id = from_user_id ';
+                            logger.debug('获取分享信息sql:' + sql);
+                            conn.query(sql, function (error, rows) {
+                                if (error) {
+                                    logger.error('获取分享错误：' + error);
+                                    message.Status = false;
+                                    message.message = '获取分享出错';
+                                    message.Data = null;
+                                    callback(error, message);
+                                } else {
+                                    callback(null, rows, fromUser, toUser, devCodes);
+                                }
+                            });
+                        },
+                        function (rs, fromUser, toUser, devCodes, callback) {
+                            if (rs.length > 0) {
+                                var devCodes = [];
+                                for (var i in  rs) {
+                                    devCodes.push(rs[i].dev_code);
+                                }
+                                var sql = sqlQuery.update().into('box_user_box').set({status: 2}).where({dev_code: devCodes}).build();
+                                logger.debug('更新分享信息sql:' + sql);
+                                conn.query(sql, function (error, rows) {
+                                    if (error) {
+                                        logger.error('更新分享错误：' + error);
+                                        message.Status = false;
+                                        message.message = '更新分享出错';
+                                        message.Data = null;
+                                        callback(error, message);
+                                    } else {
+                                        callback(null, fromUser, toUser, devCodes);
+                                    }
+                                });
+                            } else {
+                                callback(null, fromUser, toUser, devCodes);
+                            }
+                        },
+                        function (fromUser, toUser, devCodes, callback) {
+                            var sql = 'delete from box_user_box where user_id = from_user_id ';
+                            logger.debug('删除分享信息sql:' + sql);
+                            conn.query(sql, function (error, rows) {
+                                if (error) {
+                                    logger.error('删除分享错误：' + error);
+                                    message.Status = false;
+                                    message.message = '删除分享分享出错';
+                                    message.Data = null;
+                                    callback(error, message);
+                                } else {
+                                    callback(null, fromUser, toUser, devCodes);
+                                }
+                            });
+                        },
+                        function (fromUser, toUser, devCodes, callback) {
+                            var targetURI;
+                            if (toUser.source == 2) {
+                                targetURI = '/' + toUser.companyName + '/' + toUser.jobNo;
+                                callback(null, targetURI, toUser);
+                            } else {
+                                var sql = 'SELECT user_id as userId,job_no as jobNo,enterprise_id as companyId,enterprise_name as companyName from sys_user where SOURCE =2 and MOBILE_PHONE in (SELECT MOBILE_PHONE from sys_user where USER_ID = ' + toUser.userId + ' )';
+                                logger.debug('获取上级用户sql:', sql);
+                                conn.query(sql, function (error, rows) {
+                                    if (error) {
+                                        logger.error('获取上级用户错误:', error);
+                                        message.Status = false;
+                                        message.message = '获取上级用户错误';
+                                        message.Data = null;
+                                        callback(new Error('获取上级用户错误'), message);
+                                    } else {
+                                        if (rows.length == 1) {
+                                            targetURI = '/' + rows[0].companyName + '/' + rows[0].jobNo + '/' + toUser.jobNo;
+                                        } else {
+                                            targetURI = '/' + toUser.jobNo;
+                                        }
+                                        callback(null, targetURI, fromUser, toUser, devCodes);
+                                    }
+                                });
+                            }
+                        },
+                        function (targetURI, fromUser, toUser, devCodes, callback) {
+                            var sourceURI;
+                            if (fromUser.source == 2) {
+                                sourceURI = '/' + fromUser.companyName + '/' + fromUser.jobNo;
+                                callback(null, sourceURI, toUser);
+                            } else {
+                                var sql = 'SELECT user_id as userId,job_no as jobNo,enterprise_id as companyId,enterprise_name as companyName from sys_user where SOURCE =2 and MOBILE_PHONE in (SELECT MOBILE_PHONE from sys_user where USER_ID = ' + fromUser.userId + ' )';
+                                logger.debug('获取上级用户sql:', sql);
+                                conn.query(sql, function (error, rows) {
+                                    if (error) {
+                                        logger.error('获取上级用户错误:', error);
+                                        message.Status = false;
+                                        message.message = '获取上级用户错误';
+                                        message.Data = null;
+                                        callback(new Error('获取上级用户错误'), message);
+                                    } else {
+                                        if (rows.length == 1) {
+                                            sourceURI = '/' + rows[0].companyName + '/' + rows[0].jobNo + '/' + fromUser.jobNo;
+                                        } else {
+                                            sourceURI = '/' + fromUser.jobNo;
+                                        }
+                                        callback(null, sourceURI, targetURI, fromUser, toUser, devCodes);
+                                    }
+                                });
+                            }
+                        },
+                        function (sourceURI, targetURI, fromUser, toUser, devCodes, callback) {
+                            var sql = 'select domain_id as domainId,URI,company_id as companyId from sys_domain where URI ="' + targetURI + '"';
+                            logger.debug('获取上级域 sql:', sql);
+                            conn.query(sql, function (error, rows) {
+                                if (error) {
+                                    logger.error('获取上级域错误:', error);
+                                    message.Status = false;
+                                    message.message = '获取上级域错误';
+                                    message.Data = null;
+                                    callback(new Error('获取上级域错误'), message);
+                                } else {
+                                    if (rows.length == 1) {
+                                        callback(null, sourceURI, targetURI, fromUser, toUser, devCodes, rows[0].domainId);
+                                    } else {
+                                        message.Status = false;
+                                        message.message = '没有对应的上级域';
+                                        message.Data = null;
+                                        callback(new Error('没有对应的上级域'), message);
+                                    }
+                                }
+                            });
+                        },
+                        function (sourceURI, targetURI, fromUser, toUser, devCodes, domainId, callback) {
+                            var sql = 'select id as id,URI from sys_mtree where URI ="' + targetURI + '"';
+                            logger.debug('获取上级MTree sql:', sql);
+                            conn.query(sql, function (error, rows) {
+                                if (error) {
+                                    logger.error('获取上级MTree 错误:', error);
+                                    message.Status = false;
+                                    message.message = '获取上级MTree 错误';
+                                    message.Data = null;
+                                    callback(new Error('获取上级MTree 错误'), message);
+                                } else {
+                                    if (rows.length == 1) {
+                                        callback(null, sourceURI, targetURI, fromUser, toUser, devCodes, domainId, rows[0].id);
+                                    } else {
+                                        message.Status = false;
+                                        message.message = '没有对应的上级MTree';
+                                        message.Data = null;
+                                        callback(new Error('没有对应的上级MTree'), message);
+                                    }
+                                }
+                            });
+                        },
+                        function (sourceURI, targetURI, fromUser, toUser, devCodes, domainId, mtreeId, callback) {
+                            var date = Utils.dateFormat(new Date().getTime(), Utils.yyyyMMddhhmmss);
+                            async.eachSeries(devCodes, function (devCode, callbackSeries) {
+                                async.waterfall(
+                                    [
+                                        function (callbackWater) {
+                                            var sql = 'select domain_id as domainId,URI,company_id as companyId from sys_domain where type = 3 and name = "' + devCode + '"';
+                                            logger.debug('获取是否绑定过信息sql:', sql);
+                                            conn.query(sql, function (error, rows) {
+                                                if (error) {
+                                                    logger.error('获取是否绑定过信息错误:', error);
+                                                    message.Status = false;
+                                                    message.message = '获取绑定信息错误'
+                                                    message.Data = null;
+                                                    callbackWater(new Error('获取绑定信息错误'), message);
+                                                } else {
+                                                    callbackWater(null, rows[0].URI);
+                                                }
+                                            });
+                                        },
+                                        function (URI, callbackWater) {
+                                            var sql = 'update sys_user_domain set USER_ID = ' + toUser.userId + ',update_date = "' + date + '" where DOMAIN_ID in (select DOMAIN_ID from sys_domain where URI = "' + URI + '")'
+                                            logger.debug('更新对应的域所属sql:', sql);
+                                            conn.query(sql, function (error, rows) {
+                                                if (error) {
+                                                    logger.error('更新对应的域所属错误：', error);
+                                                    message.Status = false;
+                                                    message.message = '更新对应的域所属错误';
+                                                    message.Data = null;
+                                                    callbackWater(new Error('更新对应的域所属错误'), message);
+                                                } else {
+                                                    callbackWater(null, URI);
+                                                }
+                                            });
+                                        },
+                                        function (URI, callbackWater) {
+                                            var sql = sqlQuery.update().into('sys_domain').set({
+                                                pre_domain_Id: domainId,
+                                                URI: targetURI + '/' + devCode,
+                                                COMPANY_ID: toUser.companyId,
+                                                TYPE: 3,
+                                                update_date: date
+                                            }).where({
+                                                URI: URI
+                                            }).build();
+                                            logger.debug('更新对应的用户顶级域sql:', sql);
+                                            conn.query(sql, function (error, rows) {
+                                                if (error) {
+                                                    logger.error('更新对应的用户顶级域错误：', error);
+                                                    message.Status = false;
+                                                    message.message = '更新顶级域错误';
+                                                    message.Data = null;
+                                                    callbackWater(new Error('更新顶级域错误'), message);
+                                                } else {
+                                                    callbackWater(null, URI);
+                                                }
+                                            });
+                                        },
+                                        function (URI, callbackWater) {
+                                            var sql = sqlQuery.update().into('sys_mtree').set({
+                                                PID: mtreeId,
+                                                URI: targetURI + '/' + devCode,
+                                                COMPANY_ID: toUser.companyId,
+                                                update_date: date
+                                            }).where({
+                                                URI: URI
+                                            }).build();
+                                            logger.debug('更新对应的用户顶级MTree sql:', sql);
+                                            conn.query(sql, function (error, rows) {
+                                                if (error) {
+                                                    logger.error('更新对应的用户顶级MTree错误：', error);
+                                                    message.Status = false;
+                                                    message.message = '更新顶级MTree错误';
+                                                    message.Data = null;
+                                                    callbackWater(new Error('更新顶级MTree 错误'), message);
+                                                } else {
+                                                    callbackWater(null, URI);
+                                                }
+                                            });
+                                        },
+                                        function (URI, callbackWater) {
+                                            var sql = 'update sys_domain set URI=INSERT(URI,1,' + URI.length + ',"' + targetURI + '/' + devCode + '"),company_id = ' + toUser.companyId +
+                                                ',update_date="' + date + '" where URI like "' + URI + '/%"';
+                                            logger.debug('更新对应的下属域信息sql:', sql);
+                                            conn.query(sql, function (error, rows) {
+                                                if (error) {
+                                                    logger.error('更新对应的下属域错误：', error);
+                                                    message.Status = false;
+                                                    message.message = '更新对应的下属域错误';
+                                                    message.Data = null;
+                                                    callbackWater(new Error('更新对应的下属域错误'), message);
+                                                } else {
+                                                    callbackWater(null, URI);
+                                                }
+                                            });
+                                        },
+                                        function (URI, callbackWater) {
+                                            var sql = 'update sys_mtree set URI=INSERT(URI,1,' + URI.length + ',"' + targetURI + '/' + devCode + '"),company_id = ' + toUser.companyId +
+                                                ',update_date="' + date + '" where URI like "' + URI + '/%"';
+                                            logger.debug('更新对应的下属MTree信息sql:', sql);
+                                            conn.query(sql, function (error, rows) {
+                                                if (error) {
+                                                    logger.error('更新对应的下属MTree错误：', error);
+                                                    message.Status = false;
+                                                    message.message = '更新对应的下属MTree错误';
+                                                    message.Data = null;
+                                                    callbackWater(new Error('更新对应的下属MTree错误'), message);
+                                                } else {
+                                                    callbackWater(null, URI);
+                                                }
+                                            });
+                                        },
+                                        function (URI, callbackWater) {
+                                            var sql = 'SELECT point.POINT_ID,point.UUID,point.POINT_NAME,point.URI from sys_point point where URI like "' + URI + '/%"';
+                                            logger.debug('获取节点下面的测信息sql：' + sql);
+                                            conn.query(sql, function (err, rows) {
+                                                if (err) {
+                                                    logger.error('获取节点下面测点信息错误：' + err);
+                                                    message.Status = false;
+                                                    message.Data = null;
+                                                    message.message = '获取节点信息失败';
+                                                    callbackWater(err, message);
+                                                } else {
+                                                    callbackWater(null, rows, URI);
+                                                }
+                                            });
+                                        },
+                                        function (rows, URI, callbackWater) {
+                                            if (!rows || rows.length < 1) {
+                                                callbackWater(null, false, null);
+                                            } else {
+                                                var cols = [];
+                                                var rrs = [];
+                                                cols.push(["ID", OPAPI.TYPE.INT32]);
+                                                cols.push(["PN", OPAPI.TYPE.STRING]);
+                                                cols.push(["UD", OPAPI.TYPE.INT64]);
+                                                var sqlPoints = '',
+                                                    sqlPointsUUID = '',
+                                                    sqlPointURI = '',
+                                                    sqlPointIds = [];
+                                                var size = rows.length;
+                                                for (var i = 0; i < size; i++) {
+                                                    var row = rows[i];
+                                                    var rr = [];
+                                                    rr.push(row.POINT_ID);
+                                                    var pointURI = row.URI.indexOf(URI + '/', targetURI + '/');
+                                                    var UUID = opPool.makeUUID(pointURI);
+                                                    rr.push(UUID);
+                                                    UUID = '0x' + UUID;
+                                                    rr.push(UUID);
+                                                    rrs.push(rr);
+                                                    sqlPointsUUID += 'when ' + row.POINT_ID + ' then "' + UUID + '" ';
+                                                    sqlPointURI += 'when ' + row.POINT_ID + ' then "' + pointURI + '" ';
+                                                    sqlPointIds.push(row.POINT_ID);
+                                                }
+                                                sqlPoints = 'update sys_point set UUID = case POINT_ID ' + sqlPointsUUID + ' end,URI= case POINT_ID ' + sqlPointURI + ' end ,DOMAIN_ID = ' + domainId + ' where point_ID in( ' + sqlPointIds.toString() + ')';
+                                                opPool.update('Point', rrs, cols, function (error, rows, columns) {
+                                                    if ((error != 0 && error && error.code) || rows[0].EC != 0) {
+                                                        logger.error('编辑测点信息错误：' + JSON.stringify(error));
+                                                        message.Status = false;
+                                                        message.message = '更新测点信息失败';
+                                                        message.Data = null;
+                                                        callbackWater(new Error('更新测点信息错误'), message);
+                                                    } else {
+                                                        callbackWater(null, true, sqlPoints);
+                                                    }
+                                                });
+                                            }
+                                        },
+                                        function (points, sqlPoints, callbackWater) {
+                                            if (points) {
+                                                logger.debug('box用户审核更新测点信息sql:' + sqlPoints);
+                                                conn.query(sqlPoints, function (err, rows) {
+                                                    if (err) {
+                                                        logger.error('更新关系库测点信息错误：' + err);
+                                                        message.Status = false;
+                                                        message.Data = null;
+                                                        message.message = '更新数据库信息错误';
+                                                        callbackWater(new Error('更新测点信息错误'), message);
+                                                    } else {
+                                                        callbackWater(null);
+                                                    }
+                                                });
+                                            } else {
+                                                callbackWater(null);
+                                            }
+                                        },
+                                        function (callbackWater) {
+                                            var path = './public/userfile/';
+                                            sourceURI = path + fromUser.companyId + '/resources' + sourceURI + '/' + devCode;
+                                            targetURI = path + toUser.companyId + '/resources' + targetURI + '/' + devCode;
+                                            fs.exists(targetURI, function (exists) {
+                                                if (exists) {
+                                                    fileUtils.rmdirSync(targetURI);
+                                                    fs.mkdirSync(targetURI);
+                                                }
+                                                if (!exists) {
+                                                    fs.mkdirSync(targetURI);
+                                                }
+                                                fileUtils.copyFileSync(sourceURI, targetURI);
+                                                fileUtils.rmdirSync(sourceURI);
+                                                message.Status = true;
+                                                message.message = 'OK';
+                                                message.Data = null;
+                                                callbackWater(null, message);
+                                            });
+
+                                        }
+                                    ],
+                                    function (error, message) {
+                                        if (error) {
+                                            callback(error, message);
+                                        } else {
+                                            callbackSeries(null, message);
+                                        }
+                                    });
+                            }, function (err) {
+                                if (err) {
+                                    message.Status = false;
+                                    message.message = '操作失败';
+                                    message.Data = null;
+                                } else {
+                                    message.Status = true;
+                                    message.message = 'OK';
+                                    message.Data = null;
+                                }
+                                callback(err, message);
+                            });
+                        }
+                    ],
+                    function (error, message) {
+                        res.json(message);
+                    });
             }
-        );
+        });
     }
 };
 module.exports = boxInfo;

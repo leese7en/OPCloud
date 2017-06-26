@@ -11,7 +11,6 @@ var formidable = require('formidable');
 var fs = require('fs');
 var GlobalAgent = require('../../message/GlobalAgent');
 var querystring = require('querystring');
-
 var UUID = require('node-uuid');
 
 var sql = require('sql-query');
@@ -1556,8 +1555,8 @@ var domainManage = {
                                     cols.push(["GN", OPAPI.TYPE.STRING]);
                                     cols.push(["TN", OPAPI.TYPE.STRING]);
                                     cols.push(["RT", OPAPI.TYPE.INT8]);
-                                    cols.push(["KR", OPAPI.TYPE.STRING]);
-                                    cols.push(["HW", OPAPI.TYPE.INT32]);
+                                    cols.push(["KR", OPAPI.TYPE.INT32]);
+                                    cols.push(["HW", OPAPI.TYPE.STRING]);
                                     cols.push(["AN", OPAPI.TYPE.STRING]);
                                     cols.push(["FQ", OPAPI.TYPE.INT16]);
                                     cols.push(["ED", OPAPI.TYPE.STRING]);

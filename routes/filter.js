@@ -75,7 +75,7 @@ urls[addUser] = 1;
 urls[sendSms] = 1;
 
 
-var IboxUrl = ['/Ibox/user/login', '/Ibox/user/register', '/Ibox/user/registerEnter'];
+var IboxUrl = ['/Ibox/user/login', '/Ibox/user/register', '/Ibox/user/registerEnter', '/Ibox/user/forgetPassword'];
 
 var appFilter = {
     "urls": urls,

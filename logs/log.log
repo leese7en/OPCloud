@@ -4696,3 +4696,260 @@
 [2017-06-20 13:42:37.393] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
 [2017-06-20 13:42:39.744] [INFO] system - 200 GET /Ibox/data/blurryBoxRealtime?userId=54&devCode=9RJNBBLH&ED=&offset=0&limit=20
 [2017-06-20 13:42:45.693] [INFO] system - 200 GET /Ibox/data/blurryBoxRealtime?userId=54&devCode=9RJNBBLH&ED=&offset=0&limit=20
+[2017-06-21 09:23:12.735] [DEBUG] system - 修改用户状态成功
+[2017-06-21 09:23:30.284] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 09:23:45.995] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 09:23:58.721] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 09:26:21.956] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 09:26:35.838] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 09:27:05.459] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 09:27:20.972] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 09:27:31.745] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 09:27:46.472] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 09:27:59.951] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 09:28:10.615] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 09:28:53.355] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 09:29:07.615] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 09:29:07.867] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 09:29:15.083] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 09:29:28.005] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 09:31:36.828] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 09:31:57.082] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 09:33:42.907] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 09:34:00.500] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 09:36:36.016] [WARN] system - session :tNZXbCiIqHyM8payP03ae64D1X_cb9FL REQ_URL >>>>>>>/ifr_status/
+[2017-06-21 09:36:36.032] [INFO] system - 302 GET /ifr_status/
+[2017-06-21 09:37:46.098] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 09:37:57.812] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 09:40:35.269] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 09:40:48.375] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 09:40:57.919] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 09:45:37.345] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 09:46:01.633] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 09:46:08.083] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 09:46:13.455] [INFO] system - 200 POST /Ibox/user/login
+[2017-06-21 09:46:18.202] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 09:46:24.171] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 09:48:47.853] [DEBUG] system - 修改用户状态成功
+[2017-06-21 09:49:02.280] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 09:58:08.298] [DEBUG] system - 修改用户状态成功
+[2017-06-21 09:58:16.626] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 10:00:39.007] [DEBUG] system - 修改用户状态成功
+[2017-06-21 10:00:45.074] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 10:03:32.565] [DEBUG] system - 修改用户状态成功
+[2017-06-21 10:03:40.992] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 10:06:30.619] [WARN] system - session :1FL9TjL6nz70NkWyxUu0tHCpjEoCOuNe REQ_URL >>>>>>>/ifr_status/
+[2017-06-21 10:06:30.690] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 10:11:37.418] [DEBUG] system - 修改用户状态成功
+[2017-06-21 10:24:02.557] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 10:24:15.507] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 10:35:23.640] [WARN] system - session :S6ZdqdP8pCFhfc1zyzZGIq0766HfGxtU REQ_URL >>>>>>>/ifr_status/
+[2017-06-21 10:35:23.648] [INFO] system - 302 GET /ifr_status/
+[2017-06-21 10:37:25.649] [DEBUG] system - 修改用户状态成功
+[2017-06-21 10:37:40.535] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 10:37:47.778] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 10:38:00.925] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 10:38:06.583] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 10:41:50.779] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 10:42:04.908] [INFO] system - 200 POST /Ibox/user/registerEnter
+[2017-06-21 10:44:21.561] [INFO] system - 200 POST /Ibox/user/review
+[2017-06-21 10:50:11.711] [DEBUG] system - 修改用户状态成功
+[2017-06-21 10:50:35.360] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 10:50:44.662] [INFO] system - 200 POST /Ibox/user/registerEnter
+[2017-06-21 10:50:55.257] [INFO] system - 200 POST /Ibox/user/review
+[2017-06-21 10:53:43.577] [DEBUG] system - 修改用户状态成功
+[2017-06-21 10:56:16.805] [DEBUG] system - 修改用户状态成功
+[2017-06-21 11:03:39.311] [DEBUG] system - 修改用户状态成功
+[2017-06-21 11:06:58.068] [DEBUG] system - 修改用户状态成功
+[2017-06-21 11:07:48.033] [INFO] system - 200 POST /Ibox/user/review
+[2017-06-21 11:13:20.013] [DEBUG] system - 修改用户状态成功
+[2017-06-21 11:13:30.725] [INFO] system - 200 POST /Ibox/user/review
+[2017-06-21 11:15:18.870] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 11:24:15.344] [DEBUG] system - 修改用户状态成功
+[2017-06-21 11:26:15.151] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 11:26:20.246] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 11:31:17.361] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 11:31:43.846] [INFO] system - 200 POST /Ibox/user/registerEnter
+[2017-06-21 11:36:07.594] [DEBUG] system - 修改用户状态成功
+[2017-06-21 11:39:16.652] [DEBUG] system - 修改用户状态成功
+[2017-06-21 11:44:24.630] [DEBUG] system - 修改用户状态成功
+[2017-06-21 11:53:43.066] [DEBUG] system - 修改用户状态成功
+[2017-06-21 11:54:38.068] [INFO] system - 200 POST /Ibox/user/review
+[2017-06-21 11:58:29.074] [DEBUG] system - 修改用户状态成功
+[2017-06-21 11:59:31.663] [INFO] system - 200 POST /Ibox/user/review
+[2017-06-21 13:07:45.793] [DEBUG] system - 修改用户状态成功
+[2017-06-21 13:07:50.132] [INFO] system - 200 POST /Ibox/user/review
+[2017-06-21 13:12:21.327] [INFO] system - 200 POST /Ibox/user/review
+[2017-06-21 13:14:27.763] [DEBUG] system - 修改用户状态成功
+[2017-06-21 13:24:27.859] [DEBUG] system - 修改用户状态成功
+[2017-06-21 13:24:40.000] [INFO] system - 200 POST /Ibox/user/review
+[2017-06-21 13:35:07.669] [DEBUG] system - 修改用户状态成功
+[2017-06-21 13:35:24.686] [WARN] system - session :sD_QPYP9ay53_CxQmPtlhn103IOK_j4K REQ_URL >>>>>>>/ifr_status/
+[2017-06-21 13:35:24.704] [INFO] system - 302 GET /ifr_status/
+[2017-06-21 13:35:49.616] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 13:36:11.756] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 13:36:17.933] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 13:36:25.452] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 13:36:36.094] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 13:36:45.581] [INFO] system - 200 POST /Ibox/user/registerEnter
+[2017-06-21 13:36:51.851] [INFO] system - 200 POST /Ibox/user/registerEnter
+[2017-06-21 13:37:13.831] [INFO] system - 200 POST /Ibox/user/review
+[2017-06-21 13:42:20.579] [DEBUG] system - 修改用户状态成功
+[2017-06-21 13:42:36.881] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 13:42:43.355] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 13:42:47.786] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 13:42:53.609] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-21 13:42:56.400] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-21 13:43:01.328] [INFO] system - 200 POST /Ibox/user/registerEnter
+[2017-06-21 13:43:08.682] [INFO] system - 200 POST /Ibox/user/review
+[2017-06-21 13:43:27.974] [INFO] system - 200 POST /Ibox/user/review
+[2017-06-21 14:05:24.707] [WARN] system - session :R2hq3dfAqaxcPDUED1ftISbLhWdXjxZ9 REQ_URL >>>>>>>/ifr_status/
+[2017-06-21 14:05:24.714] [INFO] system - 302 GET /ifr_status/
+[2017-06-21 14:09:13.735] [WARN] system - session :WE9RLr5qQ4H2qMqbmyCyaE6K2XWnmaL5 REQ_URL >>>>>>>/ifr_status/
+[2017-06-21 14:09:13.741] [INFO] system - 302 GET /ifr_status/
+[2017-06-21 14:39:13.756] [WARN] system - session :IG9yhu5atZmFyLDDdxKoSQsp_3v0dsDu REQ_URL >>>>>>>/ifr_status/
+[2017-06-21 14:39:13.767] [INFO] system - 302 GET /ifr_status/
+[2017-06-21 15:09:13.784] [WARN] system - session :GLJNbJyuEKWqGCRQiwyjXbHDSER3vRqk REQ_URL >>>>>>>/ifr_status/
+[2017-06-21 15:09:13.790] [INFO] system - 302 GET /ifr_status/
+[2017-06-21 15:39:13.800] [WARN] system - session :SAqdl40k2ByTFrShz2LHa60Ax-NKuS0K REQ_URL >>>>>>>/ifr_status/
+[2017-06-21 15:39:13.809] [INFO] system - 302 GET /ifr_status/
+[2017-06-21 18:31:58.785] [WARN] system - session :ttKkzSxPoR4iLH-K5AhvTNCUdR2eDP8f REQ_URL >>>>>>>/ifr_status/
+[2017-06-21 18:31:58.796] [INFO] system - 302 GET /ifr_status/
+[2017-06-21 19:01:58.816] [WARN] system - session :MQsO4ZFc280q0L1HKLSzefU4kQfJxWTq REQ_URL >>>>>>>/ifr_status/
+[2017-06-21 19:01:58.826] [INFO] system - 302 GET /ifr_status/
+[2017-06-21 19:31:58.841] [WARN] system - session :zZPGGaPpTazVoq8quY-Vbz5jjaFexm-K REQ_URL >>>>>>>/ifr_status/
+[2017-06-21 19:31:58.851] [INFO] system - 302 GET /ifr_status/
+[2017-06-21 20:01:58.862] [WARN] system - session :oCchwpgDR0BA7k851VOVggPSy2huW1mL REQ_URL >>>>>>>/ifr_status/
+[2017-06-21 20:01:58.871] [INFO] system - 302 GET /ifr_status/
+[2017-06-21 20:31:58.891] [WARN] system - session :EkPfTN1VG582ty-F4fMDRlBJW7ySfSjc REQ_URL >>>>>>>/ifr_status/
+[2017-06-21 20:31:58.902] [INFO] system - 302 GET /ifr_status/
+[2017-06-22 14:32:49.861] [DEBUG] system - 修改用户状态成功
+[2017-06-22 14:53:46.551] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 14:54:02.453] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-22 14:54:34.351] [INFO] system - 200 POST /Ibox/box/bindBox
+[2017-06-22 14:56:12.034] [DEBUG] system - 修改用户状态成功
+[2017-06-22 14:58:18.937] [DEBUG] system - 修改用户状态成功
+[2017-06-22 14:59:48.875] [DEBUG] system - 修改用户状态成功
+[2017-06-22 15:00:47.822] [DEBUG] system - 修改用户状态成功
+[2017-06-22 15:01:09.731] [DEBUG] system - 修改用户状态成功
+[2017-06-22 15:04:50.667] [DEBUG] system - 修改用户状态成功
+[2017-06-22 15:06:13.544] [DEBUG] system - 修改用户状态成功
+[2017-06-22 15:06:23.448] [INFO] system - 200 POST /Ibox/box/bindBox
+[2017-06-22 15:09:31.338] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 15:09:37.557] [INFO] system - 200 POST /Ibox/box/unBindBox
+[2017-06-22 15:12:47.646] [INFO] system - 200 POST /Ibox/box/bindBox
+[2017-06-22 15:13:00.030] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 15:13:23.368] [INFO] system - 200 POST /Ibox/box/unBindBox
+[2017-06-22 15:19:05.241] [INFO] system - 200 POST /Ibox/box/bindBox
+[2017-06-22 15:19:12.001] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 15:19:21.803] [INFO] system - 200 POST /Ibox/box/unBindBox
+[2017-06-22 15:37:46.842] [DEBUG] system - 修改用户状态成功
+[2017-06-22 15:37:49.727] [INFO] system - 200 POST /Ibox/box/bindBox
+[2017-06-22 15:37:57.295] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 15:40:28.048] [DEBUG] system - 修改用户状态成功
+[2017-06-22 15:40:38.452] [INFO] system - 200 POST /Ibox/box/bindBox
+[2017-06-22 15:40:44.985] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 15:41:08.350] [INFO] system - 200 POST /Ibox/box/unBindBox
+[2017-06-22 15:48:55.246] [DEBUG] system - 修改用户状态成功
+[2017-06-22 15:52:30.715] [INFO] system - 200 POST /Ibox/box/bindBox
+[2017-06-22 15:53:23.585] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 15:53:29.835] [INFO] system - 200 POST /Ibox/box/unBindBox
+[2017-06-22 15:56:27.129] [DEBUG] system - 修改用户状态成功
+[2017-06-22 15:58:29.697] [INFO] system - 200 POST /Ibox/box/bindBox
+[2017-06-22 15:58:35.891] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 15:58:43.803] [INFO] system - 200 POST /Ibox/box/unBindBox
+[2017-06-22 16:05:01.499] [DEBUG] system - 修改用户状态成功
+[2017-06-22 16:05:13.443] [INFO] system - 200 POST /Ibox/box/unBindBox
+[2017-06-22 16:05:19.359] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 16:05:24.706] [INFO] system - 200 POST /Ibox/box/unBindBox
+[2017-06-22 16:06:00.499] [INFO] system - 200 POST /Ibox/box/bindBox
+[2017-06-22 16:08:07.906] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 16:08:17.764] [INFO] system - 200 POST /Ibox/user/register
+[2017-06-22 16:10:00.665] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 16:10:53.897] [INFO] system - 200 POST /Ibox/box/boxProjectTransfer
+[2017-06-22 16:13:39.274] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 16:16:41.860] [DEBUG] system - 修改用户状态成功
+[2017-06-22 16:17:02.545] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 16:18:06.075] [INFO] system - 200 POST /Ibox/box/boxProjectTransfer
+[2017-06-22 16:27:56.538] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 16:28:19.158] [INFO] system - 200 POST /Ibox/box/boxProjectTransfer
+[2017-06-22 16:29:14.051] [DEBUG] system - 修改用户状态成功
+[2017-06-22 16:29:18.996] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 16:29:25.510] [INFO] system - 200 POST /Ibox/box/boxProjectTransfer
+[2017-06-22 16:33:15.651] [DEBUG] system - 修改用户状态成功
+[2017-06-22 16:33:21.597] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 16:37:56.512] [DEBUG] system - 修改用户状态成功
+[2017-06-22 16:37:59.477] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 16:40:17.061] [INFO] system - 200 POST /Ibox/box/boxProjectTransfer
+[2017-06-22 16:42:34.666] [DEBUG] system - 修改用户状态成功
+[2017-06-22 16:42:54.917] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 16:43:03.813] [INFO] system - 200 POST /Ibox/box/boxProjectTransfer
+[2017-06-22 16:43:50.339] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 16:59:13.891] [DEBUG] system - 修改用户状态成功
+[2017-06-22 16:59:41.707] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 17:03:40.575] [DEBUG] system - 修改用户状态成功
+[2017-06-22 17:04:41.602] [DEBUG] system - 修改用户状态成功
+[2017-06-22 17:04:54.767] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 17:05:00.095] [INFO] system - 200 POST /Ibox/box/boxProjectTransfer
+[2017-06-22 17:06:07.623] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 17:07:17.415] [INFO] system - 200 POST /Ibox/box/boxProjectTransfer
+[2017-06-22 17:15:04.753] [DEBUG] system - 修改用户状态成功
+[2017-06-22 17:15:16.749] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 17:15:46.068] [INFO] system - 200 POST /Ibox/box/boxProjectTransfer
+[2017-06-22 17:18:00.799] [DEBUG] system - 修改用户状态成功
+[2017-06-22 17:18:10.589] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 17:18:20.398] [INFO] system - 200 POST /Ibox/box/boxProjectTransfer
+[2017-06-22 17:18:52.639] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 17:19:00.245] [INFO] system - 200 POST /Ibox/box/boxProjectTransfer
+[2017-06-22 17:20:02.646] [DEBUG] system - 修改用户状态成功
+[2017-06-22 17:20:25.952] [INFO] system - 200 POST /system/publicInfo/sendSmsCode
+[2017-06-22 17:20:31.286] [INFO] system - 200 POST /Ibox/box/boxProjectTransfer
+[2017-06-23 11:00:20.863] [DEBUG] system - 修改用户状态成功
+[2017-06-23 11:03:57.447] [DEBUG] system - 修改用户状态成功
+[2017-06-23 11:18:02.004] [WARN] system - session :8oZ_IEX7luOrlPJ5Cc10VmdqWWc3bW-0 REQ_URL >>>>>>>/ifr_status/
+[2017-06-23 11:18:02.021] [INFO] system - 302 GET /ifr_status/
+[2017-06-23 11:25:25.976] [WARN] system - session :5yi1IuIMeNiMiaeydAS0by6DgetB9eh4 REQ_URL >>>>>>>/ifr_status/
+[2017-06-23 11:25:25.987] [INFO] system - 302 GET /ifr_status/
+[2017-06-23 11:33:22.355] [INFO] system - 200 POST /Ibox/box/bindBox
+[2017-06-23 11:38:11.102] [DEBUG] system - 修改用户状态成功
+[2017-06-23 11:48:00.039] [DEBUG] system - 修改用户状态成功
+[2017-06-23 11:50:56.742] [DEBUG] system - 修改用户状态成功
+[2017-06-23 11:56:07.123] [DEBUG] system - 修改用户状态成功
+[2017-06-23 15:57:48.700] [DEBUG] system - 修改用户状态成功
+[2017-06-23 16:00:17.597] [WARN] system - session :H0-Bv2rug-dZwujmla2eKnYciBJ1zRWO REQ_URL >>>>>>>/ifr_status/
+[2017-06-23 16:00:17.622] [INFO] system - 302 GET /ifr_status/
+[2017-06-23 16:09:12.559] [DEBUG] system - 修改用户状态成功
+[2017-06-23 16:11:14.977] [DEBUG] system - 修改用户状态成功
+[2017-06-23 16:12:53.651] [DEBUG] system - 修改用户状态成功
+[2017-06-23 16:14:16.841] [ERROR] system - agent error:Error: OPAPI.modify() invalid arguments
+[2017-06-23 16:14:16.868] [INFO] system - 200 POST /Ibox/service/syncBox
+[2017-06-23 16:20:51.837] [ERROR] system - agent error:Error: OPAPI.modify() invalid arguments
+[2017-06-23 16:22:57.841] [DEBUG] system - 修改用户状态成功
+[2017-06-23 16:24:07.808] [INFO] system - 200 POST /Ibox/service/syncBox
+[2017-06-23 16:30:17.632] [WARN] system - session :lruxSEvPX446gsROg74n_Ulm4o9iI6eE REQ_URL >>>>>>>/ifr_status/
+[2017-06-23 16:30:17.643] [INFO] system - 302 GET /ifr_status/
+[2017-06-23 16:48:05.497] [DEBUG] system - 修改用户状态成功
+[2017-06-23 16:48:40.120] [ERROR] system - agent error:ReferenceError: GGss is not defined
+[2017-06-23 16:48:40.146] [INFO] system - 200 POST /Ibox/service/syncBox
+[2017-06-23 16:57:08.306] [DEBUG] system - 修改用户状态成功
+[2017-06-23 16:59:11.953] [ERROR] system - agent error:TypeError: Cannot read property 'ID' of undefined
+[2017-06-23 16:59:11.975] [INFO] system - 200 POST /Ibox/service/syncBox
+[2017-06-23 17:05:04.625] [ERROR] system - agent error:TypeError: Cannot read property 'ID' of undefined
+[2017-06-23 17:05:04.645] [INFO] system - 200 POST /Ibox/service/syncBox
+[2017-06-23 17:06:16.849] [DEBUG] system - 修改用户状态成功
+[2017-06-23 17:09:53.997] [ERROR] system - agent error:TypeError: Cannot read property 'ID' of undefined
+[2017-06-23 17:09:54.016] [INFO] system - 200 POST /Ibox/service/syncBox
+[2017-06-23 17:10:17.904] [DEBUG] system - 修改用户状态成功
+[2017-06-23 17:18:38.306] [DEBUG] system - 修改用户状态成功
+[2017-06-23 17:20:10.038] [DEBUG] system - 修改用户状态成功
+[2017-06-23 17:22:40.586] [DEBUG] system - 修改用户状态成功
+[2017-06-23 17:24:49.103] [DEBUG] system - 修改用户状态成功
+[2017-06-23 17:26:19.908] [INFO] system - 200 POST /Ibox/service/syncBox
+[2017-06-23 18:22:34.117] [WARN] system - session :lEpByVmFR0UH5eSNZfnJh0txpAcCrVMa REQ_URL >>>>>>>/ifr_status/
+[2017-06-23 18:22:34.132] [INFO] system - 302 GET /ifr_status/
+[2017-06-23 18:52:34.148] [WARN] system - session :oMpGMT96HermKHI9_13JbMhVps3Lcwr3 REQ_URL >>>>>>>/ifr_status/
+[2017-06-23 18:52:34.158] [INFO] system - 302 GET /ifr_status/
+[2017-06-23 19:22:34.169] [WARN] system - session :TwSMCmUTF4ud19kh50wmoyZL6YgUBfsj REQ_URL >>>>>>>/ifr_status/
+[2017-06-23 19:22:34.178] [INFO] system - 302 GET /ifr_status/
+[2017-06-23 19:52:34.406] [WARN] system - session :cGH0S8J9_ZGfBemyXWcTtCiOkOtcLatI REQ_URL >>>>>>>/ifr_status/
+[2017-06-23 19:52:34.414] [INFO] system - 302 GET /ifr_status/

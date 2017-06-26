@@ -39,19 +39,19 @@ var dev_info = {
                     var sqlCount = '', sql = '';
                     if (user.IS_SYSTEM == 1) {
                         sqlCount = 'SELECT count(t.ID) as count FROM box_box_info t WHERE STATUS="on" ';
-                        sql = 'SELECT t.ID,t.DEV_ID,t.NAME,t.DEV_CODE,t.STATUS,t.IP,t.VERSION_NUM,t.SERIAL_NO,t.DEV_DESC,t.TIME,t.OUT_COUNT,t.anttention as anttention,bg.group_name as groupName FROM box_box_info t ' +
+                        sql = 'SELECT t.ID,t.NAME,t.DEV_CODE,t.STATUS,t.IP,t.VERSION_NUM,t.SERIAL_NO,t.DEV_DESC,t.TIME,t.OUT_COUNT,t.anttention as anttention,bg.group_name as groupName FROM box_box_info t ' +
                             ' LEFT JOIN box_box_group bg on t.groupId = bg.group_id ' +
                             ' WHERE STATUS="on" ';
                     } else {
                         if (user.SOURCE == 1) {
                             sqlCount = 'SELECT count(t.ID) as count FROM box_box_info t WHERE STATUS="on" and ub.user_id=' + user.USER_ID;
-                            sql = 'SELECT ub.user_id as userId,t.ID,t.DEV_ID,t.NAME,t.DEV_CODE,t.STATUS,t.IP,t.VERSION_NUM,t.SERIAL_NO,t.DEV_DESC,t.TIME,t.OUT_COUNT,t.anttention as anttention,bg.group_name as groupName FROM box_box_info t ' +
+                            sql = 'SELECT ub.user_id as userId,t.ID,t.NAME,t.DEV_CODE,t.STATUS,t.IP,t.VERSION_NUM,t.SERIAL_NO,t.DEV_DESC,t.TIME,t.OUT_COUNT,t.anttention as anttention,bg.group_name as groupName FROM box_box_info t ' +
                                 ' LEFT JOIN box_box_group bg on t.groupId = bg.group_id ' +
                                 ' LEFT JOIN box_user_box ub on t.dev_code = ub.dev_Code' +
                                 ' WHERE STATUS="on" and ub.status!=4 and ub.user_id=' + user.USER_ID;
                         } else {
                             sqlCount = 'SELECT count(t.ID) as count FROM box_box_info t left join box_user_box ub on t.dev_code = ub.dev_code WHERE ub.user_id in (select USER_ID from sys_user where MOBILE_PHONE in (select MOBILE_PHONE from sys_user where user_id = ' + user.USER_ID + ')) and STATUS="on"';
-                            sql = 'SELECT ub.user_id as userId, t.ID,t.DEV_ID,t.NAME,t.DEV_CODE,t.STATUS,ub.Status as shareStatus,t.IP,t.VERSION_NUM,t.SERIAL_NO,t.DEV_DESC,t.TIME,t.OUT_COUNT,t.anttention as anttention,bg.group_name as groupName FROM box_box_info t ' +
+                            sql = 'SELECT ub.user_id as userId, t.ID,t.NAME,t.DEV_CODE,t.STATUS,ub.Status as shareStatus,t.IP,t.VERSION_NUM,t.SERIAL_NO,t.DEV_DESC,t.TIME,t.OUT_COUNT,t.anttention as anttention,bg.group_name as groupName FROM box_box_info t ' +
                                 ' LEFT JOIN box_box_group bg on t.groupId = bg.group_id ' +
                                 ' LEFT JOIN box_user_box ub on t.dev_code = ub.dev_Code' +
                                 ' WHERE ub.user_id in (select USER_ID from sys_user where MOBILE_PHONE in (select MOBILE_PHONE from sys_user where user_id = ' + user.USER_ID + ')) and ub.status!=4 and STATUS="on"';
@@ -156,19 +156,19 @@ var dev_info = {
                     var sqlCount = '', sql = '';
                     if (user.IS_SYSTEM == 1) {
                         sqlCount = 'SELECT count(t.ID) as count FROM box_box_info t WHERE STATUS="off" ';
-                        sql = 'SELECT t.ID,t.DEV_ID,t.NAME,t.DEV_CODE,t.STATUS,t.IP,t.VERSION_NUM,t.SERIAL_NO,t.DEV_DESC,t.TIME,t.OUT_COUNT,t.anttention as anttention,bg.group_name as groupName FROM box_box_info t ' +
+                        sql = 'SELECT t.ID,t.NAME,t.DEV_CODE,t.STATUS,t.IP,t.VERSION_NUM,t.SERIAL_NO,t.DEV_DESC,t.TIME,t.OUT_COUNT,t.anttention as anttention,bg.group_name as groupName FROM box_box_info t ' +
                             ' LEFT JOIN box_box_group bg on t.groupId = bg.group_id ' +
                             ' WHERE STATUS="off" ';
                     } else {
                         if (user.SOURCE == 1) {
                             sqlCount = 'SELECT count(t.ID) as count FROM box_box_info t WHERE STATUS="off" and ub.user_id=' + user.USER_ID;
-                            sql = 'SELECT ub.user_id as userId,t.ID,t.DEV_ID,t.NAME,t.DEV_CODE,t.STATUS,t.IP,t.VERSION_NUM,t.SERIAL_NO,t.DEV_DESC,t.TIME,t.OUT_COUNT,t.anttention as anttention,bg.group_name as groupName FROM box_box_info t ' +
+                            sql = 'SELECT ub.user_id as userId,t.ID,t.NAME,t.DEV_CODE,t.STATUS,t.IP,t.VERSION_NUM,t.SERIAL_NO,t.DEV_DESC,t.TIME,t.OUT_COUNT,t.anttention as anttention,bg.group_name as groupName FROM box_box_info t ' +
                                 ' LEFT JOIN box_box_group bg on t.groupId = bg.group_id ' +
                                 ' LEFT JOIN box_user_box ub on t.dev_code = ub.dev_Code' +
                                 ' WHERE STATUS="off" and ub.status!=4 and ub.user_id=' + user.USER_ID;
                         } else {
                             sqlCount = 'SELECT count(t.ID) as count FROM box_box_info t left join box_user_box ub on t.dev_code = ub.dev_code WHERE ub.user_id in (select USER_ID from sys_user where MOBILE_PHONE in (select MOBILE_PHONE from sys_user where user_id = ' + user.USER_ID + ')) and STATUS="off"';
-                            sql = 'SELECT ub.user_id as userId, t.ID,t.DEV_ID,t.NAME,t.DEV_CODE,t.STATUS,ub.Status as shareStatus,t.IP,t.VERSION_NUM,t.SERIAL_NO,t.DEV_DESC,t.TIME,t.OUT_COUNT,t.anttention as anttention,bg.group_name as groupName FROM box_box_info t ' +
+                            sql = 'SELECT ub.user_id as userId, t.ID,t.NAME,t.DEV_CODE,t.STATUS,ub.Status as shareStatus,t.IP,t.VERSION_NUM,t.SERIAL_NO,t.DEV_DESC,t.TIME,t.OUT_COUNT,t.anttention as anttention,bg.group_name as groupName FROM box_box_info t ' +
                                 ' LEFT JOIN box_box_group bg on t.groupId = bg.group_id ' +
                                 ' LEFT JOIN box_user_box ub on t.dev_code = ub.dev_Code' +
                                 ' WHERE ub.user_id in (select USER_ID from sys_user where MOBILE_PHONE in (select MOBILE_PHONE from sys_user where user_id = ' + user.USER_ID + ')) and ub.status!=4 and STATUS="off"';
@@ -576,17 +576,6 @@ var dev_info = {
             res.json(message);
         });
 
-    },
-    deviceBydevId: function (req, res) {
-        var id = req.body.id;
-        var sql = "SELECT * FROM box_box_info where dev_id = " + id;
-        query(sql, function (err, rows, columns) {
-            if (err == null) {
-                res.json(rows);
-            } else {
-                console.log(err)
-            }
-        });
     },
     updateBox: function (req, res, action) {
         var devCode = req.body.devcode;
