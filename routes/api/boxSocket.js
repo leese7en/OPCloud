@@ -149,16 +149,15 @@ const EDM_ALL_POINT = 0x08  //获取所有点
 const EDM_ALL_DRIVER = 0x06  //查询所有驱动信息
 const EDM_DRIVER_CONF = 0x21  //驱动配置信息
 const DRIVER_NAME = 'ModbusTcp'
-const BOX_NAME = 'B18NFATH'
+const BOX_NAME = 'B1HFFAI1'
 
-
-sendMsg(EDM_DRIVER_CONF, BOX_NAME, COMMAND_FLAG, DRIVER_NAME, function (error, data) {
-    console.log('----------------------------------');
-    console.log(error);
-    if (!error) {
-        console.log(data.toString());
-    }
-});
+// sendMsg(EDM_ALL_DAS, BOX_NAME, COMMAND_FLAG, null, function (error, data) {
+//     console.log('----------------------------------');
+//     console.log(error);
+//     if (!error) {
+//         console.log(data.toString());
+//     }
+// });
 
 // sendMsg(EDM_STOP_DAS, BOX_NAME, COMMAND_FLAG, 'test2', function (error, data) {
 //     if (error) {
